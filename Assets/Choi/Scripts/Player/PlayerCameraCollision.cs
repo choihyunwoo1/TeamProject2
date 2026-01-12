@@ -4,6 +4,7 @@ namespace Choi
 {
     public class PlayerCameraCollision : MonoBehaviour
     {
+        #region Variables
         [Header("References")]
         [SerializeField] private Transform cameraPivot;   // CameraRig (회전축)
         [SerializeField] private Transform cameraTransform; // Main Camera
@@ -14,7 +15,9 @@ namespace Choi
         [SerializeField] private float cameraSmooth = 10f;
 
         private float defaultDistance;
+        #endregion
 
+        #region Unity Event Method
         private void Start()
         {
             // 초기 카메라 거리 저장 (offset 기준)
@@ -25,7 +28,9 @@ namespace Choi
         {
             HandleCollision();
         }
+        #endregion
 
+        #region Custom Method
         private void HandleCollision()
         {
             Vector3 pivotPos = cameraPivot.position;
@@ -58,5 +63,6 @@ namespace Choi
                 Time.deltaTime * cameraSmooth
             );
         }
+        #endregion
     }
 }

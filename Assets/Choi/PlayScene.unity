@@ -931,6 +931,7 @@ GameObject:
   - component: {fileID: 1790796860}
   - component: {fileID: 1790796859}
   - component: {fileID: 1790796858}
+  - component: {fileID: 1790796865}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -952,11 +953,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1790796860}
   cameraTransform: {fileID: 257308165}
+  animator: {fileID: 1790796865}
   walkSpeed: 6
   sprintSpeed: 10
   rotationSpeed: 12
   jumpForce: 6
-  gravity: -9
+  gravity: -5
+  dashPower: 12
+  dashDuration: 0.2
+  dashCooldown: 1
 --- !u!114 &1790796859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1106,6 +1111,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1790796858}
+        m_TargetAssemblyTypeName: Choi.PlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 31e4e993-3375-49ec-a860-977a9da2ddfe
+    m_ActionName: 'Player/Dash[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -1205,6 +1226,28 @@ Transform:
   - {fileID: 257308165}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1790796865
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790796857}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a889839dc2a80448bebb2d1de2750ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2118508534
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ namespace Choi
 {
     public class PlayerCameraController : MonoBehaviour
     {
+        #region Variables
         [Header("References")]
         [SerializeField] private Transform target;          // 플레이어
         [SerializeField] private Transform cameraPivot;     // 회전 중심
@@ -22,7 +23,9 @@ namespace Choi
         private Vector2 lookInput;
         private float yaw;
         private float pitch;
+        #endregion
 
+        #region Unity Event Method
         public void OnLook(InputAction.CallbackContext context)
         {
             lookInput = context.ReadValue<Vector2>();
@@ -43,7 +46,10 @@ namespace Choi
             RotateCamera();
             FollowTarget();
         }
+        #endregion
 
+
+        #region Custom Method
         private void RotateCamera()
         {
             // 회전 입력
@@ -72,5 +78,6 @@ namespace Choi
             mainCamera.transform.localPosition = cameraOffset;
             mainCamera.transform.LookAt(cameraPivot);
         }
+        #endregion
     }
 }
