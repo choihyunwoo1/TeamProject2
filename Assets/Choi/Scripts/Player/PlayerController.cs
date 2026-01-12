@@ -10,7 +10,8 @@ namespace Choi
         [SerializeField] private Transform cameraTransform;
 
         [Header("Movement Settings")]
-        [SerializeField] private float moveSpeed = 6f;
+        [SerializeField] private float walkSpeed = 6f;
+        [SerializeField] private float sprintSpeed = 10f;   // 스프린트 속도 추가
         [SerializeField] private float rotationSpeed = 12f;
 
         [Header("Jump Settings")]
@@ -21,6 +22,9 @@ namespace Choi
         private float verticalVelocity;
         private bool jumpRequested;
         private bool isGrounded;
+
+        // Sprint
+        private bool isSprinting = false;
 
         private void Update()
         {
@@ -43,13 +47,24 @@ namespace Choi
             }
         }
 
+        public void OnSprint(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                isSprinting = true;   // shift 누르면 true
+            }
+            else if (context.canceled)
+            {
+                isSprinting = false;  // shift 떼면 false
+            }
+        }
+
         private void UpdateGroundCheck()
         {
             isGrounded = controller.isGrounded;
 
             if (isGrounded && verticalVelocity < 0f)
             {
-                // CharacterController의 바닥 체크 안정화
                 verticalVelocity = -2f;
             }
         }
@@ -62,13 +77,11 @@ namespace Choi
                 jumpRequested = false;
             }
 
-            // 중력 적용
             verticalVelocity += gravity * Time.deltaTime;
         }
 
         private void MovePlayer()
         {
-            // 카메라 기반 방향
             Vector3 camForward = cameraTransform.forward;
             Vector3 camRight = cameraTransform.right;
 
@@ -78,7 +91,7 @@ namespace Choi
 
             Vector3 direction = camForward * moveInput.y + camRight * moveInput.x;
 
-            // 회전 처리
+            // 회전
             if (direction.sqrMagnitude > 0.01f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -89,11 +102,12 @@ namespace Choi
                 );
             }
 
-            // 최종 이동 벡터
-            Vector3 velocity = direction * moveSpeed;
+            // *** 여기서 속도를 결정 ***
+            float currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
+
+            Vector3 velocity = direction * currentSpeed;
             velocity.y = verticalVelocity;
 
-            // CharacterController는 Move 한 번만!
             controller.Move(velocity * Time.deltaTime);
         }
     }
