@@ -39,7 +39,7 @@ namespace Choi
 
         private bool isDashing = false;
         private bool canDash = true;
-
+        public bool attackQueued = false;
         private Vector2 moveInput;
         private bool isSprinting;
         #endregion
@@ -59,6 +59,23 @@ namespace Choi
         public void OnMove(InputAction.CallbackContext context)
         {
             moveInput = context.ReadValue<Vector2>();
+        }
+        public void OnAttack(InputAction.CallbackContext context)
+        {
+            if (!context.started) return;
+
+            AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
+
+            bool isInAttackState = info.IsTag("Attack");
+
+            if (!isInAttackState)
+            {
+                animator.SetTrigger("Attack"); // 수정됨
+                attackQueued = false;
+                return;
+            }
+
+            attackQueued = true;
         }
 
         public void OnJump(InputAction.CallbackContext context)
@@ -84,6 +101,13 @@ namespace Choi
         {
             if (context.performed)
                 TryDash();
+        }
+        #endregion
+
+        #region Animator Method
+        public void OnAttackAnimationEnd()
+        {
+            attackQueued = false;
         }
         #endregion
 
