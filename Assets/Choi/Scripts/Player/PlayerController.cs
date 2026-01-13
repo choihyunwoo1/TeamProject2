@@ -10,7 +10,7 @@ namespace Choi
         [Header("References")]
         [SerializeField] private CharacterController controller;
         [SerializeField] private Transform cameraTransform;
-        [SerializeField] private Animator animator;  // 애니메이터 추가
+        [SerializeField] private Animator animator;
 
         [Header("Movement Settings")]
         [SerializeField] private float walkSpeed = 6f;
@@ -21,25 +21,33 @@ namespace Choi
         [SerializeField] private float jumpForce = 6f;
         [SerializeField] private float gravity = -20f;
 
+        // Jump 안정화 요소
+        private bool jumpBuffered;
+        private float jumpBufferTimer;
+        private readonly float jumpBufferTime = 0.15f;
+
+        private float coyoteTimer;
+        private readonly float coyoteTime = 0.12f;
+
+        private float verticalVelocity;
+        private bool isGrounded;
+
         [Header("Dash Settings")]
-        [SerializeField] private float dashPower = 12f;       // 대쉬 속도
-        [SerializeField] private float dashDuration = 0.2f;   // 대쉬 유지 시간
-        [SerializeField] private float dashCooldown = 1f;     // 쿨타임
+        [SerializeField] private float dashPower = 12f;
+        [SerializeField] private float dashDuration = 0.2f;
+        [SerializeField] private float dashCooldown = 1f;
 
         private bool isDashing = false;
         private bool canDash = true;
 
         private Vector2 moveInput;
-        private float verticalVelocity;
-        private bool jumpRequested;
-        private bool isGrounded;
         private bool isSprinting;
         #endregion
 
-        #region Unity Event Method
+        #region Unity Methods
         private void Update()
         {
-            if (isDashing) return; // 대쉬 중이면 일반 이동/점프 중단
+            if (isDashing) return;
 
             UpdateGroundCheck();
             UpdateVerticalMovement();
@@ -47,7 +55,7 @@ namespace Choi
         }
         #endregion
 
-        #region Custom Method
+        #region Input Methods
         public void OnMove(InputAction.CallbackContext context)
         {
             moveInput = context.ReadValue<Vector2>();
@@ -55,8 +63,13 @@ namespace Choi
 
         public void OnJump(InputAction.CallbackContext context)
         {
-            if (context.performed)
-                jumpRequested = true;
+            if (!context.performed) return;
+
+            // 점프 입력 버퍼
+            jumpBuffered = true;
+            jumpBufferTimer = jumpBufferTime;
+
+            Debug.Log("Jump Buffered");
         }
 
         public void OnSprint(InputAction.CallbackContext context)
@@ -70,29 +83,49 @@ namespace Choi
         public void OnDash(InputAction.CallbackContext context)
         {
             if (context.performed)
-            {
                 TryDash();
-            }
         }
+        #endregion
 
-        /* Movement Logic */
-
+        #region Movement Logic
         private void UpdateGroundCheck()
         {
-            isGrounded = controller.isGrounded;
+            if (controller.isGrounded)
+            {
+                isGrounded = true;
+                coyoteTimer = coyoteTime;
 
-            if (isGrounded && verticalVelocity < 0f)
-                verticalVelocity = -2f;
+                if (verticalVelocity < 0f)
+                    verticalVelocity = -2f;
+            }
+            else
+            {
+                isGrounded = false;
+                coyoteTimer -= Time.deltaTime;
+            }
         }
 
         private void UpdateVerticalMovement()
         {
-            if (jumpRequested && isGrounded)
+            // Jump buffer
+            if (jumpBuffered)
             {
-                verticalVelocity = jumpForce;
-                jumpRequested = false;
+                jumpBufferTimer -= Time.deltaTime;
+                if (jumpBufferTimer <= 0f)
+                    jumpBuffered = false;
             }
 
+            // 점프 조건: jumpBuffered + coyoteTime 안
+            if (jumpBuffered && coyoteTimer > 0f)
+            {
+                verticalVelocity = jumpForce;
+                jumpBuffered = false;
+
+                if (animator != null)
+                    animator.SetTrigger("Jump");
+            }
+
+            // 중력
             verticalVelocity += gravity * Time.deltaTime;
         }
 
@@ -103,7 +136,6 @@ namespace Choi
 
             camForward.y = 0;
             camRight.y = 0;
-
             camForward.Normalize();
             camRight.Normalize();
 
@@ -120,22 +152,19 @@ namespace Choi
                 );
             }
 
-            // 속도
             float currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
 
-            // BlendTree용 Speed 파라미터 전달
             if (animator != null)
                 animator.SetFloat("Speed", direction.magnitude * (isSprinting ? 2f : 1f), 0.1f, Time.deltaTime);
 
-            // 최종 이동 벡터
             Vector3 velocity = direction * currentSpeed;
             velocity.y = verticalVelocity;
 
             controller.Move(velocity * Time.deltaTime);
         }
+        #endregion
 
-        /* DASH 기능 */
-
+        #region Dash Logic
         private void TryDash()
         {
             if (!canDash || isDashing) return;
@@ -151,17 +180,15 @@ namespace Choi
             if (animator != null)
                 animator.SetTrigger("Dash");
 
-            // 1) 카메라 기준 이동 벡터 계산
+            // 카메라 기준 이동 벡터 계산
             Vector3 camForward = cameraTransform.forward;
             Vector3 camRight = cameraTransform.right;
             camForward.y = 0; camRight.y = 0;
             camForward.Normalize();
             camRight.Normalize();
 
-            // 2) 입력값 기반 대시 방향 계산
             Vector3 dashDirection = camForward * moveInput.y + camRight * moveInput.x;
 
-            // 3) 이동 입력이 전혀 없으면 정면으로 대시
             if (dashDirection.sqrMagnitude < 0.01f)
                 dashDirection = transform.forward;
 
@@ -169,17 +196,14 @@ namespace Choi
 
             float startTime = Time.time;
 
-            // 4) 대시 구간 동안 중력 적용 없이 이동
             while (Time.time < startTime + dashDuration)
             {
                 controller.Move(dashDirection * dashPower * Time.deltaTime);
                 yield return null;
             }
 
-            // 5) 대시 종료
             isDashing = false;
 
-            // 6) 쿨타임 후 다시 가능
             yield return new WaitForSeconds(dashCooldown);
             canDash = true;
         }

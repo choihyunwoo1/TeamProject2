@@ -8,16 +8,16 @@ namespace Choi
         #region Variables
         [Header("References")]
         [SerializeField] private Transform target;          // 플레이어
-        [SerializeField] private Transform cameraPivot;     // 회전 중심
+        [SerializeField] private Transform cameraPivot;     // 회전 중심 (CameraRig의 자식)
         [SerializeField] private Camera mainCamera;
 
         [Header("Rotation Settings")]
-        [SerializeField] private float lookSensitivity = 0.6f;    // 기존 1.5f → 대폭 낮춰서 부드럽게
+        [SerializeField] private float lookSensitivity = 0.6f;
         [SerializeField] private float minPitch = -30f;
         [SerializeField] private float maxPitch = 70f;
 
         [Header("Follow Settings")]
-        [SerializeField] private float followSpeed = 10f;   // 부드러운 추적 속도
+        [SerializeField] private float followSpeed = 10f;
         [SerializeField] private Vector3 cameraOffset = new Vector3(0, 2f, -3.5f);
 
         private Vector2 lookInput;
@@ -48,34 +48,39 @@ namespace Choi
         }
         #endregion
 
-
         #region Custom Method
         private void RotateCamera()
         {
-            // 회전 입력
+            // 입력 기반 회전 적용
             yaw += lookInput.x * lookSensitivity;
             pitch -= lookInput.y * lookSensitivity;
 
-            // 상하 제한
+            // 피치 제한
             pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
-            // 회전 적용
+            // 회전 적용 (Pivot 기준)
             cameraPivot.rotation = Quaternion.Euler(pitch, yaw, 0f);
         }
 
         private void FollowTarget()
         {
-            // 카메라 리그가 플레이어를 스무스하게 따라오도록 설정
-            Vector3 targetPos = target.position;
-
+            // 1) Rig 자체가 플레이어를 따라가도록 이동 (부드럽게)
             transform.position = Vector3.Lerp(
                 transform.position,
-                targetPos,
+                target.position,
                 Time.deltaTime * followSpeed
             );
 
-            // 카메라 위치도 Pivot 기준으로 보정
-            mainCamera.transform.localPosition = cameraOffset;
+            // 2) Camera 위치를 Pivot 기준으로 로컬 오프셋 적용
+            Vector3 desiredCameraPos =
+                cameraPivot.position
+                + cameraPivot.right * cameraOffset.x
+                + cameraPivot.up * cameraOffset.y
+                + cameraPivot.forward * cameraOffset.z;
+
+            mainCamera.transform.position = desiredCameraPos;
+
+            // 3) 카메라는 항상 Pivot을 바라본다
             mainCamera.transform.LookAt(cameraPivot);
         }
         #endregion
