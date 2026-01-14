@@ -37,6 +37,11 @@ namespace Choi
         [SerializeField] private float dashDuration = 0.2f;
         [SerializeField] private float dashCooldown = 1f;
 
+        [Header("HeavyAttack Settings")]
+        [SerializeField] private float heavyAttackHoldTime = 0.5f;
+        private float attackButtonHeldTime = 0f;
+        private bool isHolding = false;
+
         private bool isDashing = false;
         private bool canDash = true;
         public bool attackQueued = false;
@@ -52,6 +57,7 @@ namespace Choi
             UpdateGroundCheck();
             UpdateVerticalMovement();
             MovePlayer();
+            HandleAttackInput();
         }
         #endregion
 
@@ -63,8 +69,9 @@ namespace Choi
         public void OnAttack(InputAction.CallbackContext context)
         {
             if (!context.started) return;
+            Debug.Log("On Attack2");
 
-            AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
+            AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(1);
 
             bool isInAttackState = info.IsTag("Attack");
 
@@ -75,6 +82,7 @@ namespace Choi
                 return;
             }
 
+            Debug.Log("On Attack");
             attackQueued = true;
         }
 
@@ -231,6 +239,39 @@ namespace Choi
             yield return new WaitForSeconds(dashCooldown);
             canDash = true;
         }
+        private void HandleAttackInput()
+        {
+            // 마우스 눌림
+            if (Mouse.current.leftButton.isPressed)
+            {
+                attackButtonHeldTime += Time.deltaTime;
+
+                // 0.5초 이상 → 강공격 발동
+                if (attackButtonHeldTime >= heavyAttackHoldTime)
+                {
+                    animator.SetTrigger("HeavyAttack");
+                    attackButtonHeldTime = 0f;
+                    animator.SetBool("IsAttacking", false); // 루프 종료
+                    return;
+                }
+
+                // 마우스 누르는 동안 루프 재생 (이미 true면 Set 안함)
+                if (!animator.GetBool("IsAttacking"))
+                {
+                    animator.SetBool("IsAttacking", true);
+                }
+            }
+            else
+            {
+                // 마우스 떼면 루프 종료
+                if (animator.GetBool("IsAttacking"))
+                {
+                    animator.SetBool("IsAttacking", false);
+                }
+                attackButtonHeldTime = 0f;
+            }
+        }
+
         #endregion
     }
 }
