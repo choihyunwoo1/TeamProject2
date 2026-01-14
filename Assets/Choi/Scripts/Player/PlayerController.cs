@@ -54,9 +54,9 @@ namespace Choi
         {
             if (isDashing) return;
 
-            UpdateGroundCheck();
             UpdateVerticalMovement();
-            MovePlayer();
+            MovePlayer();      // Move() 호출
+            UpdateGroundCheck();  // Move 후에 체크해야 isGrounded가 정확함
             HandleAttackInput();
         }
         #endregion
