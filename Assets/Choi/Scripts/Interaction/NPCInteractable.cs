@@ -8,7 +8,7 @@ namespace Choi
 
         public string GetInteractPrompt()
         {
-            return "Press [E] Button";
+            return "Chat : [E]";
         }
 
         public void Interact(GameObject player)
