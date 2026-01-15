@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,11 +30,15 @@ namespace TeamProject2
         private EnemyState currentState;    //현재 상태
         private EnemyState beforeState;     //이전 상태
 
+        //
+        [SerializeField] private Transform ThePlayer;
+        
+
         //체력
         private float health;
         [SerializeField]
         private float maxHealth = 20f;
-
+        //죽음
         private bool isDeath = false;
         [SerializeField]
         private float destoryDelay = 6f;
@@ -96,7 +99,7 @@ namespace TeamProject2
         {
             //초기화
             health = maxHealth;
-            wayPointIndex = 1;
+            wayPointIndex = 0;
             startPosion = transform.position;
 
             SetState(EnemyState.E_Idle);
@@ -229,6 +232,7 @@ namespace TeamProject2
 
                 case EnemyState.E_Death:
                     animator.SetBool(IsDeath, true);
+                    agent.enabled = false;
                     break;
             }
 
@@ -258,22 +262,6 @@ namespace TeamProject2
             }
         }
 
-        //죽음 처리
-        private void Die()
-        {
-            isDeath = true;
-
-            SetState(EnemyState.E_Death);
-
-            //보상 처리(골드, 경험치, 아이템..)
-            PlayerStats.AddMoney(rewardMoney);
-            PlayerStats.AddExp(rewardExp);
-
-
-            //킬
-            Destroy(gameObject, destoryDelay);
-        }
-
         //Enemy 공격
         private void Shoot()
         {
@@ -288,6 +276,22 @@ namespace TeamProject2
             {
                 damageable.TakeDamage(attackDamage);
             }
+        }
+
+        //죽음 처리
+        private void Die()
+        {
+            isDeath = true;
+
+            SetState(EnemyState.E_Death);
+
+            //보상 처리(골드, 경험치, 아이템..)
+            PlayerStats.AddMoney(rewardMoney);
+            PlayerStats.AddExp(rewardExp);
+
+
+            //킬
+            Destroy(gameObject, destoryDelay);
         }
         #endregion
     }
