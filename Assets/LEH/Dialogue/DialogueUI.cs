@@ -5,30 +5,39 @@ using System.Collections;
 public class DialogueUI : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] GameObject panel;
-    [SerializeField] TMP_Text nameText;
-    [SerializeField] TMP_Text dialogueText;
+    [SerializeField] private GameObject panel;       // 대화창 패널
+    [SerializeField] private TMP_Text nameText;      // 화자 이름
+    [SerializeField] private TMP_Text dialogueText;  // 대사 텍스트
 
-    [Header("Setting")]
-    [SerializeField] float typingSpeed = 0.04f;
+    [Header("Settings")]
+    [SerializeField] private float typingSpeed = 0.04f;
 
-    Coroutine typingCoroutine;
-    bool isTyping;
-    string fullText;
-
-    NPCDialogue currentNPC;
+    private Coroutine typingCoroutine;
+    private bool isTyping;
+    private string fullText;
+    private NPC currentNPC;
 
     void Start()
     {
-        panel.SetActive(false); //시작할 때 숨김
+        if (panel == null)
+            Debug.LogError("DialogueUI: panel이 연결되어 있지 않습니다!");
+        panel.SetActive(false);
     }
 
-    public void Show(string speaker, string line, NPCDialogue npc)
+    public void Show(string speaker, string line, NPC npc)
     {
         currentNPC = npc;
 
+        Debug.Log("DialogueUI.Show 호출됨: " + speaker + " / " + line);
+
+        if (panel == null) return;
         panel.SetActive(true);
-        nameText.text = speaker;
+
+        if (nameText != null) nameText.text = speaker;
+        else Debug.LogError("nameText가 null!");
+
+        if (dialogueText != null) dialogueText.text = "";
+        else Debug.LogError("dialogueText가 null!");
 
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
@@ -36,7 +45,7 @@ public class DialogueUI : MonoBehaviour
         typingCoroutine = StartCoroutine(TypeLine(line));
     }
 
-    IEnumerator TypeLine(string line)
+    private IEnumerator TypeLine(string line)
     {
         isTyping = true;
         fullText = line;
@@ -53,22 +62,22 @@ public class DialogueUI : MonoBehaviour
 
     public void OnNext()
     {
-        // 타이핑 중이면 즉시 출력
         if (isTyping)
         {
             StopCoroutine(typingCoroutine);
             dialogueText.text = fullText;
             isTyping = false;
         }
-        // 다 출력된 상태면 다음 대사
         else
         {
-            currentNPC.NextLine();
+            if (currentNPC != null)
+                currentNPC.NextLine();
         }
     }
 
     public void Hide()
     {
-        panel.SetActive(false);
+        if (panel != null)
+            panel.SetActive(false);
     }
 }
