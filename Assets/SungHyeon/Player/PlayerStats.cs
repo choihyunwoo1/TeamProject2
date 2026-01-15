@@ -19,7 +19,11 @@ namespace TeamProject2
 
         //초기 소지금
         [SerializeField]
-        private int startMoney = 400;
+        private int startMoney = 0;
+
+        public static int level = 1;
+        public static int exp = 0;
+        public static int maxExp = 100;
         #endregion
 
         #region Property
@@ -44,6 +48,27 @@ namespace TeamProject2
         public static void AddMoney(int amount)
         {
             money += amount;
+        }
+
+        public static void AddExp(int amount)
+        {
+            exp += amount;
+
+            if (exp >= maxExp)
+            {
+                LevelUp();
+            }
+
+        }
+
+        //경험치 성장
+        private static void LevelUp()
+        {
+            exp -= maxExp;
+            level++;
+            maxExp = Mathf.RoundToInt(maxExp * 1.2f); // 레벨업 곡선
+
+            Debug.Log($"레벨 업! 현재 레벨 : {level}");
         }
 
         //돈 쓰기

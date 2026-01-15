@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,7 +17,7 @@ namespace TeamProject2
     /// <summary>
     /// Enemy를 관리하는 클래스
     /// </summary>
-    public class Enemy : MonoBehaviour,Damageable
+    public class EnemyStats : MonoBehaviour,IDamageable
     {
         #region Variables
         //참조
@@ -31,17 +30,26 @@ namespace TeamProject2
         private EnemyState currentState;    //현재 상태
         private EnemyState beforeState;     //이전 상태
 
+        //
+        [SerializeField] private Transform ThePlayer;
+        
+
         //체력
         private float health;
         [SerializeField]
         private float maxHealth = 20f;
-
+        //죽음
         private bool isDeath = false;
         [SerializeField]
         private float destoryDelay = 6f;
 
         //보상
         [SerializeField] private int rewardMoney = 100;
+        //경험치
+        [SerializeField] private int rewardExp = 50;
+        //private Item rewardItem;
+        public GameObject rewardItemPrefab;
+
 
         //상태 - 대기
         private float idleTimer = 2f; //2~3초
@@ -91,7 +99,7 @@ namespace TeamProject2
         {
             //초기화
             health = maxHealth;
-            wayPointIndex = 1;
+            wayPointIndex = 0;
             startPosion = transform.position;
 
             SetState(EnemyState.E_Idle);
@@ -224,6 +232,7 @@ namespace TeamProject2
 
                 case EnemyState.E_Death:
                     animator.SetBool(IsDeath, true);
+                    agent.enabled = false;
                     break;
             }
 
@@ -253,20 +262,6 @@ namespace TeamProject2
             }
         }
 
-        //죽음 처리
-        private void Die()
-        {
-            isDeath = true;
-
-            SetState(EnemyState.E_Death);
-
-            //보상 처리(골드, 경험치, 아이템..)
-            PlayerStats.AddMoney(rewardMoney);
-
-            //킬
-            Destroy(gameObject, destoryDelay);
-        }
-
         //Enemy 공격
         private void Shoot()
         {
@@ -276,11 +271,27 @@ namespace TeamProject2
             //효과 vfx, sfx
 
             //타겟에게 데미지 주기
-            Damageable damageable = thePlayer.GetComponent<Damageable>();
+            IDamageable damageable = thePlayer.GetComponent<IDamageable>();
             if (damageable != null)
             {
                 damageable.TakeDamage(attackDamage);
             }
+        }
+
+        //죽음 처리
+        private void Die()
+        {
+            isDeath = true;
+
+            SetState(EnemyState.E_Death);
+
+            //보상 처리(골드, 경험치, 아이템..)
+            PlayerStats.AddMoney(rewardMoney);
+            PlayerStats.AddExp(rewardExp);
+
+
+            //킬
+            Destroy(gameObject, destoryDelay);
         }
         #endregion
     }
