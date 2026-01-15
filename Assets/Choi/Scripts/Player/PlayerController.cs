@@ -30,7 +30,6 @@ namespace Choi
         private readonly float coyoteTime = 0.12f;
 
         private float verticalVelocity;
-        private bool isGrounded;
 
         [Header("Dash Settings")]
         [SerializeField] private float dashPower = 12f;
@@ -40,7 +39,6 @@ namespace Choi
         [Header("HeavyAttack Settings")]
         [SerializeField] private float heavyAttackHoldTime = 0.5f;
         private float attackButtonHeldTime = 0f;
-        private bool isHolding = false;
 
         private bool isDashing = false;
         private bool canDash = true;
@@ -124,7 +122,6 @@ namespace Choi
         {
             if (controller.isGrounded)
             {
-                isGrounded = true;
                 coyoteTimer = coyoteTime;
 
                 if (verticalVelocity < 0f)
@@ -132,7 +129,6 @@ namespace Choi
             }
             else
             {
-                isGrounded = false;
                 coyoteTimer -= Time.deltaTime;
             }
         }

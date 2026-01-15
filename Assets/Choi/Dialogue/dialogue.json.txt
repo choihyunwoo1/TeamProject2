@@ -1,0 +1,16 @@
+{
+  "dialogue": [
+    {
+      "id": 1,
+      "character": "NPC",
+      "text": "Hello!",
+      "next": 2
+    },
+    {
+      "id": 2,
+      "character": "NPC",
+      "text": "HIHIHIHIHI?",
+      "next": null
+    }
+  ]
+}

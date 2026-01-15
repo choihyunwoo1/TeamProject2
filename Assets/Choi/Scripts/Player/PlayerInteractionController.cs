@@ -19,6 +19,8 @@ namespace Choi
 
         private void Update()
         {
+            Debug.DrawRay(_cam.transform.position, _cam.transform.forward * interactRange, Color.red);
+
             DetectInteractable();
         }
 
@@ -27,6 +29,7 @@ namespace Choi
         {
             if (!context.performed) return;
 
+            Debug.Log("OnInteract");   // 추가
             TryInteract();
         }
 
@@ -36,7 +39,7 @@ namespace Choi
 
             Ray ray = new Ray(_cam.transform.position, _cam.transform.forward);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactLayer))
+            if (Physics.SphereCast(ray, 0.2f, out RaycastHit hit, interactRange, interactLayer))
             {
                 currentInteractable = hit.collider.GetComponent<IInteractable>();
 
@@ -46,7 +49,6 @@ namespace Choi
                     return;
                 }
             }
-
             InteractionUI.Instance.Hide();
         }
 
