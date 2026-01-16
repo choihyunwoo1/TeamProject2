@@ -266,13 +266,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 26699555}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b37ee9f6e9d3884a9d9d3a8149fa6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EventMask:
+  rayDistance: 4
+  npcLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
-  m_MaxRayIntersections: 0
+    m_Bits: 8
 --- !u!1 &58834830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,6 +1289,7 @@ GameObject:
   - component: {fileID: 600793938}
   - component: {fileID: 600793937}
   - component: {fileID: 600793939}
+  - component: {fileID: 600793940}
   m_Layer: 5
   m_Name: DialoguePanel
   m_TagString: Untagged
@@ -1363,9 +1364,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600793935}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddb1cc6563951fb4680264753ab985af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 600793935}
+  nameText: {fileID: 1437134701}
+  dialogueText: {fileID: 822047517}
+  typingSpeed: 0.04
+--- !u!114 &600793940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600793935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac8432d8b4d7784fa503490672a73e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 600793935}
@@ -2417,7 +2434,7 @@ GameObject:
   - component: {fileID: 1291072048}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2649,6 +2666,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 31e4e993-3375-49ec-a860-977a9da2ddfe
     m_ActionName: 'Player/Dash[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cd6dec8d-2e35-46c8-a2b6-050fccf15bdf
+    m_ActionName: 'UI/Inventory[/Keyboard/i]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8a0b5e50-e9e0-4f51-954d-61bc66d6f53e
+    m_ActionName: 'UI/Map[/Keyboard/m]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ea53a09f-bc4b-454d-a615-c4dd736405e9
+    m_ActionName: 'UI/Setting[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -3888,7 +3917,7 @@ GameObject:
   - component: {fileID: 1796763227}
   - component: {fileID: 1796763226}
   - component: {fileID: 1796763225}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4195,6 +4224,7 @@ GameObject:
   - component: {fileID: 1830451138}
   - component: {fileID: 1830451137}
   - component: {fileID: 1830451141}
+  - component: {fileID: 1830451142}
   m_Layer: 3
   m_Name: Npc
   m_TagString: Untagged
@@ -4285,8 +4315,8 @@ Transform:
   m_GameObject: {fileID: 1830451136}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.46, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.6, y: 0.58, z: 1.3}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4298,17 +4328,39 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830451136}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c61de5dc6f089ee45b2ccaab1b0f4b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcName: "\uC0C1\uC810 \uC8FC\uC778"
+  npcName: "\uC2DC\uBBFC1"
   lines:
   - "\uD14C\uC2A4\uD2B81"
   - "\uD14C\uC2A4\uD2B82"
   dialogueUI: {fileID: 600793939}
   player: {fileID: 1291072052}
+  npcLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &1830451142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830451136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d30c44e5f6cca42bfc8eb63c4c0aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: "\uC0C1\uC778"
+  lines:
+  - "\uD14C\uC2A4\uD2B81"
+  - "\uD14C\uC2A4\uD2B82"
+  dialogueUI: {fileID: 600793940}
+  player: {fileID: 1291072052}
+  talkDistance: 3
   npcLayer:
     serializedVersion: 2
     m_Bits: 8
