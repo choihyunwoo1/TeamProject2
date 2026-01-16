@@ -3428,7 +3428,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 81
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &128798508
 Transform:
@@ -24021,7 +24021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 115328, guid: 3d0e1c5473aa4ab39e49c88bd3d0b08f, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 89
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 452624, guid: 3d0e1c5473aa4ab39e49c88bd3d0b08f, type: 3}
       propertyPath: m_RootOrder
@@ -24636,7 +24636,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &802397980
 Transform:
@@ -25257,7 +25257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 115328, guid: 3d0e1c5473aa4ab39e49c88bd3d0b08f, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 89
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 452624, guid: 3d0e1c5473aa4ab39e49c88bd3d0b08f, type: 3}
       propertyPath: m_RootOrder
@@ -31312,7 +31312,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 81
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &985748649
 Transform:
@@ -35958,12 +35958,13 @@ GameObject:
   - component: {fileID: 1114261985}
   - component: {fileID: 1114261984}
   - component: {fileID: 1114261983}
+  - component: {fileID: 1114261986}
   m_Layer: 0
   m_Name: Rostrum_Preset_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 89
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1114261982
 Transform:
@@ -36058,6 +36059,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114261981}
   m_Mesh: {fileID: 4300000, guid: 323ecdb37cae45a295637dab9aff065f, type: 3}
+--- !u!114 &1114261986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114261981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90051469cf1075b44a009fc253436c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1114516080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56759,7 +56772,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 81
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1751212896
 Transform:
@@ -73821,9 +73834,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d805582ed1dda49be715493c8ff1ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
-  currentHP: 0
+  maxHealth: 100
   invincibleDuration: 0.3
+  blinkInterval: 0.1
+  transparentAlpha: 0.4
 --- !u!4 &8487949771738787843
 Transform:
   m_ObjectHideFlags: 0
