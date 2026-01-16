@@ -11,6 +11,7 @@ namespace Choi
         [SerializeField] private CharacterController controller;
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Animator animator;
+        private PlayerStats stats;
 
         [Header("Movement Settings")]
         [SerializeField] private float walkSpeed = 6f;
@@ -48,8 +49,13 @@ namespace Choi
         #endregion
 
         #region Unity Methods
+        private void Awake()
+        {
+            stats = GetComponent<PlayerStats>();
+        }
         private void Update()
         {
+            if (stats.IsDead) return; // 죽었으면 움직임 중지
             if (isDashing) return;
 
             UpdateVerticalMovement();
