@@ -20,6 +20,12 @@ namespace hm
 
         private Dictionary<PopupType, PopupUIBase> popupMap;
 
+        //퀵슬롯
+        [SerializeField] private QuickSlotUI quickSlotUI;
+        private ItemData selectedItem;                          //퀵슬롯에 넣을 아이템
+        private Dictionary<int, ItemData> slotToItem = new();   // 현재 퀵슬롯에 등록된 아이템들
+        private Dictionary<ItemData, int> itemToSlot = new();   // 아이템이 어느 슬롯에 있는지 역으로 찾기용
+
 
         private void Awake()
         {
@@ -33,7 +39,9 @@ namespace hm
             popupMap = new Dictionary<PopupType, PopupUIBase>();
             foreach (var popup in popups)
             {
-                popupMap.Add(popup.Type, popup);
+                if (!popupMap.ContainsKey(popup.Type))
+                    popupMap.Add(popup.Type, popup);
+
                 popup.gameObject.SetActive(false);
             }
         }
@@ -148,6 +156,51 @@ namespace hm
         public void OpenSetting()
         {
             HandleEscape();
+        }
+        #endregion
+
+        #region QuickSlot
+        //인벤토리 아이템 클릭 시 호출
+        public void SelectItemForQuickSlot(ItemData item)
+        {
+            // 소비 아이템만 허용
+            if (item.itemType != ItemType.Consumable)
+                return;
+
+            selectedItem = item;
+            quickSlotUI.EnterSelectMode();
+        }
+
+
+        //슬롯 클릭 시 호출
+        public void AssignItemToSlot(int slotIndex)
+        {
+            if (selectedItem == null) return;
+
+            // 이미 이 아이템이 다른 슬롯에 있다면
+            if (itemToSlot.TryGetValue(selectedItem, out int prevSlot))
+            {
+                // 이전 슬롯 비우기
+                slotToItem.Remove(prevSlot);
+                quickSlotUI.ClearSlot(prevSlot);
+                itemToSlot.Remove(selectedItem);
+            }
+
+            //현재 슬롯에 다른 아이템이 있다면?
+            if (slotToItem.TryGetValue(slotIndex, out ItemData existingItem))
+            {
+                itemToSlot.Remove(existingItem);
+            }
+
+            //새로 등록
+            slotToItem[slotIndex] = selectedItem;
+            itemToSlot[selectedItem] = slotIndex;
+
+            quickSlotUI.SetSlot(slotIndex, selectedItem);
+
+            //마무리
+            selectedItem = null;
+            quickSlotUI.ExitSelectMode();
         }
         #endregion
     }

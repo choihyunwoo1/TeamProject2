@@ -14,9 +14,13 @@ namespace hm
 
         private ITooltipData Data => tooltipData as ITooltipData;
 
-        public void SetData(ScriptableObject data)
+        public void SetData(ITooltipData data)
         {
-            tooltipData = data;
+            tooltipData = data as ScriptableObject;
+        }
+        public void ClearData()
+        {
+            tooltipData = null;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
