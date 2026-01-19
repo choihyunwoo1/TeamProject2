@@ -6,50 +6,61 @@ namespace Choi
     public class PlayerAttackDialogueHook : MonoBehaviour
     {
         [Header("Ray Settings")]
-        [SerializeField] private float rayDistance = 10f;
+        [SerializeField] private float rayDistance = 50f;
         [SerializeField] private LayerMask npcLayer;
+        [SerializeField] private float sphereRadius = 0.6f;
 
         private Camera cam;
 
         private void Start()
         {
-            // MainCamera 자동 참조
             cam = GetComponentInChildren<Camera>();
-            if (cam == null)
-                Debug.LogError("Camera를 찾을 수 없습니다! Player 자식에 MainCamera 있어야 함");
         }
 
         private void Update()
         {
             if (Mouse.current == null) return;
+            if (!Mouse.current.leftButton.wasPressedThisFrame) return;
 
-            if (Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                Debug.Log("공격 입력 감지");
-                FireRayFromCenter();
-            }
+            // 1. NPC 먼저 체크
+            if (TryNPC())
+                return;
+
+            // 2. NPC 없으면 공격
+            DoAttack();
         }
 
-        private void FireRayFromCenter()
+        bool TryNPC()
         {
-            if (cam == null) return;
+            Ray ray = cam.ScreenPointToRay(
+                Mouse.current.position.ReadValue());
 
-            Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
             Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.red, 1f);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, npcLayer))
+            if (Physics.SphereCast(
+                ray.origin,
+                sphereRadius,
+                ray.direction,
+                out RaycastHit hit,
+                rayDistance,
+                npcLayer))
             {
-                Debug.Log("맞은 오브젝트: " + hit.collider.name);
-                var npc = hit.collider.GetComponent<NPCDialogueNew>();
-                if (npc != null)
-                {
-                    npc.StartDialogue();
-                }
+                Debug.Log("NPC 감지: " + hit.collider.name);
+
+                hit.collider
+                    .GetComponent<NPCDialogueNew>()
+                    ?.StartDialogue();
+
+                return true;
             }
-            else
-            {
-                Debug.Log("❌ 아무것도 안 맞음");
-            }
+
+            return false;
+        }
+
+        void DoAttack()
+        {
+            Debug.Log("공격 실행");
+            // 기존 공격 코드
         }
     }
 }

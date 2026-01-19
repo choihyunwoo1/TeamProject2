@@ -273,6 +273,7 @@ MonoBehaviour:
   npcLayer:
     serializedVersion: 2
     m_Bits: 8
+  sphereRadius: 0.6
 --- !u!1 &58834830
 GameObject:
   m_ObjectHideFlags: 0
@@ -4341,7 +4342,7 @@ MonoBehaviour:
   player: {fileID: 1291072052}
   npcLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
 --- !u!114 &1830451142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4359,11 +4360,6 @@ MonoBehaviour:
   - "\uD14C\uC2A4\uD2B81"
   - "\uD14C\uC2A4\uD2B82"
   dialogueUI: {fileID: 600793940}
-  player: {fileID: 1291072052}
-  talkDistance: 3
-  npcLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!1 &1837272338
 GameObject:
   m_ObjectHideFlags: 0
