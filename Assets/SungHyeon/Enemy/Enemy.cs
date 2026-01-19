@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace TeamProject2
 {
@@ -25,6 +26,9 @@ namespace TeamProject2
        
         protected const string MOVE_SPEED = "MoveSpeed"; //이동 속도
         protected const string IS_DEATH = "IsDeath";     //사망
+
+        //UI
+        public Image hpBarImage;
         #endregion
 
         protected virtual void Awake()
