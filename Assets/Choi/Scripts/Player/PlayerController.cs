@@ -73,7 +73,6 @@ namespace Choi
         public void OnAttack(InputAction.CallbackContext context)
         {
             if (!context.started) return;
-            Debug.Log("On Attack2");
 
             AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(1);
 
@@ -85,8 +84,6 @@ namespace Choi
                 attackQueued = false;
                 return;
             }
-
-            Debug.Log("On Attack");
             attackQueued = true;
         }
 
@@ -97,8 +94,6 @@ namespace Choi
             // 점프 입력 버퍼
             jumpBuffered = true;
             jumpBufferTimer = jumpBufferTime;
-
-            Debug.Log("Jump Buffered");
         }
 
         public void OnSprint(InputAction.CallbackContext context)
@@ -251,11 +246,25 @@ namespace Choi
                 // 0.5초 이상 → 강공격 발동
                 if (attackButtonHeldTime >= heavyAttackHoldTime)
                 {
-                    animator.SetTrigger("HeavyAttack");
+                    float heavyCost = 10f; // 강공격 게이지 소모량
+
+                    if (stats.ConsumeGauge(heavyCost))
+                    {
+                        animator.SetTrigger("HeavyAttack");
+                        animator.SetBool("IsAttacking", false);
+                    }
+                    else
+                    {
+                        animator.SetBool("IsAttacking", false);
+
+                        Debug.Log("Need Gauge");
+                        // 게이지가 부족하면 강공격 취소하고 경공격으로 처리하거나 무효 처리
+                    }
+
                     attackButtonHeldTime = 0f;
-                    animator.SetBool("IsAttacking", false); // 루프 종료
                     return;
                 }
+
 
                 // 마우스 누르는 동안 루프 재생 (이미 true면 Set 안함)
                 if (!animator.GetBool("IsAttacking"))

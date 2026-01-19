@@ -5,9 +5,15 @@ namespace Choi
 {
     public class PlayerStats : MonoBehaviour, IDamageable
     {
-        [Header("Stat Settings")]
+        [Header("HP")]
         [SerializeField] private float maxHealth = 100f;
         [SerializeField] private float invincibleDuration = 0.3f;
+
+        [Header("Gauge")]
+        public float maxGauge = 100f;
+        public float currentGauge = 0f;
+
+        [Header("DamageBlink")]
         [SerializeField] private float blinkInterval = 0.1f;   // 깜빡임 간격
         [SerializeField] private float transparentAlpha = 0.4f; // 반투명 정도
 
@@ -116,6 +122,21 @@ namespace Choi
         {
             IsDead = true;
             animator.SetTrigger("Death");
+        }
+
+        public void AddGauge(float amount)
+        {
+            Debug.Log("게이지 증가 호출됨 " + amount);
+            currentGauge = Mathf.Clamp(currentGauge + amount, 0, maxGauge);
+        }
+
+        public bool ConsumeGauge(float amount)
+        {
+            if (currentGauge < amount)
+                return false;
+
+            currentGauge -= amount;
+            return true;
         }
     }
 }
