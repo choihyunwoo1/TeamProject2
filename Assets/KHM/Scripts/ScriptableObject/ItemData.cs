@@ -1,6 +1,13 @@
 using UnityEngine;
 namespace hm
 {
+    public enum ItemType
+    {
+        Consumable,     //소비 아이템
+        Equipment,      //장비 아이템
+        Quest           //퀘스트 아이템
+    }
+
     [CreateAssetMenu(fileName = "ItemData", menuName = "Scriptable Objects/ItemData")]
     public class ItemData : ScriptableObject, ITooltipData
     {
@@ -12,6 +19,8 @@ namespace hm
 
         [TextArea(2, 5)]
         public string description;
+
+        public ItemType itemType;
 
         [Header("Icon")]
         public Sprite icon;
