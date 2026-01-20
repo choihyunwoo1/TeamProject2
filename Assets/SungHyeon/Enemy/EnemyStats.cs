@@ -17,7 +17,7 @@ namespace TeamProject2
     /// <summary>
     /// Enemy를 관리하는 클래스
     /// </summary>
-    public class EnemyStats : MonoBehaviour,IDamageable
+    public class EnemyStats : IDamageable
     {
         #region Variables
         //참조
@@ -42,14 +42,6 @@ namespace TeamProject2
         private bool isDeath = false;
         [SerializeField]
         private float destoryDelay = 6f;
-
-        //보상
-        [SerializeField] private int rewardMoney = 100;
-        //경험치
-        [SerializeField] private int rewardExp = 50;
-        //private Item rewardItem;
-        public GameObject rewardItemPrefab;
-
 
         //상태 - 대기
         private float idleTimer = 2f; //2~3초
@@ -284,11 +276,6 @@ namespace TeamProject2
             isDeath = true;
 
             SetState(EnemyState.E_Death);
-
-            //보상 처리(골드, 경험치, 아이템..)
-            PlayerStats.AddMoney(rewardMoney);
-            PlayerStats.AddExp(rewardExp);
-
 
             //킬
             Destroy(gameObject, destoryDelay);

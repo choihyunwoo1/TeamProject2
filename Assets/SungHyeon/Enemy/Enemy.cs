@@ -1,118 +1,122 @@
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.UI;
 
 namespace TeamProject2
 {
-    public abstract class Enemy : MonoBehaviour, IDamageable
+    /// <summary>
+    /// 적을 관리하는 베이스 클래스, 모든 적들의 부모 클래스
+    /// </summary>
+    public class Enemy : MonoBehaviour
     {
         #region Variables
-        protected Animator animator;     //애니메이터
-        protected NavMeshAgent agent;    //이동
-        protected Transform target;      //플레이어
+        //참조
+        protected DetectionModule m_DetectionMoudle;
+        protected IDamageable m_Damageable;
 
-        protected EnemyState currentState;   //현재 상태
-        protected EnemyState beforeState;    //이전 상태
-        protected bool isDeath;               //사망 여부
+        //상태 머신
+        protected StateMachine stateMachine;
 
-        [SerializeField] protected float maxHealth; //최대 체력
-        protected float currentHealth;              //현재 체력
+        //공격 범위
+        [SerializeField] protected float attackRange = 2.0f;
+        //공격 딜레이 타임
+        [SerializeField] protected float attackDelayTime = 1f;
 
-        [SerializeField] protected int rewardGold;  //골드
-        [SerializeField] protected int rewardExp;   //경험치
-        [SerializeField] protected GameObject dropItem; //아이템
-
-        [SerializeField] protected float destroyDelay; //삭제 지연
-       
-        protected const string MOVE_SPEED = "MoveSpeed"; //이동 속도
-        protected const string IS_DEATH = "IsDeath";     //사망
-
-        //UI
-        public Image hpBarImage;
+        //회전 속도 - Lerp 계수
+        [SerializeField] protected float rotateSpeed = 10f;
         #endregion
 
+        #region Property
+        public Transform Target => m_DetectionMoudle.Target;
+        public float AttackRange => attackRange;
+        public float AttackDelayTime => attackDelayTime;
+        //공격 가능 여부 체크
+        public bool IsAttackable
+        {
+            get
+            {
+                if (Target)
+                {
+                    return (m_DetectionMoudle.DistanceToTarget <= attackRange);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        #endregion
+
+        #region Unity Event Method
         protected virtual void Awake()
         {
-            animator = GetComponent<Animator>(); //애니메이터 참조
-            agent = GetComponent<NavMeshAgent>(); //에이전트 참조
+            //참조
+            m_DetectionMoudle = GetComponent<DetectionModule>();
+            m_Damageable = GetComponent<IDamageable>();
+        }
+
+        protected virtual void OnEnable()
+        {
+            m_Damageable.OnDamage += OnDamaged;
+            m_Damageable.OnDie += OnDie;
+        }
+
+        protected virtual void OnDisable()
+        {
+            m_Damageable.OnDamage -= OnDamaged;
+            m_Damageable.OnDie -= OnDie;
         }
 
         protected virtual void Start()
         {
-            currentHealth = maxHealth; //체력 초기화
+            //상태머신 객체 생성 및 상태 생성해도 등록
+            stateMachine = new StateMachine(this, new IdleState());
+            stateMachine.RegisterState(new WalkState());
+            stateMachine.RegisterState(new AttackState());
+            stateMachine.RegisterState(new DeathState());
+            //상속 받은 후 추가로 새로운 상태를 등록 진행
+
         }
 
         protected virtual void Update()
         {
-            if (isDeath) return; //사망 체크
+            //상태머신의 업데이트 : 현재상태의 업데이트를 매 프레임마다 실행
+            stateMachine.Update(Time.deltaTime);
 
-            if (agent != null)
-            {
-                animator.SetFloat(MOVE_SPEED, agent.velocity.magnitude); //이동 애니메이션
-            }
         }
+        #endregion
 
-        public virtual void SetState(EnemyState newState)
+        #region Custom Method
+        //상태 변경
+        public State ChangeState(State newState)
         {
-            if (currentState == newState) return; //상태 중복 방지
-
-            beforeState = currentState; //이전 상태 저장
-            currentState = newState;    //상태 변경
-
-            agent.ResetPath(); //이동 초기화
-
-            if (currentState == EnemyState.E_Death)
-            {
-                animator.SetBool(IS_DEATH, true); //사망 애니메이션
-                agent.enabled = false;            //이동 중지
-            }
+            return stateMachine.ChangeState(newState);
         }
 
-        public virtual void TakeDamage(float damage)
+        //타겟을 바라본다
+        public void FaceToTarget()
         {
-            if (isDeath) return; //사망 체크
+            //타겟 체크
+            if (Target == null)
+                return;
 
-            currentHealth -= damage; //체력 감소
-
-            if (currentHealth <= 0f)
-            {
-                Die(); //사망
-            }
+            //타겟의 방향을 구해 방향에 대한 Rotation을 얻는다
+            Vector3 dir = (Target.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(dir.x, transform.position.y, dir.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation,
+                lookRotation, Time.deltaTime * rotateSpeed);
         }
 
-        protected virtual void Die()
+        private void OnDamaged(float damage)
         {
-            isDeath = true; //사망 처리
-
-            SetState(EnemyState.E_Death); //상태 변경
-
-            GiveReward(); //보상 지급
-            DropItem();   //아이템 드랍
-
-            Destroy(gameObject, destroyDelay); //삭제
+            ChangeState(new IdleState());
         }
 
-        protected virtual void GiveReward()
+        private void OnDie()
         {
-            PlayerStats.AddMoney(rewardGold); //골드 지급
-            PlayerStats.AddExp(rewardExp);    //경험치 지급
-        }
+            ChangeState(new DeathState());
 
-        protected virtual void DropItem()
-        {
-            if (dropItem != null)
-            {
-                Instantiate(
-                    dropItem,
-                    transform.position + Vector3.up * 0.5f, //드랍 위치
-                    Quaternion.identity
-                );
-            }
+            //킬
+            Destroy(gameObject, 3f);
         }
-
-        public virtual void SetTarget(Transform target)
-        {
-            this.target = target; //타겟 설정
-        }
+        #endregion
     }
 }
