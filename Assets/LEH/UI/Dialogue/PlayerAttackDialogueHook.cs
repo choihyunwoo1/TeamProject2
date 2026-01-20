@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Choi
-{
     public class PlayerAttackDialogueHook : MonoBehaviour
     {
         [Header("Ray Settings")]
@@ -63,4 +61,3 @@ namespace Choi
             // 기존 공격 코드
         }
     }
-}

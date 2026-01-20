@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class DialogueUINew : MonoBehaviour
 {
@@ -66,5 +67,15 @@ public class DialogueUINew : MonoBehaviour
     public void Hide()
     {
         panel.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (Keyboard.current == null) return;
+
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            OnNext();
+        }
     }
 }
