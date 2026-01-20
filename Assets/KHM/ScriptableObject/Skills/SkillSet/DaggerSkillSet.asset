@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e705c1934842aa745a090231e1ef93e9, type: 3}
+  m_Name: DaggerSkillSet
+  m_EditorClassIdentifier: 
+  weaponType: 2
+  skills:
+  - {fileID: 11400000, guid: de7b03ceeddce9c4f8911f7f4e456e23, type: 2}
+  - {fileID: 11400000, guid: ab9b6e09ddb23924ba705f57c9abd72a, type: 2}

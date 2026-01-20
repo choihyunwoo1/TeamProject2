@@ -14,7 +14,7 @@ namespace Choi
         [SerializeField] private float lookSensitivity = 0.6f;
         [SerializeField] private float minPitch = -30f;
         [SerializeField] private float maxPitch = 70f;
-        [SerializeField] private float rotationSmoothTime = 0.05f;
+        [SerializeField] private float rotationSmoothTime = 0.1f;
 
         [Header("Follow Settings")]
         [SerializeField] private float followSpeed = 10f;
@@ -39,6 +39,9 @@ namespace Choi
 
         public void OnLook(InputAction.CallbackContext context)
         {
+            if (float.IsNaN(lookInput.x) || float.IsNaN(lookInput.y))
+                lookInput = Vector2.zero;
+
             lookInput = context.ReadValue<Vector2>();
         }
 
@@ -60,19 +63,23 @@ namespace Choi
             FollowTarget();
             HandleCameraCollision();
         }
-
         private void RotateCamera()
         {
             yaw += lookInput.x * lookSensitivity;
             pitch -= lookInput.y * lookSensitivity;
 
+            // pitch 제한
             pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+
+            // yaw 무한 증가 방지
+            yaw = Mathf.Repeat(yaw, 360f);
 
             smoothYaw = Mathf.SmoothDampAngle(smoothYaw, yaw, ref yawVelocity, rotationSmoothTime);
             smoothPitch = Mathf.SmoothDampAngle(smoothPitch, pitch, ref pitchVelocity, rotationSmoothTime);
 
             cameraPivot.rotation = Quaternion.Euler(smoothPitch, smoothYaw, 0f);
         }
+
 
         private void FollowTarget()
         {
