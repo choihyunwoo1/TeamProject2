@@ -147,11 +147,18 @@ namespace Choi
             // 점프 조건: jumpBuffered + coyoteTime 안
             if (jumpBuffered && coyoteTimer > 0f)
             {
-                verticalVelocity = jumpForce;
-                jumpBuffered = false;
+                if (stats.ConsumeStamina(5f))
+                {
+                    verticalVelocity = jumpForce;
+                    jumpBuffered = false;
 
-                if (animator != null)
-                    animator.SetTrigger("Jump");
+                    if (animator != null)
+                        animator.SetTrigger("Jump");
+                }
+                else
+                {
+                    jumpBuffered = false; // 스태미너 부족 → 점프취소
+                }
             }
 
             // 중력
@@ -170,7 +177,7 @@ namespace Choi
 
             Vector3 direction = camForward * moveInput.y + camRight * moveInput.x;
 
-            // 회전
+            // 회전 처리
             if (direction.sqrMagnitude > 0.01f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -183,6 +190,12 @@ namespace Choi
 
             float currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
 
+            // 스태미너 소비
+            if (isSprinting && direction.sqrMagnitude > 0.1f)
+            {
+                stats.ConsumeStamina(Time.deltaTime * 8f);
+            }
+
             if (animator != null)
                 animator.SetFloat("Speed", direction.magnitude * (isSprinting ? 2f : 1f), 0.1f, Time.deltaTime);
 
@@ -191,12 +204,14 @@ namespace Choi
 
             controller.Move(velocity * Time.deltaTime);
         }
+
         #endregion
 
         #region Dash Logic
         private void TryDash()
         {
             if (!canDash || isDashing) return;
+            if (!stats.ConsumeStamina(20f)) return; // ← 스태미너 부족하면 대시 안됨
 
             StartCoroutine(DashRoutine());
         }

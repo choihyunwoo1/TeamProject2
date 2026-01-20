@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 namespace Choi
 {
@@ -7,7 +7,18 @@ namespace Choi
     {
         [Header("HP")]
         [SerializeField] private float maxHealth = 100f;
+        [SerializeField] private float currentHealth = 0f;
         [SerializeField] private float invincibleDuration = 0.3f;
+
+        [Header("Stamina")]
+        [SerializeField] private float maxStamina = 100f;
+        [SerializeField] private float staminaRecoveryRate = 15f; // 초당 회복량
+        [SerializeField] private float staminaRecoveryDelay = 1.0f; // 행동 후 회복 대기시간
+        [SerializeField] private float currentStamina;
+
+        private float staminaRecoveryTimer;
+        public float MaxStamina => maxStamina;
+        public float CurrentStamina => currentStamina;
 
         [Header("Gauge")]
         public float maxGauge = 100f;
@@ -17,7 +28,8 @@ namespace Choi
         [SerializeField] private float blinkInterval = 0.1f;   // 깜빡임 간격
         [SerializeField] private float transparentAlpha = 0.4f; // 반투명 정도
 
-        public float CurrentHealth { get; private set; }
+        public float MaxHealth => maxHealth;
+        public float CurrentHealth => currentHealth;
         public bool IsDead { get; private set; }
         public bool IsInvincible { get; private set; }
 
@@ -27,7 +39,9 @@ namespace Choi
 
         private void Awake()
         {
-            CurrentHealth = maxHealth;
+            currentHealth = maxHealth;
+            currentStamina = maxStamina;
+
             animator = GetComponent<Animator>();
 
             // 자식 오브젝트까지 포함한 모든 Renderer 가져오기
@@ -40,17 +54,27 @@ namespace Choi
                 originalColors[i] = renderers[i].material.color;
             }
         }
+        private void Update()
+        {
+            if (staminaRecoveryTimer > 0)
+                staminaRecoveryTimer -= Time.deltaTime;
+            else
+                RecoverStamina();
+
+            //죽음체크
+            //CheatDamage(10f);
+        }
 
         public void TakeDamage(float damage)
         {
             if (IsDead || IsInvincible) return;
 
-            CurrentHealth -= damage;
+            currentHealth -= damage;
             animator.SetTrigger("Hit");
 
             if (CurrentHealth <= 0)
             {
-                CurrentHealth = 0;
+                currentHealth = 0;
                 Die();
                 return;
             }
@@ -83,6 +107,24 @@ namespace Choi
             ToggleRenderers(true);
 
             IsInvincible = false;
+        }
+
+        public bool ConsumeStamina(float amount)
+        {
+            if (currentStamina < amount)
+                return false;
+
+            currentStamina -= amount;
+
+            staminaRecoveryTimer = staminaRecoveryDelay; // 회복 대기시간 초기화
+            return true;
+        }
+        private void RecoverStamina()
+        {
+            if (currentStamina >= maxStamina) return;
+
+            currentStamina += staminaRecoveryRate * Time.deltaTime;
+            currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
         }
 
         private void SetTransparency(float alpha)
@@ -138,5 +180,13 @@ namespace Choi
             currentGauge -= amount;
             return true;
         }
+
+        #region Cheat
+        public void CheatDamage(float amount)
+        {
+            Debug.Log($"[CHEAT] 강제 데미지: {amount}");
+            TakeDamage(amount);
+        }
+        #endregion
     }
 }

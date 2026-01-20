@@ -14200,10 +14200,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: d793747ff15de6a4e9a5d7001617abff, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -48307,10 +48307,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: d793747ff15de6a4e9a5d7001617abff, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -59849,6 +59849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1644374307}
+  - component: {fileID: 1644374308}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -59877,6 +59878,20 @@ RectTransform:
   m_AnchoredPosition: {x: 77, y: 37}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1644374308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644374306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0baf59f7d06cf44c87232e3d02b54fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 1286593266}
+  playerStats: {fileID: 8474702934093399232}
 --- !u!4 &1645465182 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5239272197777735519, guid: e348e7143b6247b488737e4be26fb038, type: 3}
@@ -71132,6 +71147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1986245773}
+  - component: {fileID: 1986245774}
   m_Layer: 5
   m_Name: StaminaBar
   m_TagString: Untagged
@@ -71160,6 +71176,20 @@ RectTransform:
   m_AnchoredPosition: {x: 77, y: 4}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1986245774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986245772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b53077db9aa7414daddc977a8deb127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 399244309}
+  playerStats: {fileID: 8474702934093399232}
 --- !u!1 &1988358635
 GameObject:
   m_ObjectHideFlags: 0
@@ -83527,7 +83557,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
   invincibleDuration: 0.3
+  maxStamina: 100
+  staminaRecoveryRate: 15
+  staminaRecoveryDelay: 1
+  currentStamina: 0
   maxGauge: 100
   currentGauge: 0
   blinkInterval: 0.1
