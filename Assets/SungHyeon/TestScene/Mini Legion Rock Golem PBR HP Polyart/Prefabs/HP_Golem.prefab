@@ -297,6 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4168634819871070}
   - component: {fileID: 95247164175502188}
+  - component: {fileID: 6693088189698139466}
   m_Layer: 0
   m_Name: HP_Golem
   m_TagString: Untagged
@@ -343,6 +344,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6693088189698139466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438169871030806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39a450d1bce3994ea09438269563816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  rewardGold: 0
+  rewardExp: 0
+  dropItem: {fileID: 0}
+  destroyDelay: 0
+  hpBarImage: {fileID: 0}
+  detectDistance: 0
+  attackRange: 0
+  moveSpeed: 0
+  attackDamage: 0
+  attackCooldown: 0
+  skillDamage: 0
+  skillCooldown: 0
 --- !u!1 &1457912190622302
 GameObject:
   m_ObjectHideFlags: 0
