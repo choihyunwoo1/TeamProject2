@@ -37,11 +37,15 @@ namespace Choi
         {
             currentInteractable = null;
 
-            Ray ray = new Ray(_cam.transform.position, _cam.transform.forward);
+            Vector3 start = _cam.transform.position;
+            Vector3 end = start + _cam.transform.forward * 1.0f; // 캡슐 높이
+            float radius = 0.6f;                                 // 원하는 만큼 넓게
 
-            if (Physics.SphereCast(ray, 0.2f, out RaycastHit hit, interactRange, interactLayer))
+            if (Physics.CapsuleCast(start, end, radius,
+                _cam.transform.forward, out RaycastHit hit,
+                interactRange, interactLayer))
             {
-                currentInteractable = hit.collider.GetComponent<IInteractable>();
+                currentInteractable = hit.collider.GetComponentInParent<IInteractable>();
 
                 if (currentInteractable != null)
                 {
@@ -49,8 +53,10 @@ namespace Choi
                     return;
                 }
             }
+
             InteractionUI.Instance.Hide();
         }
+
 
         private void TryInteract()
         {
