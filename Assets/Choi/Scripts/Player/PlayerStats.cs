@@ -5,6 +5,8 @@ namespace Choi
 {
     public class PlayerStats : MonoBehaviour, IDamageable
     {
+        public PlayerStatsDataSO data;
+
         [Header("HP")]
         [SerializeField] private float maxHealth = 100f;
         [SerializeField] private float currentHealth = 0f;
@@ -54,6 +56,19 @@ namespace Choi
                 originalColors[i] = renderers[i].material.color;
             }
         }
+        private void Start()
+        {
+            // 소에서 값을 불러오기
+            maxHealth = data.maxHealth;
+            currentHealth = data.currentHealth;
+
+            maxStamina = data.maxStamina;
+            currentStamina = data.currentStamina;
+
+            maxGauge = data.maxGauge;
+            currentGauge = data.currentGauge;
+        }
+
         private void Update()
         {
             if (staminaRecoveryTimer > 0)

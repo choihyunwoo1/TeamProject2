@@ -9,6 +9,10 @@ namespace Choi
         [SerializeField] private string sceneToLoad;
         [SerializeField] private float requiredStayTime = 5f;
 
+        [Header("Portal ID")]
+        [SerializeField] private string portalID;          // 현재 포탈의 ID
+        [SerializeField] private string targetPortalID;    // 다음 씬에서 도착할 포탈 ID
+
         [Header("References")]
         [SerializeField] private SceneFader sceneFader;
 
@@ -51,7 +55,10 @@ namespace Choi
                 yield return null;
             }
 
-            // 5초 이상 포탈 내부 → SceneFader 사용해 페이드 아웃 후 씬 이동
+            // 도착 포탈 정보 저장
+            PortalManager.LastPortalID = targetPortalID;
+
+            // 페이드 후 씬 이동
             if (sceneFader != null && !string.IsNullOrEmpty(sceneToLoad))
             {
                 sceneFader.FadeTo(sceneToLoad);
