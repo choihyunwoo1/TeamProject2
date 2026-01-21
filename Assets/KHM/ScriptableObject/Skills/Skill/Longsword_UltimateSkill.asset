@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a1d08a3c66b84b42b62044d04b790af, type: 3}
-  m_Name: SkillData
+  m_Name: Longsword_UltimateSkill
   m_EditorClassIdentifier: 
-  skillName: "\uC2A4\uD0AC\uBA85"
+  skillName: Longsword_UltimateSkill
   description: "\uC2A4\uD0AC\uC124\uBA85"
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 32aca750a107fa94da61a9925969944e, type: 3}
   cooldown: 0
   duration: 0
