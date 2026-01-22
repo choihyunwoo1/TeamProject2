@@ -26,6 +26,9 @@ namespace hm
         private Dictionary<int, ItemData> slotToItem = new();   // 현재 퀵슬롯에 등록된 아이템들
         private Dictionary<ItemData, int> itemToSlot = new();   // 아이템이 어느 슬롯에 있는지 역으로 찾기용
 
+        //스킬
+        [SerializeField] private SkillUI skillUI;
+
 
         private void Awake()
         {
@@ -203,5 +206,11 @@ namespace hm
             quickSlotUI.ExitSelectMode();
         }
         #endregion
+
+        //무기에 따른 스킬셋을 불러오기
+        public void ChangeSkillSet(SkillSetData skillSet)
+        {
+            skillUI.SetSkillSet(skillSet);
+        }
     }
 }
