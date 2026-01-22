@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Choi
 {
-    public class PlayerStats : MonoBehaviour, IDamageable
+    public class PlayerStats : MonoBehaviour, IDamageable, IBuffReceiver
     {
         public PlayerStatsDataSO data;
 
@@ -194,6 +194,16 @@ namespace Choi
 
             currentGauge -= amount;
             return true;
+        }
+
+        public void ApplyBuff(BuffDataSO data, int stack)
+        {
+            Debug.Log($"Apply Buff: {data.buffName}, Stack: {stack}");
+        }
+
+        public void RemoveBuff(BuffDataSO data)
+        {
+            Debug.Log($"Remove Buff: {data.buffName}");
         }
 
         #region Cheat

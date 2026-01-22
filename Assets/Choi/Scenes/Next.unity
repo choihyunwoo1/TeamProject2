@@ -12213,6 +12213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 217503986}
   - component: {fileID: 217503987}
+  - component: {fileID: 217503988}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -12258,6 +12259,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &217503988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217503985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2bb5002bd59ab4d8dd5d3d01adbef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 217503987}
 --- !u!1001 &220283657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41867,6 +41881,7 @@ GameObject:
   - component: {fileID: 857035106}
   - component: {fileID: 857818586}
   - component: {fileID: 859198824}
+  - component: {fileID: 859198825}
   m_Layer: 0
   m_Name: doorway
   m_TagString: Untagged
@@ -41966,6 +41981,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &859198825
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856883422}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300040, guid: a7cc7f41ce50a474aa1df610be0b810f, type: 3}
 --- !u!23 &859215192
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -46068,6 +46105,7 @@ GameObject:
   - component: {fileID: 952918473}
   - component: {fileID: 952918472}
   - component: {fileID: 952918471}
+  - component: {fileID: 952918474}
   m_Layer: 0
   m_Name: doorway (1)
   m_TagString: Untagged
@@ -46144,6 +46182,28 @@ Transform:
   - {fileID: 1534890163}
   m_Father: {fileID: 737266689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &952918474
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952918470}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300040, guid: a7cc7f41ce50a474aa1df610be0b810f, type: 3}
 --- !u!1 &959826881
 GameObject:
   m_ObjectHideFlags: 0
@@ -91249,6 +91309,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1210667550}
   - component: {fileID: 1210667551}
+  - component: {fileID: 1210667552}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -91294,6 +91355,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1210667552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210667549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2bb5002bd59ab4d8dd5d3d01adbef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1210667551}
 --- !u!54 &1212780293
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -111412,6 +111486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1534890163}
   - component: {fileID: 1534890164}
+  - component: {fileID: 1534890165}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -111457,6 +111532,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1534890165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534890162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2bb5002bd59ab4d8dd5d3d01adbef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1534890164}
 --- !u!1001 &1541604780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119698,6 +119786,7 @@ GameObject:
   - component: {fileID: 1630291098}
   - component: {fileID: 1630291097}
   - component: {fileID: 1630291096}
+  - component: {fileID: 1630291099}
   m_Layer: 0
   m_Name: doorway (2)
   m_TagString: Untagged
@@ -119774,6 +119863,28 @@ Transform:
   - {fileID: 217503986}
   m_Father: {fileID: 737266689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1630291099
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630291095}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300040, guid: a7cc7f41ce50a474aa1df610be0b810f, type: 3}
 --- !u!1001 &1630779463
 PrefabInstance:
   m_ObjectHideFlags: 0
