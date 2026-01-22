@@ -6,13 +6,21 @@ public class NPCDialogueNew : MonoBehaviour
     public string npcName;
     [TextArea] public string[] lines;
 
+    [Header("Choices")]
+    [TextArea] public string[] choices;
+
+    [Header("Choice Timing")]
+    public bool useChoice;
+    public int choiceIndex; // 몇 번째 줄에서 선택지 뜰지
+
     [Header("References")]
     [SerializeField] private DialogueUINew dialogueUI;
 
     private int index;
     private bool isTalking;
+    private bool choiceUsed;
 
-    private void Start()
+    void Start()
     {
         if (dialogueUI == null)
             dialogueUI = FindFirstObjectByType<DialogueUINew>();
@@ -24,26 +32,58 @@ public class NPCDialogueNew : MonoBehaviour
 
         index = 0;
         isTalking = true;
+        choiceUsed = false;
 
-        dialogueUI.Show(npcName, lines[index], this);
+        ShowLine();
+    }
+
+    void ShowLine()
+    {
+        if (index >= lines.Length)
+        {
+            EndDialogue();
+            return;
+        }
+
+        bool isLast = index == lines.Length - 1;
+
+        dialogueUI.Show(
+            npcName,
+            lines[index],
+            this,
+            isLast
+        );
+
+        // 선택지 타이밍
+        if (useChoice && !choiceUsed && index == choiceIndex)
+        {
+            choiceUsed = true;
+            dialogueUI.ShowChoices(choices);
+        }
     }
 
     public void NextLine()
     {
-        if (!isTalking) return;
-
         index++;
-
-        if (index < lines.Length)
-            dialogueUI.Show(npcName, lines[index], this);
-        else
-            EndDialogue();
+        ShowLine();
     }
 
-    void EndDialogue()
+    // UI에서 호출
+    public void OnChoiceSelected(int id)
+    {
+        Debug.Log("선택한 번호: " + id);
+
+        NextLine();
+    }
+
+    public bool IsLastLine()
+    {
+        return index >= lines.Length - 1;
+    }
+
+    public void EndDialogue()
     {
         isTalking = false;
         dialogueUI.Hide();
     }
 }
-
