@@ -10,6 +10,8 @@ namespace hm
         [SerializeField] private ItemData itemData; //테스트용 직렬화
         [SerializeField] private WeaponUpgradeSystem upgradeSystem;
         [SerializeField] private WeaponUpgradeUI upgradeUI;
+        [SerializeField] private UpgradeSelectPopupUI popupUI;
+
         private TooltipTrigger tooltipTrigger;
 
         private void Awake()
@@ -31,11 +33,22 @@ namespace hm
             iconImage.sprite = null;
             tooltipTrigger.ClearData();
         }
-
+       
         public void OnClick()
         {
             if (itemData == null) return;
+
+            if (itemData.itemType != ItemType.Material)
+                return;
+
             UIManager.Instance.SelectItemForQuickSlot(itemData);
+
+            popupUI.Open(
+                itemData,
+                upgradeSystem,
+                upgradeUI,
+                GetComponent<RectTransform>()  
+            );
         }
 
         public void OnClickUpgrade()
