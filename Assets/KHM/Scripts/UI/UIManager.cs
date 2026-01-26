@@ -167,7 +167,7 @@ namespace hm
         public void SelectItemForQuickSlot(ItemData item)
         {
             // 소비 아이템만 허용
-            if (item.itemType != ItemType.Consumable)
+            if (item.category != ItemCategory.UseItem)
                 return;
 
             selectedItem = item;

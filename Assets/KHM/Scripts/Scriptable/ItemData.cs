@@ -1,29 +1,34 @@
 using UnityEngine;
 namespace hm
 {
-    public enum ItemType
-    {
-        Consumable,     //소비 아이템
-        Equipment,      //장비 아이템
-        Quest,          //퀘스트 아이템
-        Material,       //무기 개조 재료
-    }
+    public enum ItemCategory { Weapon, UseItem, Material }
+    public enum ItemType { Sword, Heal, Food, Material }
 
-    [CreateAssetMenu(fileName = "ItemData", menuName = "Scriptable Objects/ItemData")]
+    [CreateAssetMenu(menuName = "Game/Item/ItemData")]
     public class ItemData : ScriptableObject, ITooltipData
     {
-        [Header("Tooltip Type")]
-        public TooltipType Type => TooltipType.Item;
-
-        [Header("Info")]
+        public int id;
+        public string devName;
         public string itemName;
+        [TextArea] public string description;
 
-        [TextArea(2, 5)]
-        public string description;
-
+        public ItemCategory category;
         public ItemType itemType;
 
-        [Header("Icon")]
+        public bool stackable;
+        public int maxStack;
+
+        public bool usable;
+        public bool consumable;
+
+        public int priceBuy;
+        public int priceSell;
+
+        public bool canDrop;
+        public bool canSale;
+        public bool questItem;
+
         public Sprite icon;
+        public TooltipType Type => TooltipType.Item;
     }
 }
