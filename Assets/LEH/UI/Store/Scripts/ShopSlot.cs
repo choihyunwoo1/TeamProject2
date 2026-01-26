@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ShopSlot : MonoBehaviour
+public class ShopSlot : MonoBehaviour,
+    IPointerEnterHandler,
+    IPointerExitHandler
 {
     public Image icon;
-    private ShopItem item;
+    public ShopItem item;
 
     public void SetItem(ShopItem newItem)
     {
@@ -12,15 +15,13 @@ public class ShopSlot : MonoBehaviour
         icon.sprite = item.icon;
     }
 
-    public void Buy()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        if (PlayerGold.Instance.gold < item.price)
-        {
-            Debug.Log("골드 부족");
-            return;
-        }
+        ItemTooltip.Instance.Show(item, transform.position);
+    }
 
-        PlayerGold.Instance.gold -= item.price;
-        PlayerInventory.Instance.AddItem(item);
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ItemTooltip.Instance.Hide();
     }
 }

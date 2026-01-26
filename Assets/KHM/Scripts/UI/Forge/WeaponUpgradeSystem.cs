@@ -10,7 +10,7 @@ namespace hm
     /// </summary>
     public class WeaponUpgradeSystem : MonoBehaviour
     {
-        [SerializeField] private MonoBehaviour inventorySource;
+        [SerializeField] private TestInventory inventorySource; //테스트 
         private IInventory inventory;
 
         [Header("Current Recipe")]
@@ -76,6 +76,22 @@ namespace hm
             return actualCount;
         }
 
+        /// <summary>
+        /// 재료 슬롯에서 재료를 다시 인벤으로 돌려보냄
+        /// </summary>
+        public int TryRemoveMaterial(ItemData item)
+        {
+            if (!filledMaterials.TryGetValue(item, out int filled) || filled <= 0)
+                return 0;
+
+            // 인벤 잠금 해제
+            inventory.UnlockItem(item, filled);
+
+            filledMaterials.Remove(item);
+
+            return filled;
+        }
+
         #endregion
 
         #region Condition Check
@@ -119,6 +135,12 @@ namespace hm
             }
 
             return true;
+        }
+
+        //아이템 이미 들어갔는지 체크
+        public bool IsMaterialFilled(ItemData item)
+        {
+            return filledMaterials.ContainsKey(item);
         }
 
         #endregion

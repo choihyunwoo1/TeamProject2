@@ -1,10 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Shop/Item")]
-public class ShopItem : ScriptableObject
+[System.Serializable]
+public class ShopItem
 {
     public string itemName;
     public Sprite icon;
     public int price;
+    [TextArea]
+    public string description; // ← 이거 하나만
 }
-

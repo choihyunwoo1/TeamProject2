@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e705c1934842aa745a090231e1ef93e9, type: 3}
-  m_Name: DaggerSkillSet
+  m_Script: {fileID: 11500000, guid: 31ca807bb3ca03d4883262a05ae6887f, type: 3}
+  m_Name: Staff
   m_EditorClassIdentifier: 
-  weaponType: 2
-  skills:
-  - {fileID: 11400000, guid: 4a5a489fd3da8474288b5228ebaee985, type: 2}
-  - {fileID: 11400000, guid: ab9b6e09ddb23924ba705f57c9abd72a, type: 2}
+  itemName: Staff
+  description: 
+  itemType: 1
+  icon: {fileID: 0}
+  skillSet: {fileID: 11400000, guid: ab3df65adda6c674fa5ca70744539877, type: 2}
