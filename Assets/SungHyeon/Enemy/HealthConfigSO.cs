@@ -9,7 +9,7 @@ namespace TeamProject2
     [CreateAssetMenu(fileName = "HealthConfigSO", menuName = "EntityConfig/Health Config")]
     public class HealthConfigSO : DescriptionBaseSO
     {
-        [SerializeField] protected float _initialHealth;
+        [SerializeField] protected float _initialHealth = 50f;
 
         public float InitialHealth => _initialHealth;
     }

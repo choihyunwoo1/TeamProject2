@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: HealthConfigSO
   m_EditorClassIdentifier: 
   description: 
-  _initialHealth: 0
+  _initialHealth: 50

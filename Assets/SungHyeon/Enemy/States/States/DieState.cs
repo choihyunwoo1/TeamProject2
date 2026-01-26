@@ -11,9 +11,6 @@ namespace TeamProject2
         #region Variables
         //참조
         private Animator m_Animator;
-
-        //애니메이터 파라미터
-        readonly int m_HashDie = Animator.StringToHash("Die");
         #endregion
 
         //상태 초기화 함수, 상태 생성시 1회 호출
@@ -27,7 +24,7 @@ namespace TeamProject2
         public override void OnEnter()
         {
             //애니메이터 설정
-            m_Animator.SetTrigger(m_HashDie);
+            m_Animator.SetTrigger("Die");
         }
 
         //상태 업데이트, 매 프레임 마다 호출

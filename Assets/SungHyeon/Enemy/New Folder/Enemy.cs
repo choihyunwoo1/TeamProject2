@@ -1,4 +1,5 @@
 using UnityEngine;
+using Choi;
 
 namespace TeamProject2
 {
@@ -10,10 +11,16 @@ namespace TeamProject2
         #region Variables
         //참조
         protected DetectionModule m_DetectionMoudle;
-        protected Damageable m_Damageable;
+        protected Damageable damageable;
 
         //상태 머신
         protected StateMachine stateMachine;
+
+        private IdleState idleState = new IdleState();
+        private WalkState walkState = new WalkState();
+        private AttackState attackState = new AttackState();
+        private DieState dieState = new DieState();
+        private GetHitState getHitState = new GetHitState();
 
         //공격 범위
         [SerializeField] protected float attackRange = 2.0f;
@@ -50,31 +57,28 @@ namespace TeamProject2
         {
             //참조
             m_DetectionMoudle = GetComponent<DetectionModule>();
-            m_Damageable = GetComponent<Damageable>();
+            damageable = GetComponent<Damageable>();
         }
 
         protected virtual void OnEnable()
         {
-            m_Damageable.OnDamage += OnDamaged;
-            m_Damageable.OnDie += OnDie;
+            damageable.OnDamage += OnDamaged;
+            damageable.OnDie += OnDie;
         }
 
         protected virtual void OnDisable()
         {
-            m_Damageable.OnDamage -= OnDamaged;
-            m_Damageable.OnDie -= OnDie;
+            damageable.OnDamage -= OnDamaged;
+            damageable.OnDie -= OnDie;
         }
 
         protected virtual void Start()
         {
-            //상태머신 객체 생성 및 상태 생성해도 등록
-            stateMachine = new StateMachine(this, new IdleState());
-            stateMachine.RegisterState(new WalkState());
-            stateMachine.RegisterState(new AttackState());
-            stateMachine.RegisterState(new DieState());
-            stateMachine.RegisterState(new GetHitState());
-            //상속 받은 후 추가로 새로운 상태를 등록 진행
-
+            stateMachine = new StateMachine(this, idleState);
+            stateMachine.RegisterState(walkState);
+            stateMachine.RegisterState(attackState);
+            stateMachine.RegisterState(dieState);
+            stateMachine.RegisterState(getHitState);
         }
 
         protected virtual void Update()
@@ -108,12 +112,12 @@ namespace TeamProject2
 
         private void OnDamaged(float damage)
         {
-            ChangeState(new IdleState());
+            ChangeState(getHitState);
         }
 
         private void OnDie()
         {
-            ChangeState(new DieState());
+            ChangeState(dieState);
 
             //킬
             Destroy(gameObject, 3f);

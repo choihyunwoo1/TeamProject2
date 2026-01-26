@@ -9,8 +9,6 @@ namespace TeamProject2
         //참조
         private Animator m_Ainmator;
 
-        //애니메이터 파라미터
-        readonly int m_HashGetHit = Animator.StringToHash("GetHit");
         #endregion
 
         public override void OnInitalize()
@@ -19,16 +17,13 @@ namespace TeamProject2
             m_Ainmator = enemy.GetComponent<Animator>();
         }
 
-        //
         public override void OnEnter()
         { 
-            //
-            m_Ainmator.SetTrigger(m_HashGetHit);
         }
 
         public override void OnUpdate(float deltaTime)
         {
-            
+            m_Ainmator.SetTrigger("GetHit");
         }
     }
 }

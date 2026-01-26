@@ -101,32 +101,6 @@ namespace TeamProject2
             Debug.Log("Die");
 
             OnDie?.Invoke();
-
-            //Destroy(gameObject); // 필요 시 활성화
-        }
-
-        public void Kill()
-        {
-            if (IsDeath)
-                return;
-
-            Die();
-        }
-
-        public void Revive()
-        {
-            _currentHealthSO.SetCurrentHealth(_currentHealthSO.MaxHealth);
-            IsDeath = false;
-            IsInvulnerable = false;
-            m_timeSinceLastHit = 0f;
-        }
-
-        public void Cure(float healthAdd)
-        {
-            if (IsDeath)
-                return;
-
-            _currentHealthSO.RestoreHealth(healthAdd);
         }
         #endregion
     }
