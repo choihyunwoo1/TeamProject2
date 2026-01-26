@@ -45,7 +45,7 @@ namespace TeamProject2
             {
                 if (enemy.IsAttackable)
                 {
-                    stateMachine.ChangeState(new AttackState());
+                    stateMachine.ChangeState(enemy.AttackState);
                 }
                 else
                 {
@@ -57,7 +57,7 @@ namespace TeamProject2
             }
             else //타겟을 잃어버리면
             {
-                stateMachine.ChangeState(new IdleState());
+                stateMachine.ChangeState(enemy.IdleState);
             }
         }
 

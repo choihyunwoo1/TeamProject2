@@ -22,6 +22,7 @@ namespace TeamProject2
         //이벤트 함수
         public event UnityAction<float> OnDamage;
         public event UnityAction OnDie;
+        public event UnityAction<float> OnAttack;
         #endregion
 
         #region Property
@@ -101,6 +102,11 @@ namespace TeamProject2
             Debug.Log("Die");
 
             OnDie?.Invoke();
+        }
+
+        private void Attack(float damage)
+        {
+            OnAttack?.Invoke(damage);
         }
         #endregion
     }

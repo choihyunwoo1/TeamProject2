@@ -1,42 +1,53 @@
 using UnityEngine;
+using Choi;
 
 namespace TeamProject2
 {
-    public class EnemyAttackBehaviour : StateMachineBehaviour
+    /// <summary>
+    /// 적 공격 애니메이션용 히트박스 Behaviour
+    /// 애니메이션 타이밍에 맞춰 EnemyHitbox 활성/비활성
+    /// </summary>
+    public class EnemyAttackStateBehaviour : StateMachineBehaviour
     {
-        // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-        //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        //{
-        //    
-        //}
+        [Header("Hitbox Timing (Normalized Time)")]
+        [Tooltip("0~1, 애니메이션 중 히트박스 활성화 시작 구간")]
+        public float hitboxStart = 0.25f;
 
-        // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-        //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        //{
-        //    
-        //}
+        [Tooltip("0~1, 애니메이션 중 히트박스 비활성화되는 구간")]
+        public float hitboxEnd = 0.45f;
 
-        // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        private Enemy enemy;
+        private EnemyHitbox hitbox;
+
+        // 애니메이터 상태 진입 시
+        override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            //Enemy 대기 상태로 보낸다
-            Enemy enemy = animator.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.ChangeState(new IdleState());
-            }
+            if (enemy == null)
+                enemy = animator.GetComponent<Enemy>();
+
+            if (hitbox == null)
+                hitbox = animator.GetComponentInChildren<EnemyHitbox>();
+
+            // 처음에는 히트박스 비활성화
+            hitbox.DisableHitbox();
         }
 
-        // OnStateMove is called right after Animator.OnAnimatorMove()
-        //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        //{
-        //    // Implement code that processes and affects root motion
-        //}
+        // 애니메이션 매 프레임 업데이트
+        override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            float t = stateInfo.normalizedTime % 1f; // 루프 고려
 
-        // OnStateIK is called right after Animator.OnAnimatorIK()
-        //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        //{
-        //    // Implement code that sets up animation IK (inverse kinematics)
-        //}
+            // 히트박스 활성/비활성 처리
+            if (t >= hitboxStart && t <= hitboxEnd)
+                hitbox.EnableHitbox();
+            else
+                hitbox.DisableHitbox();
+        }
+
+        // 애니메이터 상태 종료 시
+        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            hitbox.DisableHitbox();
+        }
     }
 }

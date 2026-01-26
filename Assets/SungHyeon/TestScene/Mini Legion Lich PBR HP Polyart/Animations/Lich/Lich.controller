@@ -10,7 +10,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: ForwardSpeed
-    m_EventTreshold: 0
+    m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3507929183999637483}
   m_Solo: 0
@@ -20,7 +20,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.8125
-  m_HasExitTime: 0
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -62,6 +62,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5954233549654664753}
+  - {fileID: 7264236114370191220}
   m_StateMachineBehaviours:
   - {fileID: 8094174344346114317}
   m_Position: {x: 50, y: 50, z: 0}
@@ -316,10 +317,10 @@ AnimatorStateMachine:
     m_Position: {x: 170, y: -270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -640032315440677691}
-    m_Position: {x: 650, y: -150, z: 0}
+    m_Position: {x: 790, y: -270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5997979352861735655}
-    m_Position: {x: 580, y: -30, z: 0}
+    m_Position: {x: 590, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1960479254784354161}
     m_Position: {x: 560, y: -270, z: 0}
@@ -353,7 +354,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.8125
-  m_HasExitTime: 0
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -487,6 +488,28 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &7264236114370191220
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 3507929183999637483}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.8125
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!114 &8094174344346114317
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -499,3 +522,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c427f86b2969ef4bbb8a33ba2b35c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitboxStart: 0.15
+  hitboxEnd: 0.45

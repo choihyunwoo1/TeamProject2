@@ -1,29 +1,31 @@
+using TeamProject2;
 using UnityEngine;
-using Choi;
 
-namespace TeamProject2
+public class GetHitState : State
 {
-    public class GetHitState : State
+    private Animator animator;
+    private float timer;
+    private const float hitDuration = 0.3f; // 히트 애니메이션 길이
+
+    public override void OnInitalize()
     {
-        #region Variables
-        //참조
-        private Animator m_Ainmator;
-
-        #endregion
-
-        public override void OnInitalize()
-        { 
-            //참조
-            m_Ainmator = enemy.GetComponent<Animator>();
-        }
-
-        public override void OnEnter()
-        { 
-        }
-
-        public override void OnUpdate(float deltaTime)
-        {
-            m_Ainmator.SetTrigger("GetHit");
-        }
+        animator = enemy.GetComponent<Animator>();
     }
+
+    public override void OnEnter()
+    {
+        timer = 0f;
+        animator.SetTrigger("GetHit");
+    }
+
+    public override void OnUpdate(float deltaTime)
+    {
+        timer += deltaTime;
+
+        // 히트 애니메이션 끝나면 Idle로 복귀
+        if (timer >= hitDuration)
+            enemy.ChangeState(new IdleState());
+    }
+
+    public override void OnExit() { }
 }

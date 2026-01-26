@@ -7,7 +7,7 @@ namespace TeamProject2
     /// 체력의 초기값 설정 - 데이터 컨네이너
     /// </summary>
     [CreateAssetMenu(fileName = "HealthConfigSO", menuName = "EntityConfig/Health Config")]
-    public class HealthConfigSO : DescriptionBaseSO
+    public class HealthConfigSO : ScriptableObject
     {
         [SerializeField] protected float _initialHealth = 50f;
 

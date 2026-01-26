@@ -10,7 +10,7 @@ namespace TeamProject2
     {
         #region Variables
         //참조
-        protected DetectionModule m_DetectionMoudle;
+        public DetectionModule m_DetectionMoudle;
         protected Damageable damageable;
 
         //상태 머신
@@ -32,6 +32,12 @@ namespace TeamProject2
         #endregion
 
         #region Property
+        public IdleState IdleState => idleState;
+        public WalkState WalkState => walkState;
+        public AttackState AttackState => attackState;
+        public DieState DieState => dieState;
+        public GetHitState GetHitState => getHitState;
+
         public Transform Target => m_DetectionMoudle.Target;
         public float AttackRange => attackRange;
         public float AttackDelayTime => attackDelayTime;
@@ -64,12 +70,14 @@ namespace TeamProject2
         {
             damageable.OnDamage += OnDamaged;
             damageable.OnDie += OnDie;
+            damageable.OnAttack += OnAttack;
         }
 
         protected virtual void OnDisable()
         {
             damageable.OnDamage -= OnDamaged;
             damageable.OnDie -= OnDie;
+            damageable.OnAttack -= OnAttack;
         }
 
         protected virtual void Start()
@@ -85,7 +93,6 @@ namespace TeamProject2
         {
             //상태머신의 업데이트 : 현재상태의 업데이트를 매 프레임마다 실행
             stateMachine.Update(Time.deltaTime);
-
         }
         #endregion
 
@@ -121,6 +128,11 @@ namespace TeamProject2
 
             //킬
             Destroy(gameObject, 3f);
+        }
+
+        private void OnAttack(float damage)
+        {
+            ChangeState(attackState);
         }
         #endregion
     }
