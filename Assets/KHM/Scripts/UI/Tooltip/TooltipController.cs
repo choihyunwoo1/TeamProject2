@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace hm
+namespace Choi
 {
     public class TooltipController : MonoBehaviour
     {

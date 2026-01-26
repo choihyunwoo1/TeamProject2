@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace hm
+namespace Choi
 {
     [CreateAssetMenu(fileName = "SkillData", menuName = "Scriptable Objects/SkillData")]
     public class SkillData : ScriptableObject, ITooltipData

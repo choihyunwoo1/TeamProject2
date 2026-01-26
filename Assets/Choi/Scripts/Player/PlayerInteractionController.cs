@@ -19,7 +19,9 @@ namespace Choi
 
         private void Update()
         {
-            DetectInteractable();
+            Debug.DrawRay(_cam.transform.position, _cam.transform.forward * interactRange, Color.red);
+
+            //DetectInteractable();
         }
 
         // Input System에서 "Interact" 액션이 호출됨
@@ -27,6 +29,7 @@ namespace Choi
         {
             if (!context.performed) return;
 
+            Debug.Log("OnInteract");   // 추가
             TryInteract();
         }
 
@@ -34,11 +37,15 @@ namespace Choi
         {
             currentInteractable = null;
 
-            Ray ray = new Ray(_cam.transform.position, _cam.transform.forward);
+            Vector3 start = _cam.transform.position;
+            Vector3 end = start + _cam.transform.forward * 1.0f; // 캡슐 높이
+            float radius = 0.6f;                                 // 원하는 만큼 넓게
 
-            if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactLayer))
+            if (Physics.CapsuleCast(start, end, radius,
+                _cam.transform.forward, out RaycastHit hit,
+                interactRange, interactLayer))
             {
-                currentInteractable = hit.collider.GetComponent<IInteractable>();
+                currentInteractable = hit.collider.GetComponentInParent<IInteractable>();
 
                 if (currentInteractable != null)
                 {
@@ -49,6 +56,7 @@ namespace Choi
 
             InteractionUI.Instance.Hide();
         }
+
 
         private void TryInteract()
         {

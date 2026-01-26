@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace hm
+namespace Choi
 {
     public class QuickSlotUI : MonoBehaviour
     {

@@ -11,8 +11,8 @@ namespace Choi
         [SerializeField] private TMP_Text nameText;
         [SerializeField] private TMP_Text sentenceText;
 
-        private string[] lines;
-        private int index = 0;
+        private DialogueLine[] lines;
+        private int currentIndex = 0;
 
         private void Awake()
         {
@@ -20,32 +20,58 @@ namespace Choi
             dialogueUI.SetActive(false);
         }
 
-        public void StartDialogue(string npcName, TextAsset json)
+        public void StartDialogue(TextAsset json)
         {
-            nameText.text = npcName;
-            lines = JsonUtility.FromJson<DialogueData>(json.text).lines;
-            index = 0;
-
+            Debug.Log("StartDialogue 호출됨!");
             dialogueUI.SetActive(true);
+
+            DialogueRoot root = JsonUtility.FromJson<DialogueRoot>(json.text);
+
+            if (root.dialogue == null || root.dialogue.Length == 0)
+            {
+                Debug.LogWarning("Nothing in here");
+                return;
+            }
+
+            lines = root.dialogue;
+
+            // 첫 줄은 항상 id 1이라고 가정
+            currentIndex = FindIndexById(1);
+
             ShowLine();
         }
 
         public void Next()
         {
-            index++;
+            DialogueLine current = lines[currentIndex];
 
-            if (index >= lines.Length)
+            if (current.next == null)
             {
                 EndDialogue();
                 return;
             }
 
+            currentIndex = FindIndexById(current.next.Value);
             ShowLine();
         }
 
         private void ShowLine()
         {
-            sentenceText.text = lines[index];
+            DialogueLine line = lines[currentIndex];
+
+            nameText.text = line.character;
+            sentenceText.text = line.text;
+        }
+
+        private int FindIndexById(int id)
+        {
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].id == id) return i;
+            }
+
+            Debug.LogError("Can't find ID: " + id);
+            return 0;
         }
 
         private void EndDialogue()
@@ -55,8 +81,17 @@ namespace Choi
     }
 
     [System.Serializable]
-    public class DialogueData
+    public class DialogueLine
     {
-        public string[] lines;
+        public int id;
+        public string character;
+        public string text;
+        public int? next;
+    }
+
+    [System.Serializable]
+    public class DialogueRoot
+    {
+        public DialogueLine[] dialogue;
     }
 }

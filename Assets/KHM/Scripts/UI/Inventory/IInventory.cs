@@ -1,3 +1,5 @@
+using Choi;
+
 namespace hm
 {
     public interface IInventory

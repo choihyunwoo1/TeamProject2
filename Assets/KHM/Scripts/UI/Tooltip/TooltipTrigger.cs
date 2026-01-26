@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace hm
+namespace Choi
 {
     /// <summary>
     /// 특정 UI에 마우스를 올렸을 때 툴팁을 띄워주는 트리거

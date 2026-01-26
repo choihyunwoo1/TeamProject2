@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace hm
+namespace Choi
 {
     [CreateAssetMenu(menuName = "Skill/SkillSet")]
     public class SkillSetData : ScriptableObject

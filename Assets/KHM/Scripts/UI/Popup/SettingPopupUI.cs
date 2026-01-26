@@ -1,4 +1,4 @@
-namespace hm
+namespace Choi
 {
     public class SettingPopupUI : PopupUIBase
     {

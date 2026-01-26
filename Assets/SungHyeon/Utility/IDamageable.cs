@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+
 namespace TeamProject2
 {
     /// <summary>
@@ -78,6 +79,7 @@ namespace TeamProject2
 
             _currentHealthSO.InflictDamage(damage);
             Debug.Log($"CurrentHealth: {_currentHealthSO.CurrentHealth}");
+
 
             OnDamage?.Invoke(damage);
 
