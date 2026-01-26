@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Choi
+namespace hm
 {
     /// <summary>
     /// UI를 관리하는 매니저

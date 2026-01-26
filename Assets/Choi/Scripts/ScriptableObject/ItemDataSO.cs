@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using hm;
 namespace Choi
 {
     [CreateAssetMenu(menuName = "GameData/Item")]

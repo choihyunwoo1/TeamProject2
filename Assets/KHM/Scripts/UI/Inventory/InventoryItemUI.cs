@@ -1,20 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Choi
+namespace hm
 {
     public class InventoryItemUI : MonoBehaviour
     {
         [SerializeField] private Image iconImage;
 
         [SerializeField] private ItemData itemData; //테스트용 직렬화
-<<<<<<< HEAD:Assets/KHM/Scripts/UI/InventoryItemUI.cs
-=======
         [SerializeField] private WeaponUpgradeSystem upgradeSystem;
         [SerializeField] private WeaponUpgradeUI upgradeUI;
         [SerializeField] private UpgradeSelectPopupUI popupUI;
 
->>>>>>> 4b6d073e3b18e6d046059e10fd840aa4764e3ebf:Assets/KHM/Scripts/UI/Inventory/InventoryItemUI.cs
         private TooltipTrigger tooltipTrigger;
 
         private void Awake()
@@ -36,7 +33,7 @@ namespace Choi
             iconImage.sprite = null;
             tooltipTrigger.ClearData();
         }
-       
+
         public void OnClick()
         {
             if (itemData == null) return;
@@ -50,8 +47,20 @@ namespace Choi
                 itemData,
                 upgradeSystem,
                 upgradeUI,
-                GetComponent<RectTransform>()  
+                GetComponent<RectTransform>()
             );
         }
+
+        public void OnClickUpgrade()
+        {
+            if (itemData.itemType != ItemType.Material)
+                return;
+
+            int filled = upgradeSystem.TryFillMaterial(itemData);
+
+            if (filled > 0)
+                upgradeUI.Refresh();
+        }
+
     }
 }

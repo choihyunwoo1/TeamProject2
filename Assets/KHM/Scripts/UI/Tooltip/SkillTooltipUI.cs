@@ -1,6 +1,6 @@
 using TMPro;
 using UnityEngine;
-namespace Choi
+namespace hm
 {
     public class SkillTooltipUI : TooltipUIBase
     {

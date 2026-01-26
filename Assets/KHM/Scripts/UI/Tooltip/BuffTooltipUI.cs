@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Choi
+namespace hm
 {
     public class BuffTooltipUI : TooltipUIBase
     {

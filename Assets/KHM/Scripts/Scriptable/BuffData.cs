@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Choi
+namespace hm
 {
     [CreateAssetMenu(fileName = "BuffData", menuName = "Scriptable Objects/BuffData")]
     public class BuffData : ScriptableObject, ITooltipData

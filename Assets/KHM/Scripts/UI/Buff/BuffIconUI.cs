@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Choi
+namespace hm
 {
     public class BuffIconUI : MonoBehaviour
     {
