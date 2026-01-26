@@ -1,3 +1,5 @@
+using Choi;
+
 namespace hm
 {
     public enum InventorySlotState

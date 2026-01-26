@@ -94,78 +94,11 @@ namespace TeamProject2
             wayPointIndex = 0;
             startPosion = transform.position;
 
-            SetState(EnemyState.E_Idle);
         }
 
         private void Update()
         {
-            //죽음 체크
-            if (isDeath)
-                return;
-
-            //디텍팅 
-            float distacne = Vector3.Distance(thePlayer.position, transform.position);
-            if (distacne <= attackRange && isBack == false)            //공격 거리 체크
-            {
-                SetState(EnemyState.E_Attack);
-            }
-            else if (distacne <= detectDistance && isBack == false)    //디텍팅 거리 체크
-            {
-                SetState(EnemyState.E_Chase);
-            }
-
-            //상태 처리
-            switch (currentState)
-            {
-                case EnemyState.E_Idle:
-                    if (isPatrol)
-                    {
-                        countdown += Time.deltaTime;
-                        if (countdown >= idleTimer)
-                        {
-                            //타이머 기능
-                            SetState(EnemyState.E_Walk);
-                        }
-                    }
-                    break;
-
-                case EnemyState.E_Walk: //패트롤                
-                    //도착 판정
-                    if (agent.remainingDistance < 0.1f)
-                    {
-                        if (isPatrol)
-                        {
-                            wayPointIndex++;
-                            if (wayPointIndex >= wayPoints.Length)
-                            {
-                                wayPointIndex = 0;
-                            }
-                        }
-                        SetState(EnemyState.E_Idle);
-                    }
-                    break;
-
-                case EnemyState.E_Chase: //추격
-                    agent.SetDestination(thePlayer.position);
-
-                    if (distacne > detectDistance)    //디텍팅 거리 체크, 타겟을 잃어버리면
-                    {
-                        SetState(EnemyState.E_Walk);
-                    }
-                    break;
-
-                case EnemyState.E_Attack:
-                    countdown += Time.deltaTime;
-                    if (countdown >= attackTimer)
-                    {
-                        //타이머 기능
-                        Shoot();
-
-                        //타이머 초기화
-                        countdown = 0;
-                    }
-                    break;
-            }
+      
 
             //애니메이터 파라미터 처리
             animator.SetFloat(MoveSpeed, agent.velocity.magnitude);
@@ -183,63 +116,8 @@ namespace TeamProject2
         #endregion
 
         #region Custom Method
-        //상태 전환
-        public void SetState(EnemyState newState)
-        {
-            //현재 상태 체크
-            if (currentState == newState)
-                return;
+       
 
-            beforeState = currentState; //현재 상태를 바로 이전 상태에 저장
-            currentState = newState;    //현재 상태를 새로운 상태로 전환
-
-            //agenet 초기화
-            agent.ResetPath();
-
-
-            //상태별 초기값 설정
-            switch (currentState)
-            {
-                case EnemyState.E_Idle:
-                    //타이머 초기화
-                    idleTimer = Random.Range(2f, 3f);
-                    break;
-
-                case EnemyState.E_Walk:
-                    //이동 목표 지점 설정
-                    if (isPatrol)
-                    {
-                        agent.SetDestination(wayPoints[wayPointIndex].position);
-                    }
-                    else
-                    {
-                        agent.SetDestination(startPosion);
-                    }
-                    break;
-
-                case EnemyState.E_Attack:
-                    //멈춤 - 이동 목표 지점을 현재 위치로 지정
-                    agent.SetDestination(this.transform.position);
-                    break;
-
-                case EnemyState.E_Death:
-                    animator.SetBool(IsDeath, true);
-                    agent.enabled = false;
-                    break;
-            }
-
-            if (currentState == EnemyState.E_Chase || currentState == EnemyState.E_Attack)
-            {
-                animator.SetLayerWeight(1, 1f);
-            }
-            else
-            {
-                animator.SetLayerWeight(1, 0f);
-            }
-
-            //타이머 초기화
-            countdown = 0f;
-        }
 
         //데미지 처리
         public void TakeDamage(float damage)
@@ -247,26 +125,11 @@ namespace TeamProject2
             health -= damage;
 
             //효과(vfx, sfx), UI, 애니메이션 
+            animator.SetTrigger("Attack");
 
             if (health <= 0f && isDeath == false)
             {
                 Die();
-            }
-        }
-
-        //Enemy 공격
-        private void Shoot()
-        {
-            //애니메이션
-            animator.SetTrigger(Fire);
-
-            //효과 vfx, sfx
-
-            //타겟에게 데미지 주기
-            IDamageable damageable = thePlayer.GetComponent<IDamageable>();
-            if (damageable != null)
-            {
-                damageable.TakeDamage(attackDamage);
             }
         }
 
@@ -275,7 +138,7 @@ namespace TeamProject2
         {
             isDeath = true;
 
-            SetState(EnemyState.E_Death);
+            animator.SetTrigger("Die");
 
             //킬
             Destroy(gameObject, destoryDelay);

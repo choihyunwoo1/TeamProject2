@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace hm
+namespace Choi
 {
     /// <summary>
-    /// 
+    /// UI를 관리하는 매니저
     /// </summary>
     public class UIManager : MonoBehaviour
     {
@@ -32,11 +32,6 @@ namespace hm
 
         private void Awake()
         {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
             Instance = this;
 
             popupMap = new Dictionary<PopupType, PopupUIBase>();

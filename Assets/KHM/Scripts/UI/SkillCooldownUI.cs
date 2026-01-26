@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace hm
+namespace Choi
 {
     /// <summary>
     /// 스킬 쿨타임을 보여주는 UI를 관리하는 클래스

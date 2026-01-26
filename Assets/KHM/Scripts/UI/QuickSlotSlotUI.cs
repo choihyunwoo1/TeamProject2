@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace hm
+namespace Choi
 {
     public class QuickSlotSlotUI : MonoBehaviour,
         IPointerEnterHandler, IPointerExitHandler

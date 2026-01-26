@@ -1,12 +1,11 @@
 using UnityEngine;
-namespace hm
+namespace Choi
 {
     public enum ItemType
     {
         Consumable,     //소비 아이템
         Equipment,      //장비 아이템
-        Quest,          //퀘스트 아이템
-        Material,       //무기 개조 재료
+        Quest           //퀘스트 아이템
     }
 
     [CreateAssetMenu(fileName = "ItemData", menuName = "Scriptable Objects/ItemData")]

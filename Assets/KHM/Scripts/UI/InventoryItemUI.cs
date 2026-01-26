@@ -1,15 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace hm
+namespace Choi
 {
     public class InventoryItemUI : MonoBehaviour
     {
         [SerializeField] private Image iconImage;
 
         [SerializeField] private ItemData itemData; //테스트용 직렬화
-        [SerializeField] private WeaponUpgradeSystem upgradeSystem;
-        [SerializeField] private WeaponUpgradeUI upgradeUI;
         private TooltipTrigger tooltipTrigger;
 
         private void Awake()
@@ -37,17 +35,5 @@ namespace hm
             if (itemData == null) return;
             UIManager.Instance.SelectItemForQuickSlot(itemData);
         }
-
-        public void OnClickUpgrade()
-        {
-            if (itemData.itemType != ItemType.Material)
-                return;
-
-            int filled = upgradeSystem.TryFillMaterial(itemData);
-
-            if (filled > 0)
-                upgradeUI.Refresh();
-        }
-
     }
 }

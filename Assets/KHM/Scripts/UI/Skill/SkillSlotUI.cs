@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace hm
+namespace Choi
 {
     public class SkillSlotUI : MonoBehaviour
     {
