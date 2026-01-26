@@ -4,7 +4,7 @@ using UnityEngine;
 namespace hm
 {
     /// <summary>
-    /// 
+    /// UI를 관리하는 매니저
     /// </summary>
     public class UIManager : MonoBehaviour
     {
@@ -32,11 +32,6 @@ namespace hm
 
         private void Awake()
         {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
             Instance = this;
 
             popupMap = new Dictionary<PopupType, PopupUIBase>();
@@ -167,7 +162,7 @@ namespace hm
         public void SelectItemForQuickSlot(ItemData item)
         {
             // 소비 아이템만 허용
-            if (item.itemType != ItemType.Consumable)
+            if (item.category != ItemCategory.UseItem)
                 return;
 
             selectedItem = item;

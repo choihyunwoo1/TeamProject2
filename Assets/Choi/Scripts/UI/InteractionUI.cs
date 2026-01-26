@@ -19,7 +19,7 @@ namespace Choi
         public void Show(string prompt)
         {
             root.SetActive(true);
-            promptText.text = $"F: {prompt}";
+            promptText.text = $"E: {prompt}";
         }
 
         public void Hide()

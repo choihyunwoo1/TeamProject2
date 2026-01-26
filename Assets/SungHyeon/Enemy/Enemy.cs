@@ -71,7 +71,8 @@ namespace TeamProject2
             stateMachine = new StateMachine(this, new IdleState());
             stateMachine.RegisterState(new WalkState());
             stateMachine.RegisterState(new AttackState());
-            stateMachine.RegisterState(new DeathState());
+            stateMachine.RegisterState(new DieState());
+            stateMachine.RegisterState(new GetHitState());
             //상속 받은 후 추가로 새로운 상태를 등록 진행
 
         }
@@ -112,7 +113,7 @@ namespace TeamProject2
 
         private void OnDie()
         {
-            ChangeState(new DeathState());
+            ChangeState(new DieState());
 
             //킬
             Destroy(gameObject, 3f);
