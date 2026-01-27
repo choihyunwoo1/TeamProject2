@@ -136,11 +136,11 @@ namespace TeamProject2
         {
             ChangeState(attackState);
         }
+
         public void ClearTarget()
         {
             m_DetectionMoudle.ClearTarget();   // Target = null
         }
-
         #endregion
     }
 }

@@ -41,10 +41,7 @@ namespace TeamProject2
         //상태 나가기, 상태를 나갈때 마다 1회 호출
         public override void OnExit()
         {
-            //공격 딜레이 타임 조정
-
         }
-
         #region Custom Method
         #endregion
     }

@@ -70279,7 +70279,7 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 64
-  detectionRange: 10
+  detectionRange: 6
   detectionDelayTime: 0.1
 --- !u!195 &5562888204291341861
 NavMeshAgent:
@@ -70315,7 +70315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48287e43c3243c14cafd4208cf64f892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DetectionMoudle: {fileID: 0}
+  m_DetectionMoudle: {fileID: 5287719299063464816}
   attackRange: 2
   attackDelayTime: 1
   rotateSpeed: 10
@@ -70331,7 +70331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd57bb16e4e2db4e8bacc003f2f1c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DetectionMoudle: {fileID: 0}
+  m_DetectionMoudle: {fileID: 5287719299063464816}
   attackRange: 2
   attackDelayTime: 1
   rotateSpeed: 10
