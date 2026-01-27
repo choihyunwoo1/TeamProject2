@@ -39,6 +39,8 @@ namespace TeamProject2
         public GetHitState GetHitState => getHitState;
 
         public Transform Target => m_DetectionMoudle.Target;
+        public DetectionModule Detection => m_DetectionMoudle;
+        public float DetectionRange => m_DetectionMoudle.DetectionRange;
         public float AttackRange => attackRange;
         public float AttackDelayTime => attackDelayTime;
         //공격 가능 여부 체크
@@ -134,6 +136,11 @@ namespace TeamProject2
         {
             ChangeState(attackState);
         }
+        public void ClearTarget()
+        {
+            m_DetectionMoudle.ClearTarget();   // Target = null
+        }
+
         #endregion
     }
 }

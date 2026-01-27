@@ -14,7 +14,7 @@ namespace TeamProject2
         private Transform m_Target;
         public LayerMask targetMask;        //타겟의 레이어
 
-        [SerializeField] private float detectionRange = 5f;  //디텍팅 범위
+        [SerializeField] private float detectionRange = 10f;  //디텍팅 범위
         [SerializeField] private float detectionDelayTime = 0.1f;   //디텍팅 시간 간격
 
         private float m_DistanceToTarget;   //현재 타겟과의 거리
@@ -23,6 +23,8 @@ namespace TeamProject2
         #region Property
         public Transform Target => m_Target;
         public float DistanceToTarget => m_DistanceToTarget;
+        public float DetectionRange => detectionRange;
+
         #endregion
 
         #region Unity Event Method
@@ -67,13 +69,21 @@ namespace TeamProject2
             {
                 m_DistanceToTarget = shortestDistance;
                 m_Target = nearestEnemy;
+                Debug.Log($"Detected: {nearestEnemy.name}, Distance = {shortestDistance}");
             }
             else
             {
                 m_Target = null;
+                Debug.Log("No target");
             }
 
         }
+        public void ClearTarget()
+        {
+            m_Target = null;
+            m_DistanceToTarget = 0f;
+        }
+
         #endregion
     }
 }

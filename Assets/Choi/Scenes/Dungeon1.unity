@@ -70278,8 +70278,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetMask:
     serializedVersion: 2
-    m_Bits: 0
-  detectionRange: 5
+    m_Bits: 64
+  detectionRange: 10
   detectionDelayTime: 0.1
 --- !u!195 &5562888204291341861
 NavMeshAgent:
@@ -70315,6 +70315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48287e43c3243c14cafd4208cf64f892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DetectionMoudle: {fileID: 0}
   attackRange: 2
   attackDelayTime: 1
   rotateSpeed: 10
@@ -70330,6 +70331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd57bb16e4e2db4e8bacc003f2f1c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DetectionMoudle: {fileID: 0}
   attackRange: 2
   attackDelayTime: 1
   rotateSpeed: 10
@@ -72865,7 +72867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2279860484250093540, guid: ded7abd63ae1d314aa455c84891400f3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.31
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2279860484250093540, guid: ded7abd63ae1d314aa455c84891400f3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -72873,7 +72875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2279860484250093540, guid: ded7abd63ae1d314aa455c84891400f3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.44
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 2279860484250093540, guid: ded7abd63ae1d314aa455c84891400f3, type: 3}
       propertyPath: m_LocalRotation.w
