@@ -77952,6 +77952,7 @@ GameObject:
   - component: {fileID: 982529157}
   - component: {fileID: 982492805}
   - component: {fileID: 1002264910}
+  - component: {fileID: 1002264911}
   m_Layer: 0
   m_Name: Entrance
   m_TagString: Untagged
@@ -77972,10 +77973,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Dungeon1
-  requiredStayTime: 5
+  requiredStayTime: 3
   portalID: D2
   targetPortalID: D1E
   sceneFader: {fileID: 284290023}
+--- !u!65 &1002264911
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002264909}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7026734, y: 1.4200003, z: 2.9102874}
+  m_Center: {x: -0.14133668, y: 3.4836534e-15, z: 0.7451402}
 --- !u!1 &1002277901
 GameObject:
   m_ObjectHideFlags: 0
@@ -82032,6 +82054,7 @@ GameObject:
   - component: {fileID: 1112083265}
   - component: {fileID: 1112083264}
   - component: {fileID: 1112083267}
+  - component: {fileID: 1112083268}
   m_Layer: 0
   m_Name: Exit
   m_TagString: Untagged
@@ -86877,10 +86900,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Dungeon3
-  requiredStayTime: 5
+  requiredStayTime: 3
   portalID: D2E
   targetPortalID: D3
   sceneFader: {fileID: 284290023}
+--- !u!65 &1112083268
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112083263}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7026734, y: 1.4200003, z: 2.9102874}
+  m_Center: {x: -0.14133668, y: 3.4836534e-15, z: 0.7451402}
 --- !u!1001 &1113289181
 PrefabInstance:
   m_ObjectHideFlags: 0
