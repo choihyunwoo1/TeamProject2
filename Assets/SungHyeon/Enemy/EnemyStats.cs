@@ -8,9 +8,9 @@ namespace TeamProject2
     {
         E_Idle,         //대기
         E_Walk,         //패트롤
-        E_Chase,        //추격        
+        E_GetHit,          
         E_Attack,       //공격
-        E_Death         //죽임
+        E_Die         //죽음
     }
 
 
@@ -73,9 +73,9 @@ namespace TeamProject2
         private bool isBack = false;
 
         //애니메이터 파라미터
-        const string MoveSpeed = "MoveSpeed";
-        const string IsDeath = "IsDeath";
-        const string Fire = "Fire";
+        const string MoveSpeed = "ForwardSpeed";
+        new const string IsDeath = "Die";
+        const string Attack = "Attack";
         #endregion
 
         #region Unity Event Method

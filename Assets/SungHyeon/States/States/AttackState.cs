@@ -14,7 +14,7 @@ namespace TeamProject2
 
         //애니메이터 파라미터
         readonly int m_HashForwardSpeed = Animator.StringToHash("ForwardSpeed");
-        readonly int m_HashAttack = Animator.StringToHash("Attack");
+        readonly int m_HashAttack = Animator.StringToHash("Attack01");
         #endregion
 
         //상태 초기화 함수, 상태 생성시 1회 호출
