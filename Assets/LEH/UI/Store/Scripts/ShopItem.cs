@@ -1,12 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(menuName = "Shop/Item")]
-public class ShopItem : ScriptableObject
+public class ShopItem : MonoBehaviour
 {
-    public string itemName;
-    public Sprite icon;
-    public int price;
+    public ShopItemData data;
 
-    [TextArea]
-    public string description;
+    public Image iconImage;
+    public Text nameText;
+    public Text priceText;
+
+    public void Init(ShopItemData itemData)
+    {
+        data = itemData;
+        iconImage.sprite = data.icon;
+        nameText.text = data.itemName;
+        priceText.text = data.price.ToString();
+    }
 }

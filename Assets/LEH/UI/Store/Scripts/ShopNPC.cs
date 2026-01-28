@@ -1,15 +1,16 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class ShopNPC : MonoBehaviour
+public class ShopNpc : MonoBehaviour
 {
-    private void OnTriggerStay(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
+    public GameObject shopUI;
 
-        if (Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            ShopManager.Instance.OpenShop();
-        }
+    public void OpenShop()
+    {
+        shopUI.SetActive(true);
+    }
+
+    public void CloseShop()
+    {
+        shopUI.SetActive(false);
     }
 }

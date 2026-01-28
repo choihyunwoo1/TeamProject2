@@ -1,91 +1,31 @@
-using TMPro;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    public static ShopManager Instance;
+    public PlayerInventory inventory;
+    public PlayerGold playerGold;
+    public QuantityPopup quantityPopup;
 
-    [Header("Panels")]
-    public GameObject shopPanel;
-
-    [Header("Gold UI")]
-    public TMP_Text goldText;
-
-    private void Awake()
+    public void TryBuy(ShopItemData item)
     {
-        Instance = this;
-        shopPanel.SetActive(false);
-    }
+        if (item == null) return;
 
-    // ================== 상점 열기 ==================
-    public void OpenShop()
-    {
-        shopPanel.SetActive(true);
-        RefreshGold();
-        Time.timeScale = 0f; // 조작 제한
-    }
-
-    // ShopNPC / 다른 스크립트 호환용
-    public void Open()
-    {
-        OpenShop();
-    }
-
-    // ================== 상점 닫기 ==================
-    public void CloseShop()
-    {
-        shopPanel.SetActive(false);
-        Time.timeScale = 1f;
-    }
-
-    // ================== 골드 ==================
-    public void RefreshGold()
-    {
-        goldText.text = PlayerGold.Instance.gold.ToString();
-    }
-
-    // ================== 수량 패널 열기 ==================
-    public void OpenQuantityPanel(ShopItem item, bool isBuy)
-    {
-        int max;
-
-        if (isBuy)
+        quantityPopup.Open(99, amount =>
         {
-            max = PlayerGold.Instance.gold / item.price;
-        }
-        else
+            int cost = item.price * amount;
+            if (!playerGold.SpendGold(cost)) return;
+
+            inventory.AddItem(item, amount);
+        });
+    }
+
+    public void TrySell(ShopItemData item)
+    {
+        quantityPopup.Open(99, amount =>
         {
-            max = PlayerInventory.Instance.GetItemCount(item);
-        }
+            if (!inventory.RemoveItem(item, amount)) return;
 
-        if (max <= 0) return;
-
-        QuantityPopup.Instance.Open(item, isBuy, max);
-    }
-
-    // ================== 구매 ==================
-    public void BuyItem(ShopItem item, int quantity)
-    {
-        int totalPrice = item.price * quantity;
-
-        if (!PlayerGold.Instance.CanSpend(totalPrice))
-            return;
-
-        PlayerGold.Instance.SpendGold(totalPrice);
-        PlayerInventory.Instance.AddItem(item, quantity);
-
-        RefreshGold();
-    }
-
-    // ================== 판매 ==================
-    public void SellItem(ShopItem item, int quantity)
-    {
-        if (!PlayerInventory.Instance.HasItem(item, quantity))
-            return;
-
-        PlayerInventory.Instance.RemoveItem(item, quantity);
-        PlayerGold.Instance.gold += item.price * quantity;
-
-        RefreshGold();
+            playerGold.AddGold(item.price * amount);
+        });
     }
 }

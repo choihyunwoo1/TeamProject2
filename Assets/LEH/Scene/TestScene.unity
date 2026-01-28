@@ -494,7 +494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: 13}
+  m_AnchoredPosition: {x: 5, y: 15}
   m_SizeDelta: {x: 550, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &62936645
@@ -869,8 +869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6148ec9142984340b282b78e43c7858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 105260094}
-  titleText: {fileID: 0}
 --- !u!114 &105260097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2066,7 +2064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &279598799
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,12 +2117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 1474552517}
-  item:
-    itemName: 
-    icon: {fileID: 0}
-    price: 0
-    description: 
+  item: {fileID: 0}
+  actionMenu: {fileID: 0}
+  shopManager: {fileID: 0}
 --- !u!114 &279598802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2574,8 +2569,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9bf4d5579b4904f9c8488eb2149081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopPanel: {fileID: 2078911329}
-  goldText: {fileID: 712723407}
+  inventory: {fileID: 0}
+  playerGold: {fileID: 0}
+  quantityPopup: {fileID: 0}
 --- !u!4 &305808225
 Transform:
   m_ObjectHideFlags: 0
@@ -3024,7 +3020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &352522234
 GameObject:
   m_ObjectHideFlags: 0
@@ -3556,7 +3552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &381251317
 GameObject:
   m_ObjectHideFlags: 0
@@ -4289,12 +4285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 1317277668}
-  item:
-    itemName: 
-    icon: {fileID: 0}
-    price: 0
-    description: 
+  item: {fileID: 0}
+  actionMenu: {fileID: 0}
+  shopManager: {fileID: 0}
 --- !u!114 &509521191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4536,7 +4529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &515131653
 GameObject:
   m_ObjectHideFlags: 0
@@ -5046,12 +5039,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 1840551958}
-  item:
-    itemName: 
-    icon: {fileID: 0}
-    price: 0
-    description: 
+  item: {fileID: 0}
+  actionMenu: {fileID: 0}
+  shopManager: {fileID: 0}
 --- !u!114 &638328915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5445,7 +5435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &688031449
 GameObject:
   m_ObjectHideFlags: 0
@@ -5901,7 +5891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &779526409
 GameObject:
   m_ObjectHideFlags: 0
@@ -7475,7 +7465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &989138872
 GameObject:
   m_ObjectHideFlags: 0
@@ -7808,7 +7798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1040814497
 GameObject:
   m_ObjectHideFlags: 0
@@ -8089,7 +8079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1078729127
 GameObject:
   m_ObjectHideFlags: 0
@@ -8342,12 +8332,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 142314370}
-  item:
-    itemName: 
-    icon: {fileID: 0}
-    price: 0
-    description: 
+  item: {fileID: 0}
+  actionMenu: {fileID: 0}
+  shopManager: {fileID: 0}
 --- !u!114 &1094179283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8832,7 +8819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1123376908
 GameObject:
   m_ObjectHideFlags: 0
@@ -9158,6 +9145,11 @@ MonoBehaviour:
   rotationSmoothTime: 0.05
   followSpeed: 10
   cameraOffset: {x: 0, y: 2, z: -3.5}
+  collisionRadius: 0.2
+  collisionSmooth: 0.05
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1141896625
 GameObject:
   m_ObjectHideFlags: 0
@@ -9305,7 +9297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1157552387
 GameObject:
   m_ObjectHideFlags: 0
@@ -10352,7 +10344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4167536ccc1c7024383d76a4c6f7a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 1000
+  currentGold: 1000
+  goldText: {fileID: 0}
 --- !u!114 &1291072054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10366,7 +10359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  maxStack: 20
 --- !u!1 &1310683175
 GameObject:
   m_ObjectHideFlags: 0
@@ -11175,7 +11167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1402506074
 GameObject:
   m_ObjectHideFlags: 0
@@ -11440,7 +11432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1430871280
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11551,9 +11543,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111c65a7924ed9641967b9007a5ead4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 1434812213}
   nameText: {fileID: 0}
-  descriptionText: {fileID: 1634001238}
+  descriptionText: {fileID: 0}
+  priceText: {fileID: 0}
 --- !u!114 &1434812216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11916,12 +11908,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 315182547}
-  item:
-    itemName: 
-    icon: {fileID: 0}
-    price: 0
-    description: 
+  item: {fileID: 0}
+  actionMenu: {fileID: 0}
+  shopManager: {fileID: 0}
 --- !u!114 &1463021739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12579,7 +12568,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 92.4588, y: 80.23744}
-  m_SizeDelta: {x: 585, y: 780}
+  m_SizeDelta: {x: 585, y: 770}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1520236831
 MonoBehaviour:
@@ -13912,7 +13901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1624293912
 GameObject:
   m_ObjectHideFlags: 0
@@ -14945,7 +14934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1796763224
 GameObject:
   m_ObjectHideFlags: 0
@@ -15335,7 +15324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1816627623
 GameObject:
   m_ObjectHideFlags: 0
@@ -15388,12 +15377,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 607750970}
-  item:
-    itemName: 
-    icon: {fileID: 0}
-    price: 0
-    description: 
+  item: {fileID: 0}
+  actionMenu: {fileID: 0}
+  shopManager: {fileID: 0}
 --- !u!114 &1816627626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15835,6 +15821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e3cb75c9680a7499b488d52c17d561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopUI: {fileID: 0}
 --- !u!1 &1837272338
 GameObject:
   m_ObjectHideFlags: 0
@@ -16317,7 +16304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1909177931
 GameObject:
   m_ObjectHideFlags: 0
@@ -16862,7 +16849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1955176365
 GameObject:
   m_ObjectHideFlags: 0
@@ -17042,7 +17029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1960536199
 GameObject:
   m_ObjectHideFlags: 0
@@ -17190,7 +17177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &1977708191
 GameObject:
   m_ObjectHideFlags: 0
@@ -17370,7 +17357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  countText: {fileID: 0}
+  quantityText: {fileID: 0}
 --- !u!1 &2003566942
 GameObject:
   m_ObjectHideFlags: 0
@@ -17569,7 +17556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4167536ccc1c7024383d76a4c6f7a003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 100000
+  currentGold: 1000
+  goldText: {fileID: 0}
 --- !u!1 &2038888259
 GameObject:
   m_ObjectHideFlags: 0
@@ -18103,12 +18091,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 62936647}
-  item:
-    itemName: 
-    icon: {fileID: 0}
-    price: 0
-    description: 
+  item: {fileID: 0}
+  actionMenu: {fileID: 0}
+  shopManager: {fileID: 0}
 --- !u!114 &2093409975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18550,6 +18535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e3cb75c9680a7499b488d52c17d561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopUI: {fileID: 0}
 --- !u!135 &2129202567
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -19064,12 +19050,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 1425660390825581689}
-  item:
-    itemName: 
-    icon: {fileID: 0}
-    price: 0
-    description: 
+  item: {fileID: 0}
+  actionMenu: {fileID: 0}
+  shopManager: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

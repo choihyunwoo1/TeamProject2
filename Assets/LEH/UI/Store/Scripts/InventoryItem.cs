@@ -1,12 +1,12 @@
 [System.Serializable]
 public class InventoryItem
 {
-    public ShopItem item;
+    public ShopItemData itemData;
     public int quantity;
 
-    public InventoryItem(ShopItem item, int quantity)
+    public InventoryItem(ShopItemData data, int amount)
     {
-        this.item = item;
-        this.quantity = quantity;
+        itemData = data;
+        quantity = amount;
     }
 }

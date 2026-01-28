@@ -1,27 +1,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class ShopSlot : MonoBehaviour,
-    IPointerEnterHandler,
-    IPointerExitHandler
+public class ShopSlot : MonoBehaviour, IPointerClickHandler
 {
-    public Image icon;
     public ShopItem item;
+    public ShopActionMenu actionMenu;
+    public ShopManager shopManager;
 
-    public void SetItem(ShopItem newItem)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        item = newItem;
-        icon.sprite = item.icon;
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        ItemTooltip.Instance.Show(item, transform.position);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        ItemTooltip.Instance.Hide();
+        actionMenu.Open(item.data, shopManager);
     }
 }
