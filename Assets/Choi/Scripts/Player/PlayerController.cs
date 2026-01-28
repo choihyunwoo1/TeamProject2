@@ -27,6 +27,11 @@ namespace Choi
         private float jumpBufferTimer;
         private readonly float jumpBufferTime = 0.15f;
 
+        //Moving Platform 안정화 요소
+        private AnimatedPlatform currentPlatform;
+        private Vector3 platformLocalOffset;
+        private bool onPlatform = false;
+
         private float coyoteTimer;
         private readonly float coyoteTime = 0.12f;
 
@@ -62,6 +67,38 @@ namespace Choi
             MovePlayer();      // Move() 호출
             UpdateGroundCheck();  // Move 후에 체크해야 isGrounded가 정확함
             HandleAttackInput();
+        }
+
+        //CharacterController 전용 이벤트 메서드
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Debug.Log("Hit: " + hit.collider.name);
+
+            AnimatedPlatform platform = hit.collider.GetComponentInParent<AnimatedPlatform>();
+            if (platform != null)
+            {
+                Debug.Log("Platform Detected!");
+
+                if (currentPlatform != platform)
+                {
+                    Debug.Log("Platform Assigned!");
+                    currentPlatform = platform;
+                    onPlatform = true;
+                    platformLocalOffset = transform.position - platform.transform.position;
+                }
+            }
+            else
+            {
+                onPlatform = false;
+                currentPlatform = null;
+            }
+        }
+        private void LateUpdate()
+        {
+            if (onPlatform && currentPlatform != null)
+            {
+                controller.Move(currentPlatform.DeltaMovement);
+            }
         }
         #endregion
 
@@ -204,7 +241,6 @@ namespace Choi
 
             controller.Move(velocity * Time.deltaTime);
         }
-
         #endregion
 
         #region Dash Logic
