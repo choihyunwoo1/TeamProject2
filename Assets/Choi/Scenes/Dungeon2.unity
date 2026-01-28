@@ -77972,10 +77972,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d981e786c52420844ae0be8925bf3c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Dungeon1
+  sceneToLoad: Village
   requiredStayTime: 3
   portalID: D2
-  targetPortalID: D1E
+  targetPortalID: V2
   sceneFader: {fileID: 284290023}
 --- !u!65 &1002264911
 BoxCollider:
@@ -78826,7 +78826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2279860484250093540, guid: ded7abd63ae1d314aa455c84891400f3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.31
+      value: -0.39
       objectReference: {fileID: 0}
     - target: {fileID: 2279860484250093540, guid: ded7abd63ae1d314aa455c84891400f3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -78834,7 +78834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2279860484250093540, guid: ded7abd63ae1d314aa455c84891400f3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.14
+      value: -8.4
       objectReference: {fileID: 0}
     - target: {fileID: 2279860484250093540, guid: ded7abd63ae1d314aa455c84891400f3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -78869,6 +78869,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded7abd63ae1d314aa455c84891400f3, type: 3}
+--- !u!114 &1025810141 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6450521455489438949, guid: ded7abd63ae1d314aa455c84891400f3, type: 3}
+  m_PrefabInstance: {fileID: 1025810140}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d805582ed1dda49be715493c8ff1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1031510323
 GameObject:
   m_ObjectHideFlags: 0
@@ -86899,10 +86910,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d981e786c52420844ae0be8925bf3c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Dungeon3
+  sceneToLoad: Village
   requiredStayTime: 3
   portalID: D2E
-  targetPortalID: D3
+  targetPortalID: V2
   sceneFader: {fileID: 284290023}
 --- !u!65 &1112083268
 BoxCollider:
@@ -126938,6 +126949,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5716108234510889344, guid: 3da8b33f6a2bbea4a841a83ae1cf0c2f, type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 1025810141}
     - target: {fileID: 6044339296790110371, guid: 3da8b33f6a2bbea4a841a83ae1cf0c2f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -126966,6 +126981,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7039579902507915305, guid: 3da8b33f6a2bbea4a841a83ae1cf0c2f, type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 1025810141}
     - target: {fileID: 7143831865148368378, guid: 3da8b33f6a2bbea4a841a83ae1cf0c2f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

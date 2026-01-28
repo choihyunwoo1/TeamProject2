@@ -5996,9 +5996,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Village
-  requiredStayTime: 5
+  requiredStayTime: 3
   portalID: D1
-  targetPortalID: Village
+  targetPortalID: V1
   sceneFader: {fileID: 1049791813}
 --- !u!65 &189462129
 BoxCollider:
@@ -65549,10 +65549,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d981e786c52420844ae0be8925bf3c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Dungeon2
+  sceneToLoad: Village
   requiredStayTime: 3
   portalID: D1E
-  targetPortalID: D2
+  targetPortalID: V1
   sceneFader: {fileID: 1049791813}
 --- !u!65 &2001054413
 BoxCollider:
