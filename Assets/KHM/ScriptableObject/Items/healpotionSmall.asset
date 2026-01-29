@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea565fc52b588884da44aeff7b1b4428, type: 3}
+  m_Name: healpotionSmall
+  m_EditorClassIdentifier: 
+  id: 1005
+  devName: healpotionSmall
+  itemName: "\uCCB4\uB825 \uD68C\uBCF5 \uD3EC\uC158(\uC18C)"
+  category: 1
+  itemType: 1
+  stackable: 1
+  maxStack: 99
+  usable: 1
+  consumable: 1
+  priceBuy: 50
+  priceSell: 10
+  canDrop: 1
+  canSale: 1
+  questItem: 0
+  icon: {fileID: 21300000, guid: 28833de34438d944b88ee33529b1070a, type: 3}
+  subtitle: "\uC18C\uBE44\uC544\uC774\uD15C"
+  description: "\uC0AC\uC6A9 \uC2DC \uC18C\uB7C9\uC758 \uCCB4\uB825\uC744 \uC989\uC2DC
+    \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+  effectText: "\uCCB4\uB825 00 \uD68C\uBCF5"
+  conditionText: "\uC989\uC2DC"

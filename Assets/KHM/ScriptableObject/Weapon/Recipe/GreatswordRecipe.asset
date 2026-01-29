@@ -13,3 +13,10 @@ MonoBehaviour:
   m_Name: GreatswordRecipe
   m_EditorClassIdentifier: 
   targetWeapon: {fileID: 11400000, guid: 49f97aec63edd1a4da30c2be34992302, type: 2}
+  materials:
+  - item: {fileID: 11400000, guid: ec659bb1b731ade498e6d1b75ce93fa2, type: 2}
+    count: 10
+  - item: {fileID: 11400000, guid: 2248275fbf9ac8b4590f4e949548aa5d, type: 2}
+    count: 10
+  - item: {fileID: 11400000, guid: 0d4f8eb1f3fbfc6499850b89a00fdadf, type: 2}
+    count: 10

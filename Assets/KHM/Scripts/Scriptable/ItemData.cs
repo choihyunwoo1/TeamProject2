@@ -10,7 +10,6 @@ namespace hm
         public int id;
         public string devName;
         public string itemName;
-        [TextArea] public string description;
 
         public ItemCategory category;
         public ItemType itemType;
@@ -30,5 +29,17 @@ namespace hm
 
         public Sprite icon;
         public TooltipType Type => TooltipType.Item;
+
+        [Header("Tooltip")]
+        public string subtitle;
+
+        [TextArea(2, 5)]
+        public string description;
+
+        [TextArea(2, 5)]
+        public string effectText;
+
+        [TextArea(2, 5)]
+        public string conditionText;
     }
 }
