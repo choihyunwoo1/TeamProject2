@@ -7,7 +7,6 @@ namespace TeamProject2
     {
         private Animator m_Animator;
 
-        private bool m_IsPatrol = false;
         private float m_MinTime = 0f;
         private float m_MaxTime = 3f;
         private float m_IdleTime = 0;
@@ -26,7 +25,6 @@ namespace TeamProject2
 
             if (enemy is EnemyPatrol)
             {
-                m_IsPatrol = true;
                 m_IdleTime = Random.Range(m_MinTime, m_MaxTime);
             }
         }

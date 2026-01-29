@@ -58,6 +58,7 @@ namespace TeamProject2
                 }
             }
         }
+        public bool IsInPhase1 { get; set; }
         #endregion
 
         #region Unity Event Method

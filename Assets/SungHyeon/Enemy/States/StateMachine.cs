@@ -68,23 +68,26 @@ namespace TeamProject2
         //상태 변경
         public State ChangeState(State newState)
         {
-            //새로운 상태의 타입받아와서 타입체크
-            var newType = newState.GetType();
-            //현재 생태 체크
-            if(newType == m_CurrentState.GetType())
+            //Phase1일때 잠금 구조 추가
+            if (enemy is BossEnemy boss)
             {
-                //새로운 상태가 현재 상태와 같은면 변경하지 않는다
-                return m_CurrentState;
+                // Phase1 중인데 다른 상태로 바꾸려고 하면 차단
+                if (boss.IsInPhase1 && newState.GetType() != typeof(Choi.BossPhase1State))
+                {
+                    return m_CurrentState; // 변경 불가 → Phase1 유지
+                }
             }
 
-            //현재 상태 나가기
+            var newType = newState.GetType();
+
+            if (newType == m_CurrentState.GetType())
+                return m_CurrentState;
+
             m_CurrentState.OnExit();
 
-            //상태변경
             m_PreviousState = m_CurrentState;
             m_CurrentState = states[newType];
 
-            //새로운 상태 들어가기
             m_CurrentState.OnEnter();
             m_ElapseTime = 0f;
 

@@ -29,6 +29,7 @@ namespace TeamProject2
         public bool IsInvulnerable { get; private set; }    //무적 체크
         public bool IsDeath { get; private set; }           //죽음 체크
         public HealthSO CurrentHeathSO => _currentHealthSO;
+        public float MaxHealth => _currentHealthSO.MaxHealth;
         #endregion
 
         #region Unity Event Method
@@ -81,7 +82,7 @@ namespace TeamProject2
             _currentHealthSO.InflictDamage(damage);
             Debug.Log($"CurrentHealth: {_currentHealthSO.CurrentHealth}");
 
-            OnDamage?.Invoke(damage);
+            OnDamage?.Invoke(_currentHealthSO.CurrentHealth);
 
             if (_currentHealthSO.CurrentHealth <= 0)
             {

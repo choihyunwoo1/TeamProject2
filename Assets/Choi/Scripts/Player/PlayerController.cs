@@ -72,16 +72,11 @@ namespace Choi
         //CharacterController 전용 이벤트 메서드
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
-            Debug.Log("Hit: " + hit.collider.name);
-
             AnimatedPlatform platform = hit.collider.GetComponentInParent<AnimatedPlatform>();
             if (platform != null)
             {
-                Debug.Log("Platform Detected!");
-
                 if (currentPlatform != platform)
                 {
-                    Debug.Log("Platform Assigned!");
                     currentPlatform = platform;
                     onPlatform = true;
                     platformLocalOffset = transform.position - platform.transform.position;
