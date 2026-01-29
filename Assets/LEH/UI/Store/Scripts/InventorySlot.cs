@@ -1,52 +1,29 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour,
-    IPointerEnterHandler,
-    IPointerExitHandler
+public class InventorySlot : MonoBehaviour
 {
     public Image icon;
-    public TMP_Text countText;
+    public Text quantityText;
 
-    private ShopItem item;
-    private int count;
+    InventoryItem item;
 
-    public void SetItem(ShopItem newItem, int newCount)
+    public void SetItem(InventoryItem newItem)
     {
         item = newItem;
-        count = newCount;
+        icon.sprite = item.itemData.icon;
+        icon.enabled = true;
 
-        icon.sprite = item.icon;
-        countText.text = count > 1 ? count.ToString() : "";
-        gameObject.SetActive(true);
+        quantityText.text = item.quantity > 1 ? item.quantity.ToString() : "";
     }
 
     public void Clear()
     {
         item = null;
-        count = 0;
-        gameObject.SetActive(false);
+        icon.sprite = null;
+        icon.enabled = false;
+        quantityText.text = "";
     }
 
-    public void OnClick()
-    {
-        if (item == null) return;
-
-        ShopActionMenu.Instance.Open(item, true, count); // true = 인벤
-    }
-
-    //툴팁
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (item == null) return;
-
-        ItemTooltip.Instance.Show(item, eventData.position);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        ItemTooltip.Instance.Hide();
-    }
+    public InventoryItem GetItem() => item;
 }

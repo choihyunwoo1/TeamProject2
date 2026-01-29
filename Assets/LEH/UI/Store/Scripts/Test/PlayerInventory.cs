@@ -3,57 +3,26 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public static PlayerInventory Instance;
+    public List<InventoryItem> items = new();
 
-    public List<InventoryItem> items = new List<InventoryItem>();
-    public int maxStack = 20;
-
-    private void Awake()
+    public void AddItem(ShopItemData data, int amount)
     {
-        if (Instance == null)
-            Instance = this;
+        var item = items.Find(i => i.itemData == data);
+        if (item != null)
+            item.quantity += amount;
         else
-            Destroy(gameObject);
+            items.Add(new InventoryItem(data, amount));
     }
 
-    //아이템 보유 여부
-    public bool HasItem(ShopItem item, int quantity)
+    public bool RemoveItem(ShopItemData data, int amount)
     {
-        InventoryItem found = items.Find(i => i.item == item);
-        return found != null && found.quantity >= quantity;
-    }
+        var item = items.Find(i => i.itemData == data);
+        if (item == null || item.quantity < amount) return false;
 
-    //수량 얻기
-    public int GetItemCount(ShopItem item)
-    {
-        InventoryItem found = items.Find(i => i.item == item);
-        return found != null ? found.quantity : 0;
-    }
+        item.quantity -= amount;
+        if (item.quantity <= 0)
+            items.Remove(item);
 
-    //아이템 추가
-    public void AddItem(ShopItem item, int amount)
-    {
-        InventoryItem found = items.Find(i => i.item == item);
-
-        if (found != null)
-        {
-            found.quantity = Mathf.Min(found.quantity + amount, maxStack);
-        }
-        else
-        {
-            items.Add(new InventoryItem(item, Mathf.Min(amount, maxStack)));
-        }
-    }
-
-    //아이템 제거
-    public void RemoveItem(ShopItem item, int amount)
-    {
-        InventoryItem found = items.Find(i => i.item == item);
-        if (found == null) return;
-
-        found.quantity -= amount;
-
-        if (found.quantity <= 0)
-            items.Remove(found);
+        return true;
     }
 }

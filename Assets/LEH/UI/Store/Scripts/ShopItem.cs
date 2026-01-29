@@ -1,11 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[System.Serializable]
-public class ShopItem
+public class ShopItem : MonoBehaviour
 {
-    public string itemName;
-    public Sprite icon;
-    public int price;
-    [TextArea]
-    public string description; // ← 이거 하나만
+    public ShopItemData data;
+
+    public Image iconImage;
+    public Text nameText;
+    public Text priceText;
+
+    public void Init(ShopItemData itemData)
+    {
+        data = itemData;
+        iconImage.sprite = data.icon;
+        nameText.text = data.itemName;
+        priceText.text = data.price.ToString();
+    }
 }
