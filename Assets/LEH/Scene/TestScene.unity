@@ -827,7 +827,6 @@ GameObject:
   - component: {fileID: 105260099}
   - component: {fileID: 105260098}
   - component: {fileID: 105260097}
-  - component: {fileID: 105260096}
   m_Layer: 5
   m_Name: BuyPanel
   m_TagString: Untagged
@@ -857,18 +856,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 250, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &105260096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 105260094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6148ec9142984340b282b78e43c7858, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &105260097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1774,6 +1761,7 @@ RectTransform:
   - {fileID: 867603734}
   - {fileID: 1605292787}
   - {fileID: 1430871280}
+  - {fileID: 635243680}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2117,9 +2105,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  data: {fileID: 0}
+  iconImage: {fileID: 0}
+  nameText: {fileID: 0}
+  priceText: {fileID: 0}
   actionMenu: {fileID: 0}
   shopManager: {fileID: 0}
+  tooltip: {fileID: 0}
 --- !u!114 &279598802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2569,9 +2561,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9bf4d5579b4904f9c8488eb2149081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
-  playerGold: {fileID: 0}
-  quantityPopup: {fileID: 0}
+  inventory: {fileID: 1291072054}
+  playerGold: {fileID: 2038438840}
+  quantityPopup: {fileID: 1430871283}
 --- !u!4 &305808225
 Transform:
   m_ObjectHideFlags: 0
@@ -4285,9 +4277,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  data: {fileID: 0}
+  iconImage: {fileID: 0}
+  nameText: {fileID: 0}
+  priceText: {fileID: 0}
   actionMenu: {fileID: 0}
   shopManager: {fileID: 0}
+  tooltip: {fileID: 0}
 --- !u!114 &509521191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4987,6 +4983,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626569745}
   m_CullTransparentMesh: 1
+--- !u!1 &635243679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 635243680}
+  - component: {fileID: 635243681}
+  m_Layer: 5
+  m_Name: ShopActionMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &635243680
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635243679}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 240500541}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &635243681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635243679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6148ec9142984340b282b78e43c7858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &638328912
 GameObject:
   m_ObjectHideFlags: 0
@@ -5039,9 +5083,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  data: {fileID: 0}
+  iconImage: {fileID: 0}
+  nameText: {fileID: 0}
+  priceText: {fileID: 0}
   actionMenu: {fileID: 0}
   shopManager: {fileID: 0}
+  tooltip: {fileID: 0}
 --- !u!114 &638328915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8332,9 +8380,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  data: {fileID: 0}
+  iconImage: {fileID: 0}
+  nameText: {fileID: 0}
+  priceText: {fileID: 0}
   actionMenu: {fileID: 0}
   shopManager: {fileID: 0}
+  tooltip: {fileID: 0}
 --- !u!114 &1094179283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10037,7 +10089,7 @@ GameObject:
   - component: {fileID: 1291072049}
   - component: {fileID: 1291072048}
   - component: {fileID: 1291072054}
-  - component: {fileID: 1291072053}
+  - component: {fileID: 1291072055}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10272,18 +10324,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 31e4e993-3375-49ec-a860-977a9da2ddfe
     m_ActionName: 'Player/Dash[/Mouse/rightButton]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cd6dec8d-2e35-46c8-a2b6-050fccf15bdf
-    m_ActionName: 'UI/Inventory[/Keyboard/i]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8a0b5e50-e9e0-4f51-954d-61bc66d6f53e
-    m_ActionName: 'UI/Map[/Keyboard/m]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ea53a09f-bc4b-454d-a615-c4dd736405e9
-    m_ActionName: 'UI/Setting[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -10332,20 +10372,6 @@ Transform:
   - {fileID: 1136607140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1291072053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291072047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4167536ccc1c7024383d76a4c6f7a003, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentGold: 1000
-  goldText: {fileID: 0}
 --- !u!114 &1291072054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10359,6 +10385,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+--- !u!114 &1291072055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291072047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d805582ed1dda49be715493c8ff1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 98071da222af1f449981088ad23ed31f, type: 2}
+  maxHealth: 100
+  currentHealth: 0
+  invincibleDuration: 0.3
+  maxStamina: 100
+  staminaRecoveryRate: 15
+  staminaRecoveryDelay: 1
+  currentStamina: 0
+  maxGauge: 100
+  currentGauge: 0
+  blinkInterval: 0.1
+  transparentAlpha: 0.4
 --- !u!1 &1310683175
 GameObject:
   m_ObjectHideFlags: 0
@@ -11426,6 +11476,7 @@ GameObject:
   - component: {fileID: 1430871280}
   - component: {fileID: 1430871282}
   - component: {fileID: 1430871281}
+  - component: {fileID: 1430871283}
   m_Layer: 5
   m_Name: QuantityPanel
   m_TagString: Untagged
@@ -11491,6 +11542,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430871279}
   m_CullTransparentMesh: 1
+--- !u!114 &1430871283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430871279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f643bfb555eecd24e96fca2b4916a103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quantityText: {fileID: 1490744023}
 --- !u!1 &1434812213
 GameObject:
   m_ObjectHideFlags: 0
@@ -11908,9 +11972,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  data: {fileID: 0}
+  iconImage: {fileID: 0}
+  nameText: {fileID: 0}
+  priceText: {fileID: 0}
   actionMenu: {fileID: 0}
   shopManager: {fileID: 0}
+  tooltip: {fileID: 0}
 --- !u!114 &1463021739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13900,7 +13968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3055aa8885a41534f8c488b196599262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 1105162843}
   quantityText: {fileID: 0}
 --- !u!1 &1624293912
 GameObject:
@@ -15377,9 +15445,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  data: {fileID: 0}
+  iconImage: {fileID: 0}
+  nameText: {fileID: 0}
+  priceText: {fileID: 0}
   actionMenu: {fileID: 0}
   shopManager: {fileID: 0}
+  tooltip: {fileID: 0}
 --- !u!114 &1816627626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15821,7 +15893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e3cb75c9680a7499b488d52c17d561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopUI: {fileID: 0}
+  shopUI: {fileID: 2126487591}
 --- !u!1 &1837272338
 GameObject:
   m_ObjectHideFlags: 0
@@ -16577,7 +16649,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 105260096}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopActionMenu, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 1
@@ -17557,7 +17629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGold: 1000
-  goldText: {fileID: 0}
+  goldText: {fileID: 712723407}
 --- !u!1 &2038888259
 GameObject:
   m_ObjectHideFlags: 0
@@ -18091,9 +18163,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  data: {fileID: 0}
+  iconImage: {fileID: 0}
+  nameText: {fileID: 0}
+  priceText: {fileID: 0}
   actionMenu: {fileID: 0}
   shopManager: {fileID: 0}
+  tooltip: {fileID: 0}
 --- !u!114 &2093409975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19050,9 +19126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b25f9908377841ad093b2acff4761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  actionMenu: {fileID: 0}
-  shopManager: {fileID: 0}
+  data: {fileID: 0}
+  iconImage: {fileID: 0}
+  nameText: {fileID: 0}
+  priceText: {fileID: 0}
+  actionMenu: {fileID: 635243681}
+  shopManager: {fileID: 305808224}
+  tooltip: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a6ee5c7c548774ea43a5aa3afef6bc, type: 3}
   m_Name: Shop Item Data
   m_EditorClassIdentifier: 
-  itemName: 
-  icon: {fileID: 0}
-  price: 0
-  description: 
+  itemName: "\uBD95\uB300"
+  icon: {fileID: 21300000, guid: c69e1382b40df4b4083a6d971676f6a7, type: 3}
+  price: 1500
+  description: "\uBD95\uB300\uC544\uC774\uD15C\n"
