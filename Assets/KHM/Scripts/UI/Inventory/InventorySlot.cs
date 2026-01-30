@@ -2,15 +2,32 @@ namespace hm
 {
     public enum InventorySlotState
     {
+        Empty,
         Normal,
-        Disabled,     // 제작 불가
-        Locked        // 개조에 사용 중
+        Locked
     }
 
     public class InventorySlot
     {
         public ItemData item;
         public int count;
-        public InventorySlotState state;
+        public int locked;
+
+        public bool IsEmpty => item == null || count <= 0;
+        public int AvailableCount => count - locked;
+
+        public InventorySlot(ItemData item, int count)
+        {
+            this.item = item;
+            this.count = count;
+            locked = 0;
+        }
+
+        public void Clear()
+        {
+            item = null;
+            count = 0;
+            locked = 0;
+        }
     }
 }

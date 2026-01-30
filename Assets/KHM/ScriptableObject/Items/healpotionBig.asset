@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea565fc52b588884da44aeff7b1b4428, type: 3}
+  m_Name: healpotionBig
+  m_EditorClassIdentifier: 
+  id: 1006
+  devName: healpotionBig
+  itemName: "\uCCB4\uB825 \uD68C\uBCF5 \uD3EC\uC158(\uB300)"
+  category: 1
+  itemType: 1
+  stackable: 1
+  maxStack: 99
+  usable: 1
+  consumable: 1
+  priceBuy: 100
+  priceSell: 20
+  canDrop: 1
+  canSale: 1
+  questItem: 0
+  icon: {fileID: 21300000, guid: b8ac712b9400e414884e07f4ea673a9b, type: 3}
+  subtitle: "\uC18C\uBE44\uC544\uC774\uD15C"
+  description: "\uC0AC\uC6A9 \uC2DC \uB9CE\uC740 \uCCB4\uB825\uC744 \uC989\uC2DC
+    \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+  effectText: "\uCCB4\uB825 00 \uD68C\uBCF5"
+  conditionText: "\uC989\uC2DC"

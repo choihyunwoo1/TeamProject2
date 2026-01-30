@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 namespace hm
 {
+    [Serializable]
     public class RequiredMaterial
     {
         public ItemData item;
@@ -12,7 +14,7 @@ namespace hm
     public class WeaponUpgradeRecipe : ScriptableObject
     {
         public WeaponItemData targetWeapon;
-        public List<RequiredMaterial> materials;
+        public List<RequiredMaterial> materials = new();
        
     }
 }

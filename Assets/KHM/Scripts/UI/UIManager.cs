@@ -9,6 +9,7 @@ namespace hm
     public class UIManager : MonoBehaviour
     {
         public static UIManager Instance { get; private set; }
+        [SerializeField] private Transform uiCanvasRoot;
 
         //툴팁
         [SerializeField] private TooltipController tooltipController;
@@ -28,7 +29,6 @@ namespace hm
 
         //스킬
         [SerializeField] private SkillUI skillUI;
-
 
         private void Awake()
         {
@@ -155,6 +155,7 @@ namespace hm
         {
             HandleEscape();
         }
+
         #endregion
 
         #region QuickSlot

@@ -13,3 +13,10 @@ MonoBehaviour:
   m_Name: DaggerRecipe
   m_EditorClassIdentifier: 
   targetWeapon: {fileID: 11400000, guid: d63ab15dac52b6148a7c8069c31588d8, type: 2}
+  materials:
+  - item: {fileID: 11400000, guid: ec659bb1b731ade498e6d1b75ce93fa2, type: 2}
+    count: 10
+  - item: {fileID: 11400000, guid: 2248275fbf9ac8b4590f4e949548aa5d, type: 2}
+    count: 10
+  - item: {fileID: 11400000, guid: dfd7081acd062fa45925a3d4e74a2d9c, type: 2}
+    count: 10

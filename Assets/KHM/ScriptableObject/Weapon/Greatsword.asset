@@ -12,8 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ca807bb3ca03d4883262a05ae6887f, type: 3}
   m_Name: Greatsword
   m_EditorClassIdentifier: 
-  itemName: Greatsword
-  description: 
-  itemType: 1
-  icon: {fileID: 0}
+  id: 1002
+  devName: greatSword
+  itemName: "\uAC1C\uC870\uB41C \uAC80(\uB300\uAC80)"
+  category: 0
+  itemType: 0
+  stackable: 0
+  maxStack: 1
+  usable: 0
+  consumable: 0
+  priceBuy: 0
+  priceSell: 0
+  canDrop: 0
+  canSale: 0
+  questItem: 0
+  icon: {fileID: 21300000, guid: 7d7f388d818617d4eb6029debb66aecd, type: 3}
+  subtitle: "\uBB34\uAE30(\uAC1C\uC870)"
+  description: "\uBB35\uC9C1\uD55C\uAC78 \uB367\uB300\uC11C \uAC1C\uC870\uD55C \uAC80\uC785\uB2C8\uB2E4."
+  effectText: 
+  conditionText: 
   skillSet: {fileID: 11400000, guid: 61e3b6014d1b5fd4e8f0978855e4ff4f, type: 2}

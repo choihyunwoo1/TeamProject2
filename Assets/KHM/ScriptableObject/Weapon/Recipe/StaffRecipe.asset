@@ -13,3 +13,10 @@ MonoBehaviour:
   m_Name: StaffRecipe
   m_EditorClassIdentifier: 
   targetWeapon: {fileID: 11400000, guid: 04d99065c8b373340ad3fc1a0129e94c, type: 2}
+  materials:
+  - item: {fileID: 11400000, guid: ec659bb1b731ade498e6d1b75ce93fa2, type: 2}
+    count: 10
+  - item: {fileID: 11400000, guid: 2248275fbf9ac8b4590f4e949548aa5d, type: 2}
+    count: 10
+  - item: {fileID: 11400000, guid: 2c15240e0a9cb644bacd38aaaff17bdd, type: 2}
+    count: 10
