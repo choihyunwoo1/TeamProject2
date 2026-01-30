@@ -1,20 +1,44 @@
 using UnityEngine;
 
+public enum TutorialAnchor
+{
+    LeftTop,
+    Top,
+    RightTop,
+
+    LeftCenter,
+    Center,
+    RightCenter,
+
+    LeftBottom,
+    Bottom,
+    RightBottom
+}
+
+public enum TutorialButtonType
+{
+    Next,
+    Exit,
+    None
+}
+
 [System.Serializable]
 public class TutorialStep
 {
     [TextArea]
     public string description;
 
-    public Vector2 anchoredPosition;
-    public Vector2 size;
+    [Header("Anchor")]
+    public TutorialAnchor anchorType;
 
-    public TutorialClickType clickType;
-}
+    [Header("Panel")]
+    public Vector2 panelOffset;
+    public Vector2 panelSize;
 
-public enum TutorialClickType
-{
-    NextButton,     // Next 버튼을 눌러야 진행
-    ExitButton,     // Exit 버튼을 눌러 종료
-    
+    [Header("Text")]
+    public Vector2 textOffset;
+    public Vector2 textSize;
+
+    [Header("Button Type")]
+    public TutorialButtonType buttonType;
 }

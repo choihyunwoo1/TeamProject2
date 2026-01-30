@@ -16,27 +16,39 @@ MonoBehaviour:
   - description: "\uCCB4\uB825\uACFC \uAE30\uB825\uC785\uB2C8\uB2E4.\r\n\uCCB4\uB825\uC774
       0\uC774 \uB418\uBA74 \uC4F0\uB7EC\uC9C0\uACE0, \uC5EC\uAD00\uC5D0\uC11C \uBD80\uD65C\uD569\uB2C8\uB2E4.\r\n\uAE30\uB825\uC774
       0\uC774 \uB418\uBA74 \uB2EC\uB9AC\uAC70\uB098 \uD68C\uD53C\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
-    anchoredPosition: {x: -775, y: 430}
-    size: {x: 400, y: 320}
-    clickType: 0
+    anchorType: 0
+    panelOffset: {x: 350, y: -110}
+    panelSize: {x: 405, y: 320}
+    textOffset: {x: 550, y: -65}
+    textSize: {x: 700, y: 250}
+    buttonType: 0
   - description: "\uC544\uC774\uD15C \uD035\uC2AC\uB86F\uC785\uB2C8\uB2E4. \uC778\uBCA4\uD1A0\uB9AC\uC5D0\uC11C
       \uC124\uC815\uD558\uACE0,\r\n\uC22B\uC790 \uD0A4\uB97C \uB20C\uB7EC\uC11C \uC0AC\uC6A9\uD560
       \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-    anchoredPosition: {x: 0, y: 0}
-    size: {x: 0, y: 0}
-    clickType: 0
+    anchorType: 6
+    panelOffset: {x: 175, y: 28}
+    panelSize: {x: 422, y: 440}
+    textOffset: {x: 325, y: 60}
+    textSize: {x: 700, y: 250}
+    buttonType: 0
   - description: "\uB9C8\uC6B0\uC2A4 \uC67C\uCABD \uBC84\uD2BC\uC73C\uB85C \uAE30\uBCF8
       \uACF5\uACA9\uC744 \uD560 \uC218 \uC788\uACE0,\r\n\uAE30\uBCF8 \uACF5\uACA9\uC744
       \uC5F0\uB2EC\uC544\uC11C \uC0AC\uC6A9\uD558\uBA74 \uCF64\uBCF4 \uACF5\uACA9\uC774
       \uB098\uAC11\uB2C8\uB2E4."
-    anchoredPosition: {x: 0, y: 0}
-    size: {x: 0, y: 0}
-    clickType: 0
+    anchorType: 8
+    panelOffset: {x: -205, y: 40}
+    panelSize: {x: 500, y: 550}
+    textOffset: {x: -375, y: -75}
+    textSize: {x: 700, y: 250}
+    buttonType: 0
   - description: "\uAE30\uBCF8 \uACF5\uACA9\uC73C\uB85C \uD53C\uD574\uB97C \uC904
       \uB54C\uB9C8\uB2E4 \uD2B9\uC218 \uACF5\uACA9 \uAC8C\uC774\uC9C0\uAC00 \uCC44\uC6CC\uC9D1\uB2C8\uB2E4.\r\n\uB9C8\uC6B0\uC2A4
       \uC624\uB978\uCABD \uBC84\uD2BC\uC73C\uB85C \uD2B9\uC218 \uACF5\uACA9\uC744
       \uD560 \uC218 \uC788\uACE0,\r\nQ\uB97C \uB20C\uB7EC \uAD81\uADF9\uAE30\uB97C
       \uC0AC\uC6A9\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-    anchoredPosition: {x: 0, y: 0}
-    size: {x: 0, y: 0}
-    clickType: 1
+    anchorType: 8
+    panelOffset: {x: -205, y: 40}
+    panelSize: {x: 500, y: 550}
+    textOffset: {x: -480, y: -38}
+    textSize: {x: 700, y: 250}
+    buttonType: 1

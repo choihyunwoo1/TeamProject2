@@ -342,6 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e254436518b2b164ca9e5c498f40334d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiCanvasRoot: {fileID: 0}
   tooltipController: {fileID: 627794312}
   popups:
   - {fileID: 371459890}
@@ -1517,8 +1518,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialRoot: {fileID: 744665364}
-  dimBackground: {fileID: 0}
   explanationPanel: {fileID: 527980898}
+  descriptionRect: {fileID: 0}
   descriptionText: {fileID: 0}
   nextButton: {fileID: 1874563657}
   exitButton: {fileID: 1647707088}
@@ -3218,9 +3219,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6046c840ee6355c49bf8b10626087029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: d63ab15dac52b6148a7c8069c31588d8, type: 2}
-  lockIcon: {fileID: 458145479}
+  lockMask: {fileID: 0}
+  iconImage: {fileID: 0}
   button: {fileID: 307864646}
+  weaponData: {fileID: 0}
+  equippedRoot: {fileID: 0}
+  isDefaultWeapon: 0
 --- !u!1 &308793814
 GameObject:
   m_ObjectHideFlags: 0
@@ -3945,8 +3949,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047545a43e6b4594ea0144c13bbc52c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventorySource: {fileID: 371459891}
-  currentRecipe: {fileID: 11400000, guid: 83e9740deb93e204881afb1a9307e3e3, type: 2}
+  inventory: {fileID: 0}
+  allRecipes: []
+  defaultWeapon: {fileID: 0}
 --- !u!114 &355211072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3959,12 +3964,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe5114068eda8643bf05644fd9ea0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeSystem: {fileID: 355211071}
-  materialSlots:
-  - {fileID: 1826896519}
-  - {fileID: 73664464}
-  - {fileID: 1279752357}
-  upgradeButton: {fileID: 663801113}
+  recipe1Slots: []
+  weapon1Button: {fileID: 0}
+  recipe2Slots: []
+  weapon2Button: {fileID: 0}
+  recipe3Slots: []
+  weapon3Button: {fileID: 0}
+  defaultWeaponButton: {fileID: 0}
+  insertedSlots: []
+  upgradeUIRoot: {fileID: 0}
+  inventoryUIRoot: {fileID: 0}
+  inventoryPopupUI: {fileID: 0}
+  weaponPopupPrefab: {fileID: 0}
 --- !u!1 &367022813
 GameObject:
   m_ObjectHideFlags: 0
@@ -5288,10 +5299,10 @@ RectTransform:
   - {fileID: 773052746}
   m_Father: {fileID: 744665365}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -775, y: 430}
-  m_SizeDelta: {x: 400, y: 320}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -205, y: 40}
+  m_SizeDelta: {x: 500, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &527980901
 MonoBehaviour:
@@ -6748,9 +6759,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6046c840ee6355c49bf8b10626087029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 49f97aec63edd1a4da30c2be34992302, type: 2}
-  lockIcon: {fileID: 1053461361}
+  lockMask: {fileID: 0}
+  iconImage: {fileID: 0}
   button: {fileID: 663801113}
+  weaponData: {fileID: 0}
+  equippedRoot: {fileID: 0}
+  isDefaultWeapon: 0
 --- !u!224 &673636582 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3615611880287103839, guid: a768b9447d8f6f747a4616deee4209d7, type: 3}
@@ -7020,6 +7034,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 457246340}
   descriptionText: {fileID: 1903350035}
+  flavorText: {fileID: 0}
+  subtitleText: {fileID: 0}
 --- !u!1 &719458953
 GameObject:
   m_ObjectHideFlags: 0
@@ -7816,8 +7832,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCCB4\uB825\uACFC \uAE30\uB825\uC785\uB2C8\uB2E4.\n\uCCB4\uB825\uC774
-    0\uC774 \uB418\uBA74 \uC4F0\uB7EC\uC9C0\uACE0, \uC5EC\uAD00\uC5D0\uC11C \uBD80\uD65C\uD569\uB2C8\uB2E4."
+  m_text: "\uAE30\uBCF8 \uACF5\uACA9\uC73C\uB85C \uD53C\uD574\uB97C \uC904 \uB54C\uB9C8\uB2E4
+    \uD2B9\uC218 \uACF5\uACA9 \uAC8C\uC774\uC9C0\uAC00 \uCC44\uC6CC\uC9D1\uB2C8\uB2E4.\n\uB9C8\uC6B0\uC2A4
+    \uC624\uB978\uCABD \uBC84\uD2BC\uC73C\uB85C \uD2B9\uC218 \uACF5\uACA9\uC744 \uD560
+    \uC218 \uC788\uACE0,\nQ\uB97C \uB20C\uB7EC \uAD81\uADF9\uAE30\uB97C \uC0AC\uC6A9\uD560
+    \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cdffbc87753f30d4aae98e42683770aa, type: 2}
   m_sharedMaterial: {fileID: -9010611093841572195, guid: cdffbc87753f30d4aae98e42683770aa, type: 2}
@@ -7912,7 +7931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 570, y: -65}
+  m_AnchoredPosition: {x: -480, y: -38}
   m_SizeDelta: {x: 700, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &781605562
@@ -9162,9 +9181,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6046c840ee6355c49bf8b10626087029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 04d99065c8b373340ad3fc1a0129e94c, type: 2}
-  lockIcon: {fileID: 903741888}
+  lockMask: {fileID: 0}
+  iconImage: {fileID: 0}
   button: {fileID: 866987976}
+  weaponData: {fileID: 0}
+  equippedRoot: {fileID: 0}
+  isDefaultWeapon: 0
 --- !u!1 &868101865
 GameObject:
   m_ObjectHideFlags: 0
@@ -13616,9 +13638,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6046c840ee6355c49bf8b10626087029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 0a5031282349d824cb06c21549db9423, type: 2}
-  lockIcon: {fileID: 0}
+  lockMask: {fileID: 0}
+  iconImage: {fileID: 0}
   button: {fileID: 1430520923}
+  weaponData: {fileID: 0}
+  equippedRoot: {fileID: 0}
+  isDefaultWeapon: 0
 --- !u!1 &1433047934
 GameObject:
   m_ObjectHideFlags: 0
@@ -14266,6 +14291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 1580832836}
   descriptionText: {fileID: 1306518127}
+  subtitleText: {fileID: 0}
 --- !u!1 &1528371994
 GameObject:
   m_ObjectHideFlags: 0
@@ -18828,6 +18854,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 764999727}
   descriptionText: {fileID: 266345233}
+  flavorText: {fileID: 0}
+  subtitleText: {fileID: 0}
 --- !u!1 &2142289519
 GameObject:
   m_ObjectHideFlags: 0
