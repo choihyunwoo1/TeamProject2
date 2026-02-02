@@ -60,7 +60,6 @@ namespace hm
             {
                 // 재료 넣기
                 actionText.text = "재료 넣기";
-                int available = Inventory.Instance.GetItemCount(item);
                 actionButton.onClick.AddListener(AddMaterial);
             }
 
@@ -79,14 +78,12 @@ namespace hm
         /// </summary>
         private void SetPositionRelativeToSlot(RectTransform slotTransform)
         {
-            if (rectTransform == null) return;
+            if (rectTransform == null || slotTransform == null) return;
 
             // 슬롯의 월드 위치 가져오기
             Vector3 slotWorldPos = slotTransform.position;
-
-            // 오른쪽으로 70 픽셀 이동
+            // 오른쪽으로 60 픽셀 이동
             Vector3 popupWorldPos = slotWorldPos + new Vector3(60f, 0f, 0f);
-
             // 팝업 위치 설정
             rectTransform.position = popupWorldPos;
         }

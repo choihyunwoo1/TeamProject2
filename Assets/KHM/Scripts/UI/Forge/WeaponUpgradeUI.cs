@@ -32,6 +32,7 @@ namespace hm
         [SerializeField] private GameObject inventoryPopupUI;
         [SerializeField] private WeaponPopupUI weaponPopupPrefab; // 프리팹
         private WeaponPopupUI weaponPopupInstance;                  // 인스턴스
+
         private void Awake()
         {
             if (Instance == null) Instance = this;
@@ -214,6 +215,18 @@ namespace hm
         //무기 선택 팝업창 열기
         public void OpenWeaponPopup(WeaponItemData weapon, RectTransform buttonRect)
         {
+            // 인벤토리 팝업이 열려있으면 닫기
+            if (inventoryPopupUI != null && inventoryPopupUI.activeSelf)
+            {
+                inventoryPopupUI.SetActive(false);
+            }
+
+            // 인벤토리 선택 상태 초기화
+            if (InventoryUI.Instance != null)
+            {
+                InventoryUI.Instance.ClearSelection();
+            }
+
             if (weaponPopupInstance == null)
             {
                 // UIHierarchy상 WeaponUpgradeUI 아래에 생성
@@ -224,19 +237,37 @@ namespace hm
             weaponPopupInstance.Open(weapon, buttonRect);
         }
 
+        // ⭐️ 무기 팝업 닫기 (인벤토리 슬롯 클릭 시 호출)
+        public void CloseWeaponPopup()
+        {
+            if (weaponPopupInstance != null && weaponPopupInstance.gameObject.activeSelf)
+            {
+                weaponPopupInstance.gameObject.SetActive(false);
+            }
+        }
+
         // 모든 UI 닫기
         public void CloseAllUI()
         {
             if (upgradeUIRoot != null) upgradeUIRoot.SetActive(false);
             if (inventoryUIRoot != null) inventoryUIRoot.SetActive(false);
-            if (weaponPopupPrefab != null) weaponPopupInstance.gameObject.SetActive(false);
-            if (inventoryPopupUI != null && inventoryPopupUI.activeSelf) inventoryPopupUI.SetActive(false);
 
-            // 인벤토리 무기개조 모드 해제
+            if (weaponPopupInstance != null)
+                weaponPopupInstance.gameObject.SetActive(false);
+
+            if (inventoryPopupUI != null && inventoryPopupUI.activeSelf)
+                inventoryPopupUI.SetActive(false);
+
             if (InventoryUI.Instance != null)
             {
                 InventoryUI.Instance.SetMode(InventoryMode.Normal);
             }
+        }
+
+        // 무기 개조 팝업이 열려있는지 확인
+        public bool IsWeaponPopupOpen()
+        {
+            return weaponPopupInstance != null && weaponPopupInstance.gameObject.activeSelf;
         }
     }
 }

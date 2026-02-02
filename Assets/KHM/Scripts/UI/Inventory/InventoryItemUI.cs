@@ -10,6 +10,7 @@ namespace hm
         [SerializeField] private TextMeshProUGUI countText;
         [SerializeField] private Image mask; // 잠금 표시용 마스크
         [SerializeField] private Button button; // 버튼 컴포넌트
+        [SerializeField] private Image selectImage;
 
         private ItemData itemData;
         private TooltipTrigger tooltipTrigger;
@@ -64,6 +65,7 @@ namespace hm
                 tooltipTrigger.ClearData();
 
             mask.enabled = false;
+            selectImage.enabled = false;
 
             // 버튼 비활성화
             if (button != null)
@@ -165,8 +167,12 @@ namespace hm
         {
             if (itemData == null) return;
 
-            // InventoryUI에게 클릭 이벤트 전달 (RectTransform도 함께)
-            InventoryUI.Instance?.OnItemClicked(itemData, rectTransform);
+            // ⭐️ 모든 모드에서 selectImage 표시
+            if (InventoryUI.Instance != null)
+            {
+                InventoryUI.Instance.SetSelectedSlot(this);
+                InventoryUI.Instance.OnItemClicked(itemData, rectTransform);
+            }
         }
 
         /// <summary>
@@ -176,6 +182,15 @@ namespace hm
         {
             if (mask != null)
                 mask.enabled = enabled;
+        }
+
+        /// <summary>
+        /// 선택 이미지 제어
+        /// </summary>
+        public void SetSelected(bool selected)
+        {
+            if (selectImage != null)
+                selectImage.enabled = selected;
         }
 
         /// <summary>

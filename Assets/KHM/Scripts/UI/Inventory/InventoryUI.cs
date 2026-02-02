@@ -24,6 +24,8 @@ namespace hm
 
         // 인벤토리 현재 모드
         private InventoryMode currentMode = InventoryMode.Normal;
+        // 선택 중인 슬롯
+        private InventoryItemUI currentSelectedSlot;
 
         private void Awake()
         {
@@ -60,6 +62,9 @@ namespace hm
             {
                 exitButton.SetActive(mode == InventoryMode.Normal);
             }
+
+            // 모드 변경 시 선택 상태 초기화
+            ClearSelection();
 
             // 모드 변경 시 UI 갱신
             RefreshUI();
@@ -118,7 +123,7 @@ namespace hm
                     break;
 
                 case InventoryMode.Shop:
-                    // TODO: 상점 모드 UI 갱신
+                    // 상점 모드는 추가 처리 없음
                     break;
 
                 case InventoryMode.Normal:
@@ -151,6 +156,30 @@ namespace hm
                         slotUI.SetMask(true);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// 아이템 슬롯 선택 효과
+        /// </summary>
+        public void SetSelectedSlot(InventoryItemUI slot)
+        {
+            // 이전 선택 해제
+            if (currentSelectedSlot != null)
+                currentSelectedSlot.SetSelected(false);
+
+            currentSelectedSlot = slot;
+
+            if (currentSelectedSlot != null)
+                currentSelectedSlot.SetSelected(true);
+        }
+
+        public void ClearSelection()
+        {
+            if (currentSelectedSlot != null)
+            {
+                currentSelectedSlot.SetSelected(false);
+                currentSelectedSlot = null;
             }
         }
 
@@ -222,6 +251,12 @@ namespace hm
             // Material 아이템만 팝업 열기
             if (item.itemType == ItemType.Material)
             {
+                // ⭐️ 무기 팝업이 열려있으면 닫기
+                if (upgradeUI != null && upgradeUI.IsWeaponPopupOpen())
+                {
+                    upgradeUI.CloseWeaponPopup();
+                }
+
                 // RectTransform을 함께 전달하여 팝업 위치 설정
                 popupUI.Open(item, upgradeSystem, upgradeUI, slotTransform);
             }
@@ -232,16 +267,14 @@ namespace hm
         }
 
         /// <summary>
-        /// 상점 모드에서 아이템 클릭 처리 (미구현)
+        /// 상점 모드에서 아이템 클릭 처리
         /// </summary>
         private void HandleShopModeClick(ItemData item, RectTransform slotTransform)
         {
-            // TODO: 상점 구현 시 추가
             // 판매 가능한 아이템이면 판매 팝업 열기
-            if (item.canSale)
+            if (item.canSale && !item.questItem)
             {
-                Debug.Log($"{item.itemName} 판매 팝업 열기 (미구현)");
-                // ShopUI.Instance?.OpenSellPopup(item, slotTransform);
+                ShopManager.Instance?.OpenSellPopup(item, slotTransform);
             }
             else
             {
@@ -255,5 +288,11 @@ namespace hm
         /// InventoryItemUI 배열 반환 (마스크 제어용)
         /// </summary>
         public InventoryItemUI[] GetItemUISlots() => slots;
+
+        // 인벤토리 팝업이 열려있는지 확인
+        public bool IsInventoryPopupOpen()
+        {
+            return popupUI != null && popupUI.gameObject.activeSelf;
+        }
     }
 }

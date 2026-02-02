@@ -13,6 +13,12 @@ namespace hm
 
         private List<InventorySlot> slots = new();
 
+        //골드
+        private int gold;
+        public int Gold => gold;
+        public event Action<int> OnGoldChanged;
+
+        //인벤토리 모드
         public event Action OnInventoryChanged;
 
         private void Awake()
@@ -27,6 +33,21 @@ namespace hm
             for (int i = 0; i < maxSlotCount; i++)
                 slots.Add(new InventorySlot(null, 0));
         }
+        #region Money
+        public void AddGold(int amount)
+        {
+            gold += amount;
+            OnGoldChanged?.Invoke(Gold);
+        }
+
+        public bool SpendGold(int amount)
+        {
+            if (Gold < amount) return false;
+            gold -= amount;
+            OnGoldChanged?.Invoke(Gold);
+            return true;
+        }
+        #endregion
 
         #region Add
 

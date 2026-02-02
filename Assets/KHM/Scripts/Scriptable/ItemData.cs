@@ -1,8 +1,8 @@
 using UnityEngine;
 namespace hm
 {
-    public enum ItemCategory { Weapon, UseItem, Material }
-    public enum ItemType { Sword, Heal, Food, Material }
+    public enum ItemCategory { Weapon, UseItem, Material, Money }
+    public enum ItemType { Sword, Heal, Food, Material, Money }
 
     [CreateAssetMenu(menuName = "Game/Item/ItemData")]
     public class ItemData : ScriptableObject, ITooltipData
