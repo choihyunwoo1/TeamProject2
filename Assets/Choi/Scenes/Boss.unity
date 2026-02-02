@@ -13624,6 +13624,7 @@ MonoBehaviour:
   fireZoneSpawnPoint: {fileID: 194109369}
   FireBreathPivot: {fileID: 1974228164}
   fireBreathParticlePrefab: {fileID: 2536487674413581150, guid: a85fac3c41955ce41a1784759e66d9c0, type: 3}
+  extraHealth: 50
 --- !u!114 &1321914419
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,9 +13,22 @@ public class BossEnemy : Enemy
     public Transform FireBreathPivot;
     public GameObject fireBreathParticlePrefab;
 
+    [SerializeField] private float extraHealth = 50f;
     protected override void Start()
     {
         base.Start();
+
+        // 체력 보정 로직은 Start에서!
+        Damageable dmg = GetComponent<Damageable>();
+        if (dmg != null)
+        {
+            dmg.CurrentHeathSO.SetMaxHealth(dmg.MaxHealth + extraHealth);
+            dmg.CurrentHeathSO.SetCurrentHealth(dmg.CurrentHeathSO.MaxHealth);
+
+            Debug.Log($"Boss HP boosted: {dmg.CurrentHeathSO.MaxHealth}");
+        }
+
+        // Phase1 등록
         stateMachine.RegisterState(phase1);
 
         damageable.OnDamage += CheckPhase;
