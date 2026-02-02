@@ -72,7 +72,7 @@ namespace TeamProject2
             if (enemy is BossEnemy boss)
             {
                 // Phase1 중인데 다른 상태로 바꾸려고 하면 차단
-                if (boss.IsInPhase1 && newState.GetType() != typeof(Choi.BossPhase1State))
+                if (boss.IsInPhase1 && newState.GetType() != typeof(TeamProject2.BossPhase1State))
                 {
                     return m_CurrentState; // 변경 불가 → Phase1 유지
                 }

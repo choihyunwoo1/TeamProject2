@@ -1,9 +1,17 @@
 using Choi;
 using TeamProject2;
+using UnityEngine;
 
 public class BossEnemy : Enemy
 {
     private BossPhase1State phase1 = new BossPhase1State();
+
+    public bool IsInPhase1 = false;
+
+    public GameObject fireZonePrefab;
+    public Transform fireZoneSpawnPoint;
+    public Transform FireBreathPivot;
+    public GameObject fireBreathParticlePrefab;
 
     protected override void Start()
     {
@@ -23,6 +31,23 @@ public class BossEnemy : Enemy
             stateMachine.ChangeState(phase1);
 
             damageable.OnDamage -= CheckPhase;
+        }
+    }
+    public void SpawnFireZone()
+    {
+        Instantiate(fireZonePrefab, fireZoneSpawnPoint.position, Quaternion.identity);
+    }
+
+    public void SpawnFireBreath()
+    {
+        if (fireBreathParticlePrefab != null && FireBreathPivot != null)
+        {
+            GameObject effect = Instantiate(
+                fireBreathParticlePrefab,
+                FireBreathPivot.position,
+                FireBreathPivot.rotation);
+
+            effect.transform.SetParent(FireBreathPivot);
         }
     }
 }
