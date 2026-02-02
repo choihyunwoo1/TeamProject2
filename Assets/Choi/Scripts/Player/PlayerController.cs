@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using HJ; 
 
 namespace Choi
 {
@@ -101,6 +102,18 @@ namespace Choi
         public void OnMove(InputAction.CallbackContext context)
         {
             moveInput = context.ReadValue<Vector2>();
+            bool isInputOn = moveInput.magnitude > 0;
+
+            //HJ : 걷는소리
+            if (isInputOn)
+            {
+                SoundManager.Instance.Play("Walk");
+            }
+            else if (!isInputOn)
+            {
+                SoundManager.Instance.Stop("Walk");
+            }
+
         }
         public void OnAttack(InputAction.CallbackContext context)
         {
@@ -186,6 +199,9 @@ namespace Choi
 
                     if (animator != null)
                         animator.SetTrigger("Jump");
+
+                    //HJ : 점프 조건 맞을때 사운드 재생 (1회)
+                    SoundManager.Instance.Play("Jump");
                 }
                 else
                 {
@@ -222,10 +238,16 @@ namespace Choi
 
             float currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
 
-            // 스태미너 소비
             if (isSprinting && direction.sqrMagnitude > 0.1f)
             {
                 stats.ConsumeStamina(Time.deltaTime * 8f);
+                //HJ : 달릴때 소리 1.6배속
+                SoundManager.Instance.SetPitch("Walk", 1.6f);
+            }
+            else
+            {
+                //HJ : 아니면 소리 1로 재설정
+                SoundManager.Instance.SetPitch("Walk", 1f);
             }
 
             if (animator != null)
@@ -242,7 +264,16 @@ namespace Choi
         private void TryDash()
         {
             if (!canDash || isDashing) return;
-            if (!stats.ConsumeStamina(20f)) return; // ← 스태미너 부족하면 대시 안됨
+
+            //HJ : Dash 사운드
+            SoundManager.Instance.PlayOneShot("Dash");
+
+            if (!stats.ConsumeStamina(20f))
+            {
+                //HJ : Dash 사운드 스톱
+                SoundManager.Instance.Stop("Dash");
+                return; // ← 스태미너 부족하면 대시 안됨
+            }
 
             StartCoroutine(DashRoutine());
         }

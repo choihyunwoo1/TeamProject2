@@ -1,4 +1,6 @@
-namespace Choi
+using Choi;
+
+namespace hm
 {
     public enum WeaponType
     {

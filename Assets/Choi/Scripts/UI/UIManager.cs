@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Choi
+namespace hm
 {
     /// <summary>
     /// UI를 관리하는 매니저
@@ -9,6 +9,7 @@ namespace Choi
     public class UIManager : MonoBehaviour
     {
         public static UIManager Instance { get; private set; }
+        [SerializeField] private Transform uiCanvasRoot;
 
         //툴팁
         [SerializeField] private TooltipController tooltipController;
@@ -29,6 +30,16 @@ namespace Choi
         //스킬
         [SerializeField] private SkillUI skillUI;
 
+        //상점 & 무기개조
+        [Header("Shop & Upgrade")]
+        [SerializeField] private GameObject shopUIRoot;           // 상점 UI 루트
+        [SerializeField] private GameObject upgradeUIRoot;        // 무기개조 UI 루트 (참조용)
+        [SerializeField] private GameObject inventoryUIRoot;      // 인벤토리 UI 루트
+
+        // ⭐️ 상점 팝업 참조 추가
+        [Header("Shop Popups")]
+        [SerializeField] private GameObject shopActionPopup;      // 구매/판매 선택 팝업
+        [SerializeField] private GameObject shopQuantityPopup;    // 수량 조절 팝업
 
         private void Awake()
         {
@@ -123,7 +134,7 @@ namespace Choi
                 settings.Show();
             }
         }
-    
+
         public void TogglePopup(PopupType type)
         {
             if (!popupMap.TryGetValue(type, out var popup)) return;
@@ -155,6 +166,7 @@ namespace Choi
         {
             HandleEscape();
         }
+
         #endregion
 
         #region QuickSlot
@@ -162,7 +174,7 @@ namespace Choi
         public void SelectItemForQuickSlot(ItemData item)
         {
             // 소비 아이템만 허용
-            if (item.itemType != ItemType.Consumable)
+            if (item.category != ItemCategory.UseItem)
                 return;
 
             selectedItem = item;
@@ -207,5 +219,103 @@ namespace Choi
         {
             skillUI.SetSkillSet(skillSet);
         }
+
+        #region Shop & Upgrade UI Management
+
+        /// <summary>
+        /// 상점 UI 열기 (인벤토리를 상점 모드로 전환)
+        /// NPC와 상호작용할 때 호출
+        /// </summary>
+        public void OpenShop()
+        {
+            // 다른 팝업 모두 닫기
+            CloseAllPopups();
+
+            // 상점 UI 활성화
+            if (shopUIRoot != null)
+                shopUIRoot.SetActive(true);
+
+            // 인벤토리 UI 활성화
+            if (inventoryUIRoot != null)
+                inventoryUIRoot.SetActive(true);
+
+            // 인벤토리를 상점 모드로 전환
+            if (InventoryUI.Instance != null)
+            {
+                InventoryUI.Instance.SetMode(InventoryMode.Shop);
+            }
+
+            Debug.Log("[UIManager] 상점 UI 열림");
+        }
+
+        /// <summary>
+        /// 상점 UI 닫기
+        /// </summary>
+        public void CloseShop()
+        {
+            // ⭐️ 상점 팝업들 먼저 닫기
+            if (shopActionPopup != null && shopActionPopup.activeSelf)
+            {
+                shopActionPopup.SetActive(false);
+            }
+
+            if (shopQuantityPopup != null && shopQuantityPopup.activeSelf)
+            {
+                shopQuantityPopup.SetActive(false);
+            }
+
+            // 상점 UI 비활성화
+            if (shopUIRoot != null)
+                shopUIRoot.SetActive(false);
+
+            // 인벤토리 UI 비활성화
+            if (inventoryUIRoot != null)
+                inventoryUIRoot.SetActive(false);
+
+            // 인벤토리 선택 해제
+            InventoryUI.Instance?.ClearSelection();
+
+            // 인벤토리를 일반 모드로 복원
+            if (InventoryUI.Instance != null)
+            {
+                InventoryUI.Instance.SetMode(InventoryMode.Normal);
+            }
+
+            Debug.Log("[UIManager] 상점 UI 닫힘");
+        }
+
+        /// <summary>
+        /// 무기개조 UI 열기 
+        /// </summary>
+        public void OpenWeaponUpgrade()
+        {
+            // 다른 팝업 모두 닫기
+            CloseAllPopups();
+
+            if (WeaponUpgradeUI.Instance != null)
+            {
+                WeaponUpgradeUI.Instance.OpenUpgradeUI();
+            }
+
+            Debug.Log("[UIManager] 무기개조 UI 열림");
+        }
+
+        /// <summary>
+        /// 무기개조 UI 닫기
+        /// </summary>
+        public void CloseWeaponUpgrade()
+        {
+            if (WeaponUpgradeUI.Instance != null)
+            {
+                WeaponUpgradeUI.Instance.CloseAllUI();
+            }
+
+            // 인벤토리 선택 해제
+            InventoryUI.Instance?.ClearSelection();
+
+            Debug.Log("[UIManager] 무기개조 UI 닫힘");
+        }
+
+        #endregion
     }
 }

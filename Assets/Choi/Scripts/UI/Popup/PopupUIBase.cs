@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Choi
+namespace hm
 {
     public abstract class PopupUIBase : MonoBehaviour
     {
