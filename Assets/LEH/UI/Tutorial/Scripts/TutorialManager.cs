@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject tutorialRoot;
     public RectTransform explanationPanel;
     public RectTransform descriptionRect;
-    public Text descriptionText;
+    public TMP_Text descriptionText;
     public Button nextButton;
     public Button exitButton;
 
@@ -23,17 +24,18 @@ public class TutorialManager : MonoBehaviour
 
     public void StartTutorial(TutorialData data)
     {
+        if (data == null || data.steps.Length == 0)
+            return;
+
         currentData = data;
         stepIndex = 0;
+
         tutorialRoot.SetActive(true);
         ShowStep();
     }
 
     void ShowStep()
     {
-        if (currentData == null || currentData.steps.Length == 0)
-            return;
-
         TutorialStep step = currentData.steps[stepIndex];
 
         // 텍스트
@@ -42,11 +44,11 @@ public class TutorialManager : MonoBehaviour
         // Anchor
         ApplyAnchor(explanationPanel, step.anchorType);
 
-        // 패널
+        // Panel
         explanationPanel.anchoredPosition = step.panelOffset;
         explanationPanel.sizeDelta = step.panelSize;
 
-        // 텍스트 Rect
+        // Text Rect
         descriptionRect.anchoredPosition = step.textOffset;
         descriptionRect.sizeDelta = step.textSize;
 
@@ -57,7 +59,7 @@ public class TutorialManager : MonoBehaviour
         nextButton.onClick.RemoveAllListeners();
         exitButton.onClick.RemoveAllListeners();
 
-        // 버튼 타입 처리
+        // 버튼 타입
         switch (step.buttonType)
         {
             case TutorialButtonType.Next:
@@ -71,7 +73,6 @@ public class TutorialManager : MonoBehaviour
                 break;
 
             case TutorialButtonType.None:
-                // 버튼 없음
                 break;
         }
     }
@@ -91,6 +92,10 @@ public class TutorialManager : MonoBehaviour
 
     void EndTutorial()
     {
+        //다시 안 나오게 저장
+        PlayerPrefs.SetInt($"Tutorial_{currentData.tutorialId}", 1);
+        PlayerPrefs.Save();
+
         tutorialRoot.SetActive(false);
     }
 
@@ -100,35 +105,17 @@ public class TutorialManager : MonoBehaviour
 
         switch (type)
         {
-            case TutorialAnchor.LeftTop:
-                anchor = new Vector2(0f, 1f);
-                break;
-            case TutorialAnchor.Top:
-                anchor = new Vector2(0.5f, 1f);
-                break;
-            case TutorialAnchor.RightTop:
-                anchor = new Vector2(1f, 1f);
-                break;
+            case TutorialAnchor.LeftTop: anchor = new Vector2(0f, 1f); break;
+            case TutorialAnchor.Top: anchor = new Vector2(0.5f, 1f); break;
+            case TutorialAnchor.RightTop: anchor = new Vector2(1f, 1f); break;
 
-            case TutorialAnchor.LeftCenter:
-                anchor = new Vector2(0f, 0.5f);
-                break;
-            case TutorialAnchor.Center:
-                anchor = new Vector2(0.5f, 0.5f);
-                break;
-            case TutorialAnchor.RightCenter:
-                anchor = new Vector2(1f, 0.5f);
-                break;
+            case TutorialAnchor.LeftCenter: anchor = new Vector2(0f, 0.5f); break;
+            case TutorialAnchor.Center: anchor = new Vector2(0.5f, 0.5f); break;
+            case TutorialAnchor.RightCenter: anchor = new Vector2(1f, 0.5f); break;
 
-            case TutorialAnchor.LeftBottom:
-                anchor = new Vector2(0f, 0f);
-                break;
-            case TutorialAnchor.Bottom:
-                anchor = new Vector2(0.5f, 0f);
-                break;
-            case TutorialAnchor.RightBottom:
-                anchor = new Vector2(1f, 0f);
-                break;
+            case TutorialAnchor.LeftBottom: anchor = new Vector2(0f, 0f); break;
+            case TutorialAnchor.Bottom: anchor = new Vector2(0.5f, 0f); break;
+            case TutorialAnchor.RightBottom: anchor = new Vector2(1f, 0f); break;
         }
 
         rt.anchorMin = rt.anchorMax = anchor;
