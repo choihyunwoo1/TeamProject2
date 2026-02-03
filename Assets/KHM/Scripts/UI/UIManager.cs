@@ -61,6 +61,12 @@ namespace hm
         {
             tooltipController.Show(data);
         }
+        public void ShowTooltip(ITooltipData data, RectTransform targetRect, Vector2 offset)
+        {
+            if (tooltipController != null)
+                tooltipController.Show(data, targetRect, offset);
+        }
+
 
         //툴팁 숨기기
         public void HideTooltip()

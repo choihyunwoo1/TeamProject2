@@ -337,6 +337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipData: {fileID: 0}
+  useCustomPosition: 1
+  offset: {x: 10, y: 0}
 --- !u!114 &3068433986529221934
 MonoBehaviour:
   m_ObjectHideFlags: 0
