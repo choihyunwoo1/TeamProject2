@@ -171,15 +171,18 @@ namespace hm
         /// </summary>
         public void OnClick()
         {
-            UpdateButtonState();
-
             if (itemData == null) return;
 
-            // ⭐️ 모든 모드에서 selectImage 표시
+            // OnItemClicked를 먼저 호출 (팝업 열기)
+            if (InventoryUI.Instance != null)
+            {
+                InventoryUI.Instance.OnItemClicked(itemData, rectTransform);
+            }
+
+            // 그 다음 선택 효과 표시
             if (InventoryUI.Instance != null)
             {
                 InventoryUI.Instance.SetSelectedSlot(this);
-                InventoryUI.Instance.OnItemClicked(itemData, rectTransform);
             }
         }
 
