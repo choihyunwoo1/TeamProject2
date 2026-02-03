@@ -14361,7 +14361,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2903255209947899248}
   - component: {fileID: 8120533183491790024}
-  - component: {fileID: 1658536177983094504}
   m_Layer: 0
   m_Name: Magician
   m_TagString: Untagged
@@ -14408,29 +14407,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!136 &1658536177983094504
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6882283873872817903}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3072609
-  m_Height: 1.882848
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.98, z: 0}
 --- !u!1 &6883847282329692221
 GameObject:
   m_ObjectHideFlags: 0
@@ -19634,9 +19610,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 46f311046d2104da8b56be3d0a49a119, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5047838107753180220}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 46f311046d2104da8b56be3d0a49a119, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2427211029318913993}
   m_SourcePrefab: {fileID: 100100000, guid: 46f311046d2104da8b56be3d0a49a119, type: 3}
 --- !u!1 &8440848141536845806 stripped
@@ -19644,31 +19617,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 46f311046d2104da8b56be3d0a49a119, type: 3}
   m_PrefabInstance: {fileID: 8782726775338492607}
   m_PrefabAsset: {fileID: 0}
---- !u!143 &5047838107753180220
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8440848141536845806}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 0.8
-  m_Radius: 0.3
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.4, z: -0.1}
 --- !u!95 &2427211029318913993
 Animator:
   serializedVersion: 7

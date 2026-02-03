@@ -1,50 +1,58 @@
+using hm;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Choi
 {
     public class ChestInteractable : MonoBehaviour, IInteractable
     {
-        [Header("Chest Settings")]
-        [SerializeField] private GameObject[] dropItemPrefabs;   // 여러 개 넣을 수 있음
-        [SerializeField] private Transform dropPoint;            // 아이템 생성 위치 (옵션)
+        [SerializeField] private List<DropItem> dropItems = new();
+        [SerializeField] private int dropGold = 0;
 
         private bool isOpened = false;
 
-        // 인터랙트 UI 문구
         public string GetInteractPrompt()
         {
             return isOpened ? "" : "Open (E)";
         }
 
-        // 실제 상호작용 실행
         public void Interact(GameObject player)
         {
             if (isOpened) return;
-
             isOpened = true;
 
-            // 필요하면 애니메이션 or 사운드 호출
-            // animator.SetTrigger("Open");
-
-            SpawnItems();
+            GiveDropItems();
+            GiveDropGold();
 
             Debug.Log("Chest Open!");
+
+            // ⭐ 드랍 끝난 후 상자 제거
+            Destroy(gameObject);
         }
 
-        private void SpawnItems()
+        private void GiveDropItems()
         {
-            // 아무 아이템 없으면 그냥 return
-            if (dropItemPrefabs == null || dropItemPrefabs.Length == 0)
-                return;
-
-            // 드롭 생성 위치 (없으면 Chest 중심)
-            Vector3 spawnPos = dropPoint != null ? dropPoint.position : transform.position;
-
-            foreach (var prefab in dropItemPrefabs)
+            if (Inventory.Instance == null)
             {
-                if (prefab == null) continue; // 안전 처리
+                Debug.LogError("Inventory.Instance is NULL!");
+                return;
+            }
 
-                Instantiate(prefab, spawnPos, Quaternion.identity);
+            foreach (var drop in dropItems)
+            {
+                if (drop.item == null) continue;
+
+                Inventory.Instance.Add(drop.item, drop.count);
+                Debug.Log($"[Chest] {name} → {drop.item.itemName} {drop.count}개 지급 완료");
+            }
+        }
+
+        private void GiveDropGold()
+        {
+            if (dropGold > 0 && Inventory.Instance != null)
+            {
+                Inventory.Instance.AddGold(dropGold);
+                Debug.Log($"[Chest] {name} → Gold {dropGold} 지급 완료");
             }
         }
     }

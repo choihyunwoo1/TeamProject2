@@ -19,10 +19,18 @@ namespace Choi
             Instance = this;
             dialogueUI.SetActive(false);
         }
+        private void Update()
+        {
+            if (!dialogueUI.activeSelf) return;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Next();
+            }
+        }
 
         public void StartDialogue(TextAsset json)
         {
-            Debug.Log("StartDialogue 호출됨!");
             dialogueUI.SetActive(true);
 
             DialogueRoot root = JsonUtility.FromJson<DialogueRoot>(json.text);

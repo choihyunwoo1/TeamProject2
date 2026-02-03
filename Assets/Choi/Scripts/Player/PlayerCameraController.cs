@@ -39,10 +39,15 @@ namespace Choi
 
         public void OnLook(InputAction.CallbackContext context)
         {
-            if (float.IsNaN(lookInput.x) || float.IsNaN(lookInput.y))
-                lookInput = Vector2.zero;
+            Vector2 value = context.ReadValue<Vector2>();
 
-            lookInput = context.ReadValue<Vector2>();
+            if (float.IsNaN(value.x) || float.IsNaN(value.y))
+            {
+                lookInput = Vector2.zero;
+                return;
+            }
+
+            lookInput = value;
         }
 
         private void Start()
@@ -68,18 +73,28 @@ namespace Choi
             yaw += lookInput.x * lookSensitivity;
             pitch -= lookInput.y * lookSensitivity;
 
-            // pitch 제한
-            pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+            // 보호 연산
+            if (float.IsNaN(yaw) || float.IsNaN(pitch))
+            {
+                yaw = 0f;
+                pitch = 0f;
+            }
 
-            // yaw 무한 증가 방지
+            pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
             yaw = Mathf.Repeat(yaw, 360f);
 
             smoothYaw = Mathf.SmoothDampAngle(smoothYaw, yaw, ref yawVelocity, rotationSmoothTime);
             smoothPitch = Mathf.SmoothDampAngle(smoothPitch, pitch, ref pitchVelocity, rotationSmoothTime);
 
+            // 스무싱 후에도 검사
+            if (float.IsNaN(smoothYaw) || float.IsNaN(smoothPitch))
+            {
+                smoothYaw = yaw;
+                smoothPitch = pitch;
+            }
+
             cameraPivot.rotation = Quaternion.Euler(smoothPitch, smoothYaw, 0f);
         }
-
 
         private void FollowTarget()
         {

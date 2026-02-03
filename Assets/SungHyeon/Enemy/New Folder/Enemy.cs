@@ -1,5 +1,14 @@
 using UnityEngine;
 using Choi;
+using hm;
+using System.Collections.Generic;
+
+[System.Serializable]               
+public class DropItem
+{
+    public ItemData item;
+    public int count = 1;
+}
 
 namespace TeamProject2
 {
@@ -29,6 +38,10 @@ namespace TeamProject2
 
         //회전 속도 - Lerp 계수
         [SerializeField] protected float rotateSpeed = 10f;
+
+        [SerializeField] private List<DropItem> dropItems = new();
+        [SerializeField] private int dropGold = 0;
+
         #endregion
 
         #region Property
@@ -128,8 +141,12 @@ namespace TeamProject2
         {
             ChangeState(dieState);
 
+            GiveDropItems();    // ← 아이템 지급 함수 호출
+            GiveDropGold();      // 골드 지급 추가
+
             //킬
             Destroy(gameObject, 3f);
+
         }
 
         private void OnAttack(float damage)
@@ -141,6 +158,35 @@ namespace TeamProject2
         {
             m_DetectionMoudle.ClearTarget();   // Target = null
         }
+
+        private void GiveDropItems()
+        {
+            if (Inventory.Instance == null)
+            {
+                Debug.LogError("Inventory.Instance is NULL!");
+                return;
+            }
+
+            foreach (var drop in dropItems)
+            {
+                if (drop.item == null) continue;
+
+                Inventory.Instance.Add(drop.item, drop.count);
+
+                Debug.Log(
+                    $"[Enemy Drop] {name} → {drop.item.itemName} {drop.count}개 지급 완료"
+                );
+            }
+        }
+        private void GiveDropGold()
+        {
+            if (dropGold > 0 && Inventory.Instance != null)
+            {
+                Inventory.Instance.AddGold(dropGold);
+                Debug.Log($"[Enemy Drop] {name} → Gold {dropGold} 지급 완료");
+            }
+        }
+
         #endregion
     }
 }

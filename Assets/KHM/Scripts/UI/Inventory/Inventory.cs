@@ -216,6 +216,14 @@ namespace hm
         {
             return slots;
         }
+        #endregion
+
+        #region HasItemCheck
+
+        public bool HasItem(ItemData item, int requiredAmount = 1)
+        {
+            return GetItemCount(item) >= requiredAmount;
+        }
 
         #endregion
     }

@@ -47,6 +47,10 @@ namespace Choi
         [SerializeField] private float heavyAttackHoldTime = 0.5f;
         private float attackButtonHeldTime = 0f;
 
+        [Header("UltimateAttack Settings")]
+        private bool canUltimate = true;
+        [SerializeField] private float ultimateCooldown = 30f;
+
         private bool isDashing = false;
         private bool canDash = true;
         public bool attackQueued = false;
@@ -153,6 +157,12 @@ namespace Choi
         {
             if (context.performed)
                 TryDash();
+        }
+
+        public void OnUlitimate(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                UltimateAttack();
         }
         #endregion
 
@@ -359,7 +369,22 @@ namespace Choi
                 attackButtonHeldTime = 0f;
             }
         }
+        private IEnumerator UltimateCooldown()
+        {
+            canUltimate = false;
+            yield return new WaitForSeconds(ultimateCooldown);
+            canUltimate = true;
+        }
+        private void UltimateAttack()
+        {
+            if (!canUltimate) return;
 
+            if (!stats.ConsumeGauge(100f))
+                return;
+
+            animator.SetTrigger("Ultimate");
+            StartCoroutine(UltimateCooldown());
+        }
         #endregion
     }
 }
