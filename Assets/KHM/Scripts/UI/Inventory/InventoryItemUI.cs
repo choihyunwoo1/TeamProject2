@@ -27,6 +27,12 @@ namespace hm
             // Button 컴포넌트가 없으면 자동으로 가져오기
             if (button == null)
                 button = GetComponent<Button>();
+
+            // ⭐️ 인벤토리 아이템은 슬롯 옆에 툴팁이 뜨도록 설정
+            if (tooltipTrigger != null)
+            {
+                tooltipTrigger.SetUseCustomPosition(true, new Vector2(10f, 0f));
+            }
         }
 
         public void SetSlot(InventorySlot slot)
@@ -167,11 +173,16 @@ namespace hm
         {
             if (itemData == null) return;
 
-            // ⭐️ 모든 모드에서 selectImage 표시
+            // OnItemClicked를 먼저 호출 (팝업 열기)
+            if (InventoryUI.Instance != null)
+            {
+                InventoryUI.Instance.OnItemClicked(itemData, rectTransform);
+            }
+
+            // 그 다음 선택 효과 표시
             if (InventoryUI.Instance != null)
             {
                 InventoryUI.Instance.SetSelectedSlot(this);
-                InventoryUI.Instance.OnItemClicked(itemData, rectTransform);
             }
         }
 

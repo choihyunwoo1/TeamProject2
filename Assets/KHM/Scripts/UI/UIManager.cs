@@ -61,6 +61,12 @@ namespace hm
         {
             tooltipController.Show(data);
         }
+        public void ShowTooltip(ITooltipData data, RectTransform targetRect, Vector2 offset)
+        {
+            if (tooltipController != null)
+                tooltipController.Show(data, targetRect, offset);
+        }
+
 
         //툴팁 숨기기
         public void HideTooltip()
@@ -173,6 +179,13 @@ namespace hm
         //인벤토리 아이템 클릭 시 호출
         public void SelectItemForQuickSlot(ItemData item)
         {
+            // ⭐️ 일반 모드가 아니면 퀵슬롯 등록 불가
+            if (InventoryUI.Instance != null && !InventoryUI.Instance.IsNormalMode())
+            {
+                Debug.Log("일반 모드에서만 퀵슬롯 등록이 가능합니다.");
+                return;
+            }
+
             // 소비 아이템만 허용
             if (item.category != ItemCategory.UseItem)
                 return;
@@ -180,7 +193,6 @@ namespace hm
             selectedItem = item;
             quickSlotUI.EnterSelectMode();
         }
-
 
         //슬롯 클릭 시 호출
         public void AssignItemToSlot(int slotIndex)
@@ -211,6 +223,16 @@ namespace hm
             //마무리
             selectedItem = null;
             quickSlotUI.ExitSelectMode();
+        }
+
+        // 퀵슬롯 선택 모드 강제 종료 (외부에서 호출)
+        public void ExitQuickSlotSelectMode()
+        {
+            if (selectedItem != null)
+            {
+                selectedItem = null;
+                quickSlotUI?.ExitSelectMode();
+            }
         }
         #endregion
 
