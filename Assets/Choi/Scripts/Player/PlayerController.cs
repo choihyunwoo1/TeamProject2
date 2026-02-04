@@ -50,6 +50,10 @@ namespace Choi
         [Header("UltimateAttack Settings")]
         private bool canUltimate = true;
         [SerializeField] private float ultimateCooldown = 30f;
+        [SerializeField] private GameObject ultimatePortalPrefab;
+        [SerializeField] private Transform ultimateSpawnPoint;
+
+        public WeaponHitbox weaponHitbox;
 
         private bool isDashing = false;
         private bool canDash = true;
@@ -323,6 +327,9 @@ namespace Choi
             yield return new WaitForSeconds(dashCooldown);
             canDash = true;
         }
+        #endregion
+
+        #region Attack
         private void HandleAttackInput()
         {
             // 마우스 눌림
@@ -369,6 +376,9 @@ namespace Choi
                 attackButtonHeldTime = 0f;
             }
         }
+        #endregion
+
+        #region Ultimate
         private IEnumerator UltimateCooldown()
         {
             canUltimate = false;
@@ -383,7 +393,62 @@ namespace Choi
                 return;
 
             animator.SetTrigger("Ultimate");
+
+            SpawnUltimatePortal();
+
             StartCoroutine(UltimateCooldown());
+        }
+        private void SpawnUltimatePortal()
+        {
+            if (ultimatePortalPrefab == null)
+            {
+                Debug.LogWarning("Ultimate Portal Prefab is not assigned!");
+                return;
+            }
+
+            // 스폰 위치: 지정 지점이 있으면 그것, 없으면 플레이어 발밑
+            Vector3 spawnPos = ultimateSpawnPoint != null
+                ? ultimateSpawnPoint.position
+                : transform.position + Vector3.down * 0.1f;
+
+            Quaternion spawnRot = Quaternion.identity;
+
+            var portal = Instantiate(ultimatePortalPrefab, spawnPos, spawnRot);
+            Destroy(portal, 1.4f);
+        }
+        #endregion
+
+        #region AttackType
+        // 기본 공격
+        public void StartNormalAttack()
+        {
+            weaponHitbox.damageType = DamageType.Normal;
+            weaponHitbox.baseDamage = 10f;
+        }
+
+        // 강공격
+        public void StartStrongAttack()
+        {
+            weaponHitbox.damageType = DamageType.Strong;
+            weaponHitbox.baseDamage = 25f;
+        }
+
+        // 궁극기
+        public void StartUltimateAttack()
+        {
+            weaponHitbox.damageType = DamageType.Ultimate;
+            weaponHitbox.baseDamage = 100f;
+        }
+
+        // 실질적 타격 타이밍에서 호출될 함수들
+        public void EnableHitbox()
+        {
+            weaponHitbox.EnableHitbox();
+        }
+
+        public void DisableHitbox()
+        {
+            weaponHitbox.DisableHitbox();
         }
         #endregion
     }

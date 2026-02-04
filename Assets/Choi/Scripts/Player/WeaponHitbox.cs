@@ -3,10 +3,20 @@ using UnityEngine;
 
 namespace Choi
 {
+    public enum DamageType
+    {
+        Normal,
+        Strong,
+        Ultimate
+    }
+
     public class WeaponHitbox : MonoBehaviour
     {
         private Collider hitbox;
         private PlayerStats ownerStats;
+
+        public DamageType damageType = DamageType.Normal;   // 공격 타입
+        public float baseDamage = 10f;
 
         private HashSet<IDamageable> hitEnemies = new HashSet<IDamageable>();
 
@@ -44,7 +54,9 @@ namespace Choi
                 return;
             hitEnemies.Add(dmg);
 
-            dmg.TakeDamage(10f);
+            //공격 타입과 값을 Damageable에게 넘긴다
+            dmg.TakeDamage(baseDamage, damageType);
+
             ownerStats.AddGauge(10f);
         }
     }

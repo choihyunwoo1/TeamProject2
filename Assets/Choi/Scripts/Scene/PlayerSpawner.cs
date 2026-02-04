@@ -12,7 +12,7 @@ namespace Choi
             if (string.IsNullOrEmpty(id))
                 return;
 
-            var player = FindObjectOfType<PlayerStats>().transform;
+            var player = FindFirstObjectByType<PlayerStats>().transform;
 
             foreach (var p in spawnPoints)
             {

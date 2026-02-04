@@ -36,7 +36,7 @@ namespace Choi
             }
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, DamageType type = DamageType.Normal)
         {
             if (isBroken) return;
 

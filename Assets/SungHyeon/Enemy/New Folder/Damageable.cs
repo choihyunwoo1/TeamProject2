@@ -71,16 +71,29 @@ namespace TeamProject2
         #endregion
 
         #region Custom Method
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, DamageType type)
         {
-            if (IsDeath)
+            if (IsDeath || IsInvulnerable)
                 return;
 
-            if (IsInvulnerable)
-                return;
+            float finalDamage = damage;
 
-            _currentHealthSO.InflictDamage(damage);
-            Debug.Log($"CurrentHealth: {_currentHealthSO.CurrentHealth}");
+            switch (type)
+            {
+                case DamageType.Normal:
+                    finalDamage = damage;
+                    break;
+
+                case DamageType.Strong:
+                    finalDamage = damage * 1.5f;
+                    break;
+
+                case DamageType.Ultimate:
+                    finalDamage = damage * 3f;
+                    break;
+            }
+
+            _currentHealthSO.InflictDamage(finalDamage);
 
             OnDamage?.Invoke(_currentHealthSO.CurrentHealth);
 
@@ -103,11 +116,6 @@ namespace TeamProject2
             Debug.Log("Die");
 
             OnDie?.Invoke();
-        }
-
-        private void Attack(float damage)
-        {
-            OnAttack?.Invoke(damage);
         }
         #endregion
     }

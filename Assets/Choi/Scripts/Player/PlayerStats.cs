@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace Choi
 
         [Header("Gauge")]
         public float maxGauge = 100f;
-        public float currentGauge = 0f;
+        public float currentGauge;
 
         [Header("DamageBlink")]
         [SerializeField] private float blinkInterval = 0.1f;   // 깜빡임 간격
@@ -43,6 +44,7 @@ namespace Choi
         {
             currentHealth = maxHealth;
             currentStamina = maxStamina;
+            currentGauge = maxGauge;
 
             animator = GetComponent<Animator>();
 
@@ -66,7 +68,11 @@ namespace Choi
             currentStamina = data.currentStamina;
 
             maxGauge = data.maxGauge;
-            currentGauge = data.currentGauge;
+
+            if (data.currentGauge <= 0)
+                currentGauge = maxGauge; // 자동 만땅
+            else
+                currentGauge = data.currentGauge;
         }
 
         private void Update()
@@ -75,12 +81,9 @@ namespace Choi
                 staminaRecoveryTimer -= Time.deltaTime;
             else
                 RecoverStamina();
-
-            //죽음체크
-            //CheatDamage(10f);
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, DamageType type = DamageType.Normal)
         {
             if (IsDead || IsInvincible) return;
 
