@@ -13606,11 +13606,13 @@ MonoBehaviour:
   attackDelayTime: 1
   rotateSpeed: 10
   dropItems:
-  - item: {fileID: 11400000, guid: 410cbc92d264c0d458c8c7a91159e10f, type: 2}
+  - item: {fileID: 11400000, guid: 0d4f8eb1f3fbfc6499850b89a00fdadf, type: 2}
     count: 5
-  - item: {fileID: 11400000, guid: 055de2d5a3df96e4b8367e664da63e98, type: 2}
+  - item: {fileID: 11400000, guid: dfd7081acd062fa45925a3d4e74a2d9c, type: 2}
     count: 2
-  dropGold: 222
+  - item: {fileID: 11400000, guid: 2c15240e0a9cb644bacd38aaaff17bdd, type: 2}
+    count: 2
+  dropGold: 100
   IsInPhase1: 0
   fireZonePrefab: {fileID: 509206708377419361, guid: 09bd9cdaf78b09e4e81ad234471ce606, type: 3}
   fireZoneSpawnPoint: {fileID: 194109369}

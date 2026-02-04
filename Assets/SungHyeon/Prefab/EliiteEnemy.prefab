@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 7485225339680643255}
   - component: {fileID: 2864320509665663459}
   m_Layer: 0
-  m_Name: FreeLichPBR
+  m_Name: EliiteEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,9 +553,13 @@ MonoBehaviour:
   attackDelayTime: 1
   rotateSpeed: 10
   dropItems:
-  - item: {fileID: 11400000, guid: 0d4f8eb1f3fbfc6499850b89a00fdadf, type: 2}
+  - item: {fileID: 11400000, guid: 4caf3b44733cc3b4f885951d14c3f7dc, type: 2}
+    count: 1
+  - item: {fileID: 11400000, guid: 2248275fbf9ac8b4590f4e949548aa5d, type: 2}
     count: 2
-  dropGold: 100
+  - item: {fileID: 11400000, guid: ec659bb1b731ade498e6d1b75ce93fa2, type: 2}
+    count: 2
+  dropGold: 50
 --- !u!114 &6095910083576010599
 MonoBehaviour:
   m_ObjectHideFlags: 0
