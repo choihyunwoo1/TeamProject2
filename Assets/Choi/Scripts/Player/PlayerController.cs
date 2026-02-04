@@ -280,7 +280,7 @@ namespace Choi
             if (!canDash || isDashing) return;
 
             //HJ : Dash 사운드
-            SoundManager.Instance.PlayOneShot("Dash");
+            SoundManager.Instance.Play("Dash");
 
             if (!stats.ConsumeStamina(20f))
             {

@@ -46,7 +46,6 @@ namespace HJ
                 if (sound.source.playOnAwake)
                 {
                     sound.source.outputAudioMixerGroup = mixerGroups[1];    //BGM
-
                     sound.source.Play();
                     // 만약 배경음이면 현재 배경음 변수에도 이름 등록
                     if (sound.playOnAwake) bgmSound = sound.name;
@@ -54,7 +53,14 @@ namespace HJ
                 else
                 {
                     sound.source.outputAudioMixerGroup = mixerGroups[2];    //SFX
-                }                
+                }
+
+                if (sound.playOnAwake)
+                {
+                    sound.source.Play();
+                    // 만약 배경음이면 현재 배경음 변수에도 이름 등록
+                    if (sound.loop) bgmSound = sound.name;
+                }
             }
         }
         #endregion
@@ -66,7 +72,7 @@ namespace HJ
         {
             //플레이할 사운드
             Sound sound = null;
-             
+
             foreach (var s in allsounds)
             {
                 if (s.name == name)
@@ -83,12 +89,12 @@ namespace HJ
                 return;
             }
 
-            if (sound.source.isPlaying) return;
-            //얘로 안됨... 내가봤을땐 isGround 하나 추가해야함.
-
 
             sound.source.Play();
+            //sound.source.PlayOneShot(sound.clip, sound.volume);
+            //Play 대신 PlayOndShot (연격 소리 끊기지 않음) 설정
         }
+
 
         //Pitch 자동 조절 기능
         public void SetPitch(string name, float newPitch)
@@ -101,31 +107,6 @@ namespace HJ
             {
                 s.source.pitch = newPitch;
             }
-        }
-
-        //사용x...
-        public void PlayOneShot(string name)
-        {
-            //플레이할 사운드
-            Sound sound = null;
-
-            foreach (var s in allsounds)
-            {
-                if (s.name == name)
-                {
-                    sound = s;
-                    break;      //찾았으면 반복문 정지
-                }
-            }
-
-            //못 찾았으면
-            if (sound == null)
-            {
-                //Debug.Log($"Cannot Find {name} Play Sound");
-                return;
-            }
-
-            sound.source.PlayOneShot(sound.clip);
         }
 
         //사운드 플레이 정지
@@ -202,6 +183,4 @@ namespace HJ
         }
         #endregion
     }
-    #region
-    #endregion
 }
