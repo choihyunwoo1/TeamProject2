@@ -36,7 +36,7 @@ namespace HJ
             DataManager.selectedCharacter = characterID;
             
             //ScemeManager 이용해서 씬 변경    //작성해주세요
-            SceneManager.LoadScene("Test_NextScene");
+            SceneManager.LoadScene("Village");
         }
 
     }

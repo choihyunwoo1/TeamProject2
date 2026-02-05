@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea565fc52b588884da44aeff7b1b4428, type: 3}
-  m_Name: Key
+  m_Name: DoorKey
   m_EditorClassIdentifier: 
   id: 1111
-  devName: Key
+  devName: DoorKey
   itemName: "\uC5F4\uC1E0"
   category: 1
   itemType: 3

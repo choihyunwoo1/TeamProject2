@@ -1,8 +1,9 @@
 using UnityEngine;
+using Choi;
 
 namespace HJ
 {
-    //¾À ³Ñ¾î°¡µµ µ¥ÀÌÅÍ ÀúÀåµÇ°Ô ÇØÁÖ´Â ½ºÅ©¸³Æ®. ºñ½ÁÇÑ°Å ÀÖÀ¸¸é ÇÕÃÄÁÖ¼¼¿ä!
+    //ì”¬ ë„˜ì–´ê°€ë„ ë°ì´í„° ì €ì¥ë˜ê²Œ í•´ì£¼ëŠ” ìŠ¤í¬ë¦½íŠ¸. ë¹„ìŠ·í•œê±° ìˆìœ¼ë©´ í•©ì³ì£¼ì„¸ìš”!
     public class DataManager
     {
         public static int selectedCharacter = 0;

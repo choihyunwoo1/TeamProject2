@@ -1,20 +1,30 @@
-using System;
 using UnityEngine;
+using Choi;
 
 namespace HJ
 {
     public class SpawnManager : MonoBehaviour
     {
-        //Inspector Ã¢ ¾È¿¡¼­ Ä³¸¯ÅÍ ÇÁ¸®ÆÕ »ğÀÔÇØÁÖ¼¼¿ä
-        //0 : ³²Ä³, 1 : ¿©Ä³ ÀÔ´Ï´Ù.
-        public GameObject[] characterPrefabs;
+        public GameObject maleModel;
+        public GameObject femaleModel;
 
         public Transform spawnPoint;
 
         private void Start()
         {
-            int character = DataManager.selectedCharacter;
-            Instantiate(characterPrefabs[character], spawnPoint.position, spawnPoint.rotation);
+            int selected = DataManager.selectedCharacter;
+
+            maleModel.SetActive(false);
+            femaleModel.SetActive(false);
+
+            if (selected == 0)
+                maleModel.SetActive(true);
+            else
+                femaleModel.SetActive(true);
+
+            // Playerë¥¼ spawnPointë¡œ ì´ë™ (í•„ìš”í•  ê²½ìš°)
+            transform.position = spawnPoint.position;
+            transform.rotation = spawnPoint.rotation;
         }
     }
 }
