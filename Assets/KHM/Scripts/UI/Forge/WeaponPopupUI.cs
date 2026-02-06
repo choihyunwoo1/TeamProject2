@@ -2,7 +2,6 @@ using hm;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Choi;
 
 public class WeaponPopupUI : MonoBehaviour
 {

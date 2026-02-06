@@ -2281,6 +2281,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipData: {fileID: 11400000, guid: de7b03ceeddce9c4f8911f7f4e456e23, type: 2}
+  useCustomPosition: 0
+  offset: {x: 10, y: 0}
 --- !u!114 &152709713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4449,6 +4451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipData: {fileID: 11400000, guid: de7b03ceeddce9c4f8911f7f4e456e23, type: 2}
+  useCustomPosition: 0
+  offset: {x: 10, y: 0}
 --- !u!114 &335489683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9735,6 +9739,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipData: {fileID: 11400000, guid: de7b03ceeddce9c4f8911f7f4e456e23, type: 2}
+  useCustomPosition: 0
+  offset: {x: 10, y: 0}
 --- !u!114 &839154447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16161,6 +16167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipData: {fileID: 0}
+  useCustomPosition: 0
+  offset: {x: 10, y: 0}
 --- !u!224 &1341490967 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3615611880287103839, guid: a768b9447d8f6f747a4616deee4209d7, type: 3}
@@ -19976,6 +19984,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipData: {fileID: 0}
+  useCustomPosition: 0
+  offset: {x: 10, y: 0}
 --- !u!1 &1762156058
 GameObject:
   m_ObjectHideFlags: 0
@@ -20762,6 +20772,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipData: {fileID: 0}
+  useCustomPosition: 0
+  offset: {x: 10, y: 0}
 --- !u!114 &1877228216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22734,7 +22746,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDB: {fileID: 11400000, guid: 70dae1f460fb3d1499bf08984aad7d0b, type: 2}
-  upgradeUI: {fileID: 355211072}
 --- !u!4 &2072467287
 Transform:
   m_ObjectHideFlags: 0

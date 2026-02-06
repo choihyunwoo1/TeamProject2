@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Choi;
 
 namespace hm
 {
@@ -59,6 +58,8 @@ namespace hm
 
                 //기본 무기 장착
                 EquipWeapon(defaultWeapon);
+
+                Debug.Log($"[기본 무기 해금] {defaultWeapon.itemName}");
 
                 // UI 갱신
                 RefreshAllUI();

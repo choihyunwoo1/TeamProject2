@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Choi;
 
 namespace hm
 {
@@ -14,7 +13,6 @@ namespace hm
 
         private List<InventorySlot> slots = new();
 
-        private static bool initialized = false;
         //골드
         private int gold;
         public int Gold => gold;
@@ -25,23 +23,16 @@ namespace hm
 
         private void Awake()
         {
-            // itemDatabase.Init() 중복 실행 방지
-            if (!initialized)
-            {
-                itemDatabase.Init();
-                initialized = true;
-            }
+            itemDatabase.Init();
 
             if (Instance == null)
                 Instance = this;
             else
-                Instance = this; // 굳이 Destroy하지 않아도 됨 (선택)
-
+                Destroy(gameObject);
 
             for (int i = 0; i < maxSlotCount; i++)
                 slots.Add(new InventorySlot(null, 0));
         }
-
         #region Money
         public void AddGold(int amount)
         {
@@ -224,13 +215,9 @@ namespace hm
         {
             return slots;
         }
-        #endregion
-
-        #region HasItemCheck
-
-        public bool HasItem(ItemData item, int requiredAmount = 1)
+        public bool HasItem(ItemData item, int requiredCount = 1)
         {
-            return GetItemCount(item) >= requiredAmount;
+            return GetItemCount(item) >= requiredCount;
         }
 
         #endregion

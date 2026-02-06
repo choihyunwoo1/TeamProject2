@@ -1,12 +1,10 @@
 using UnityEngine;
-using Choi;
 
 namespace hm
 {
     public class ItemGiveTester : MonoBehaviour
     {
         [SerializeField] private ItemDatabase itemDB;
-        [SerializeField] private WeaponUpgradeUI upgradeUI;
 
         [ContextMenu("Give Test Set")]
         public void GiveTestSet()

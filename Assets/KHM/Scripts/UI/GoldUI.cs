@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using Choi;
 
 namespace hm
 {

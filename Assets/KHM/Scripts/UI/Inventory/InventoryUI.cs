@@ -1,5 +1,4 @@
 using UnityEngine;
-using Choi;
 
 namespace hm
 {
@@ -66,6 +65,12 @@ namespace hm
 
             // 모드 변경 시 선택 상태 초기화
             ClearSelection();
+
+            // ⭐️ 모드 변경 시 퀵슬롯 선택 모드 종료
+            if (mode != InventoryMode.Normal)
+            {
+                UIManager.Instance?.ExitQuickSlotSelectMode();
+            }
 
             // 모드 변경 시 UI 갱신
             RefreshUI();
@@ -232,6 +237,13 @@ namespace hm
         /// </summary>
         private void HandleNormalModeClick(ItemData item)
         {
+            // 일반 모드일 때만 퀵슬롯 등록 가능
+            if (currentMode != InventoryMode.Normal)
+            {
+                Debug.Log("일반 모드에서만 퀵슬롯 등록이 가능합니다.");
+                return;
+            }
+
             // 소비 아이템이면 퀵슬롯에 등록
             if (item.category == ItemCategory.UseItem)
             {
