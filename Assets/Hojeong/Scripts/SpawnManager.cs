@@ -40,14 +40,18 @@ namespace HJ
             Debug.Log("SpawnManager: 캐릭터 생성됨");
 
             // Player 생성
-            Instantiate(
+            GameObject playerObj = Instantiate(
                 characterPrefabs[selected],
                 spawnPoint.position,
                 spawnPoint.rotation
             );
 
+            // 생성된 캐릭터 스케일 강제 조정
+            playerObj.transform.localScale = new Vector3(1.9f, 1.9f, 1.9f);
+
             // 한 번 사용했으니 off
             gameObject.SetActive(false);
+
         }
     }
 }
