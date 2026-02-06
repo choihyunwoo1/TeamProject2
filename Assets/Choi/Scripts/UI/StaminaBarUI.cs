@@ -1,12 +1,27 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace Choi
 {
     public class StaminaBarUI : MonoBehaviour
     {
         [SerializeField] private Image fillImage;
-        [SerializeField] private PlayerStats playerStats;
+        private PlayerStats playerStats;
+
+        private void Start()
+        {
+            StartCoroutine(WaitForPlayer());
+        }
+
+        private IEnumerator WaitForPlayer()
+        {
+            while (playerStats == null)
+            {
+                playerStats = FindFirstObjectByType<PlayerStats>();
+                yield return null;
+            }
+        }
 
         private void Update()
         {

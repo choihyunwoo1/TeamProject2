@@ -2179,7 +2179,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.08, y: 5.4, z: 6.27}
-  m_LocalScale: {x: 1.9, y: 1.9, z: 1.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3812655713476847931}
@@ -2453,6 +2453,8 @@ MonoBehaviour:
   dashCooldown: 1
   heavyAttackHoldTime: 0.5
   ultimateCooldown: 30
+  ultimatePortalPrefab: {fileID: 0}
+  ultimateSpawnPoint: {fileID: 0}
   weaponHitbox: {fileID: 7334627022513063577}
   attackQueued: 0
 --- !u!114 &7713383633312064606

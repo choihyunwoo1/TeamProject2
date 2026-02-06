@@ -14,6 +14,7 @@ namespace hm
 
         private List<InventorySlot> slots = new();
 
+        private static bool initialized = false;
         //골드
         private int gold;
         public int Gold => gold;
@@ -24,16 +25,23 @@ namespace hm
 
         private void Awake()
         {
-            itemDatabase.Init();
+            // itemDatabase.Init() 중복 실행 방지
+            if (!initialized)
+            {
+                itemDatabase.Init();
+                initialized = true;
+            }
 
             if (Instance == null)
                 Instance = this;
             else
-                Destroy(gameObject);
+                Instance = this; // 굳이 Destroy하지 않아도 됨 (선택)
+
 
             for (int i = 0; i < maxSlotCount; i++)
                 slots.Add(new InventorySlot(null, 0));
         }
+
         #region Money
         public void AddGold(int amount)
         {

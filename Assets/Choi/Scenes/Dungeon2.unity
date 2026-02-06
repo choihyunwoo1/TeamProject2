@@ -44826,6 +44826,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoints:
   - {fileID: 1998184342}
+  characterPrefabs:
+  - {fileID: 7530183854487948436, guid: 3f3fb8a453703d444a3e04c85d567d10, type: 3}
+  - {fileID: 7116682954548061540, guid: 603818221947ab644a1859e8056707ee, type: 3}
 --- !u!4 &913823852
 Transform:
   m_ObjectHideFlags: 0

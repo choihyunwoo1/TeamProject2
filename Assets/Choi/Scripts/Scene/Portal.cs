@@ -55,10 +55,14 @@ namespace Choi
                 yield return null;
             }
 
-            // 도착 포탈 정보 저장
             PortalManager.LastPortalID = targetPortalID;
 
-            // 페이드 후 씬 이동
+            //씬 이동 직전에 기존 플레이어 삭제
+            var player = FindFirstObjectByType<PlayerStats>();
+            if (player != null)
+                Destroy(player.gameObject);
+
+            //페이드 후 씬 이동
             if (sceneFader != null && !string.IsNullOrEmpty(sceneToLoad))
             {
                 sceneFader.FadeTo(sceneToLoad);

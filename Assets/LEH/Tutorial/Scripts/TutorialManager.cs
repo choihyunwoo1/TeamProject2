@@ -1,11 +1,14 @@
-using UnityEngine;
-using UnityEngine.UI;
+using Choi;
+using System.Collections;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
     public PlayerInput playerInput;
+    private PlayerStats playerStats;
 
     [Header("UI")]
     public GameObject tutorialRoot;
@@ -25,6 +28,27 @@ public class TutorialManager : MonoBehaviour
         tutorialRoot.SetActive(false);
     }
 
+    private void Start()
+    {
+        // 플레이어 생성 타이밍과 상관없이 검색
+        StartCoroutine(WaitForPlayer());
+    }
+    private IEnumerator WaitForPlayer()
+    {
+        while (playerStats == null || playerInput == null)
+        {
+            if (playerStats == null)
+                playerStats = FindFirstObjectByType<PlayerStats>();
+
+            if (playerInput == null)
+                playerInput = FindFirstObjectByType<PlayerInput>();
+
+            yield return null;
+        }
+
+        Debug.Log("TutorialManager: PlayerStats & PlayerInput 연결 완료");
+    }
+
     public void StartTutorial(TutorialData data)
     {
         if (data == null || data.steps.Length == 0)
@@ -33,12 +57,13 @@ public class TutorialManager : MonoBehaviour
         currentData = data;
         stepIndex = 0;
 
-        if(playerInput != null)
+        if (playerInput != null)
             playerInput.enabled = false;
 
         tutorialRoot.SetActive(true);
         ShowStep();
     }
+
 
     void ShowStep()
     {
@@ -65,7 +90,7 @@ public class TutorialManager : MonoBehaviour
         nextButton.onClick.RemoveAllListeners();
         exitButton.onClick.RemoveAllListeners();
 
-        // 버튼 타입
+        // 버튼 타입 처리
         switch (step.buttonType)
         {
             case TutorialButtonType.Next:
@@ -95,14 +120,12 @@ public class TutorialManager : MonoBehaviour
 
         ShowStep();
     }
-
     void EndTutorial()
     {
-        //다시 안 나오게 저장
         PlayerPrefs.SetInt($"Tutorial_{currentData.tutorialId}", 1);
         PlayerPrefs.Save();
 
-        if(playerInput != null)
+        if (playerInput != null)
             playerInput.enabled = true;
 
         tutorialRoot.SetActive(false);
