@@ -10,9 +10,9 @@ namespace hm
         public void GiveTestSet()
         {
             UIManager.Instance.OpenWeaponUpgrade();
-            Inventory.Instance.Add(itemDB.GetByName("antidote"), 2);
+            Inventory.Instance.Add(itemDB.GetByName("antidote"), 2);            
             Inventory.Instance.Add(itemDB.GetByName("matScarp"), 10);
-            Inventory.Instance.Add(itemDB.GetByName("matSharp"), 10);
+            Inventory.Instance.Add(itemDB.GetByName("matSharp"), 10);            
             Inventory.Instance.Add(itemDB.GetByName("matStone"), 10);
             Inventory.Instance.Add(itemDB.GetByName("matString"), 30);
             Inventory.Instance.Add(itemDB.GetByName("matWood"), 30);
