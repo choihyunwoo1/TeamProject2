@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 0
   skills:
+  - {fileID: 11400000, guid: e37cf2df50fd9c043b66fc4a8eb7b23c, type: 2}
   - {fileID: 11400000, guid: 558d05d4b2b03b644852bbd0f35dc0bb, type: 2}
   - {fileID: 11400000, guid: 4ed62a943b67e044aa92730abb949478, type: 2}
