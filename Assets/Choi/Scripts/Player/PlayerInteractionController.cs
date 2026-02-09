@@ -9,27 +9,23 @@ namespace Choi
         [SerializeField] private float interactRange = 3f;
         [SerializeField] private LayerMask interactLayer;
 
-        private Camera _cam;
-        private IInteractable currentInteractable;
+        [Header("Player Root")]
+        [SerializeField] private Transform playerRoot;
+        [SerializeField] private float heightOffset = 1.2f;
 
-        private void Awake()
-        {
-            _cam = Camera.main;
-        }
+        [Header("BoxCast Settings")]
+        [SerializeField] private Vector3 boxHalfExtents = new Vector3(10.0f, 10.0f, 10.0f);
+
+        private IInteractable currentInteractable;
 
         private void Update()
         {
-            Debug.DrawRay(_cam.transform.position, _cam.transform.forward * interactRange, Color.red);
-
             DetectInteractable();
         }
 
-        // Input System에서 "Interact" 액션이 호출됨
         public void OnInteract(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-
-            Debug.Log("OnInteract");   // 추가
             TryInteract();
         }
 
@@ -37,13 +33,23 @@ namespace Choi
         {
             currentInteractable = null;
 
-            Vector3 start = _cam.transform.position;
-            Vector3 end = start + _cam.transform.forward * 1.0f; // 캡슐 높이
-            float radius = 0.6f;                                 // 원하는 만큼 넓게
+            // 시작 위치: 플레이어 기준 약간 위
+            Vector3 origin = playerRoot.position + Vector3.up * heightOffset;
 
-            if (Physics.CapsuleCast(start, end, radius,
-                _cam.transform.forward, out RaycastHit hit,
-                interactRange, interactLayer))
+            // BoxCast 방향
+            Vector3 direction = playerRoot.forward;
+
+            // 디버그용
+            Debug.DrawRay(origin, direction * interactRange, Color.yellow);
+
+            if (Physics.BoxCast(
+                origin,
+                boxHalfExtents,
+                direction,
+                out RaycastHit hit,
+                playerRoot.rotation,
+                interactRange,
+                interactLayer))
             {
                 currentInteractable = hit.collider.GetComponentInParent<IInteractable>();
 
@@ -56,12 +62,21 @@ namespace Choi
 
             InteractionUI.Instance.Hide();
         }
+        private void OnDrawGizmos()
+        {
+            if (playerRoot == null) return;
 
+            Gizmos.color = Color.cyan;
+
+            Vector3 origin = playerRoot.position + Vector3.up * heightOffset;
+            Gizmos.matrix = Matrix4x4.TRS(origin, playerRoot.rotation, Vector3.one);
+            Gizmos.DrawWireCube(Vector3.forward * (interactRange * 0.5f),
+                                boxHalfExtents * 2);
+        }
 
         private void TryInteract()
         {
             if (currentInteractable == null) return;
-
             currentInteractable.Interact(gameObject);
         }
     }

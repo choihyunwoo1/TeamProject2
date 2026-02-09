@@ -101,4 +101,11 @@ MonoBehaviour:
     playOnAwake: 0
     pitch: 0
     source: {fileID: 0}
+  - name: Button
+    clip: {fileID: 8300000, guid: ca3308a2e36339d44acd17617e0f3081, type: 3}
+    volume: 0.35
+    loop: 0
+    playOnAwake: 0
+    pitch: 0
+    source: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: 4d304e0320ab6634984561448a6c7e5e, type: 2}

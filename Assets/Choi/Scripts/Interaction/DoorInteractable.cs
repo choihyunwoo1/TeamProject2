@@ -41,7 +41,7 @@ namespace Choi
                 Debug.Log($"{requiredKey.itemName} 1개 사용됨");
             }
 
-            // 🔓 문 열기
+            // 문 열기
             animator.SetTrigger("Open");
             isOpened = true;
 

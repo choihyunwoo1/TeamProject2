@@ -33,6 +33,8 @@ namespace Choi
         private Vector3 platformLocalOffset;
         private bool onPlatform = false;
 
+        private bool initialized = false;
+
         private float coyoteTimer;
         private readonly float coyoteTime = 0.12f;
 
@@ -66,6 +68,11 @@ namespace Choi
         private void Awake()
         {
             stats = GetComponent<PlayerStats>();
+        }
+        private void Start()
+        {
+            // 모든 필드 초기화 끝난 후 마지막에 true로
+            initialized = true;
         }
         private void Update()
         {
@@ -125,6 +132,8 @@ namespace Choi
         }
         public void OnAttack(InputAction.CallbackContext context)
         {
+            if (!initialized) return; // 초기화 전에는 공격 입력 무시
+            if (stats.IsDead) return;
             if (!context.started) return;
 
             AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(1);

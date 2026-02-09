@@ -1,3 +1,4 @@
+using hm;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -182,6 +183,8 @@ namespace Choi
         {
             IsDead = true;
             animator.SetTrigger("Death");
+
+            UIManager.Instance.OpenGameOver();
         }
 
         public void AddGauge(float amount)
@@ -214,6 +217,11 @@ namespace Choi
         {
             Debug.Log($"[CHEAT] 강제 데미지: {amount}");
             TakeDamage(amount);
+        }
+        public void InstantKill()
+        {
+            currentHealth = 0;
+            Die();
         }
         #endregion
     }

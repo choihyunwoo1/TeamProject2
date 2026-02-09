@@ -5,27 +5,28 @@ namespace HJ
     public class PlaySoundOnEnter : StateMachineBehaviour
     {
         public string soundName;
+        public GameObject showScreen;
 
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            //»ç¿îµå ÀüºÎ ÇÃ·¹ÀÌ
+            //ì‚¬ìš´ë“œ ì „ë¶€ í”Œë ˆì´
             if (SoundManager.Instance == null) return;
             SoundManager.Instance.Play(soundName);
 
-            // °­°ø°İ
+            // ê°•ê³µê²©
             if (soundName == "L_Attack")
             {
                 SoundManager.Instance.SetPitch("L_Attack", 1.7f);
             }
         }
 
-        //°ø°İ ¸ØÃß¸é
+        //ê³µê²© ë©ˆì¶”ë©´
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (soundName == "L_Attack" && !animator.GetBool("IsAttacking"))
             {
                 SoundManager.Instance.Stop("L_Attack");
-                SoundManager.Instance.SetPitch("L_Attack", 1f); // ÇÇÄ¡ ¿ø»óº¹±¸
+                SoundManager.Instance.SetPitch("L_Attack", 1f); // í”¼ì¹˜ ì›ìƒë³µêµ¬
             }
         }
         

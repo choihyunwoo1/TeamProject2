@@ -35,6 +35,7 @@ namespace hm
         [SerializeField] private GameObject shopUIRoot;           // 상점 UI 루트
         [SerializeField] private GameObject upgradeUIRoot;        // 무기개조 UI 루트 (참조용)
         [SerializeField] private GameObject inventoryUIRoot;      // 인벤토리 UI 루트
+        [SerializeField] private GameObject gameOverUI;
 
         // ⭐️ 상점 팝업 참조 추가
         [Header("Shop Popups")]
@@ -173,6 +174,10 @@ namespace hm
             HandleEscape();
         }
 
+        public void OpenGameOver()
+        { 
+            gameOverUI.SetActive(true);
+        }
         #endregion
 
         #region QuickSlot
